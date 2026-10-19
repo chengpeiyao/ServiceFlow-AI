@@ -8,3 +8,4 @@
 *.local.json
 *.local.properties
 experiments/s1-ai/runs/
+config_al/

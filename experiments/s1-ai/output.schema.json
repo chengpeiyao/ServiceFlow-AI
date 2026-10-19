@@ -1,0 +1,158 @@
+{
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "enum": [
+        "DATABASE_CONNECTION",
+        "NETWORK",
+        "APPLICATION",
+        "ACCOUNT_PERMISSION",
+        "CONFIGURATION",
+        "OTHER"
+      ]
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "enum": [
+              "symptom",
+              "errorCode",
+              "startTime",
+              "scope",
+              "change",
+              "frequency",
+              "product",
+              "version"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "sourceQuote": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "field",
+          "value",
+          "sourceQuote"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 8
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      },
+      "maxItems": 5
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "enum": [
+              "product",
+              "version",
+              "startTime",
+              "scope",
+              "errorCode",
+              "change",
+              "frequency",
+              "logs",
+              "reproduction"
+            ]
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "field",
+          "question"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 9
+    },
+    "suggestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "knowledgeId": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 80
+          },
+          "sourceQuote": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 1500
+          },
+          "preconditions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300
+            },
+            "maxItems": 5
+          }
+        },
+        "required": [
+          "text",
+          "knowledgeId",
+          "sourceQuote",
+          "preconditions"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 3
+    },
+    "evidenceInsufficient": {
+      "type": "boolean"
+    },
+    "categoryInsufficient": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "category",
+    "facts",
+    "hypotheses",
+    "questions",
+    "suggestions",
+    "evidenceInsufficient",
+    "categoryInsufficient"
+  ],
+  "additionalProperties": false
+}

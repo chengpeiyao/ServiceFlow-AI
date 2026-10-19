@@ -1,0 +1,24 @@
+{"id":"G01","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["登录","401","403","权限"],"preconditions":["仅进行只读检查，不修改账号权限"],"text":"先保存脱敏后的请求时间、错误码和请求标识，再比较同账号与其他账号的访问结果。鉴权失败并不能单独证明角色配置错误，应由授权管理员核对访问策略。"}
+{"id":"G02","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["慢","延迟","耗时","卡顿"],"preconditions":["具备只读监控访问权限"],"text":"记录慢请求的开始时间、接口和耗时，比较同时间窗口的请求量、错误率与资源指标。指标相关性不能直接当作根因，不应直接扩容或重启。"}
+{"id":"G03","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["DNS","网络","断连","连接超时","502","504"],"preconditions":["仅在获准的测试范围内诊断"],"text":"对比客户端到服务入口的连通性、解析结果及请求标识，收集同一时间窗口的网关日志。不能仅凭超时认定服务端故障。"}
+{"id":"G04","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["重复","不一致","丢失","库存","负数"],"preconditions":["仅查询数据，禁止直接修复或删除记录"],"text":"保存业务单号、发生时间和重试记录，对照界面、接口和持久化结果。先核对同一业务键的多次提交，不应直接删除疑似重复数据。"}
+{"id":"G05","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["异常","报错","失败","白屏","崩溃"],"preconditions":["日志必须脱敏，不包含密码或令牌"],"text":"收集错误提示、发生时间、最小复现步骤和脱敏日志。先区分客户端与服务端现象，不能根据单条报错确认根因。"}
+{"id":"G06","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["死锁","连接池","SQL","数据库","锁等待"],"preconditions":["具备只读数据库监控权限"],"text":"记录错误码与时间窗口，查看连接使用量、慢查询或锁等待快照。禁止在未审批时终止会话、修改连接上限或执行修复 SQL。"}
+{"id":"G07","product":"GENERAL","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["设备","传感器","心跳","离线"],"preconditions":["现场人员遵守设备安全操作要求"],"text":"记录设备标识、最后心跳及影响范围，对比同网络其他设备。不得绕过安全联锁、远程强制启动或假定网络是唯一原因。"}
+{"id":"C01","product":"COMS","versions":["1.2"],"reviewStatus":"APPROVED_DEMO","keywords":["连接池","连接池耗尽"],"preconditions":["客户确认产品版本为 1.2","具备只读监控访问权限"],"text":"在本项目模拟的 COMS 1.2 场景中，对比连接活跃数、等待数和请求量；若连接长期占用，收集对应慢请求。该建议不证明连接泄漏。"}
+{"id":"C02","product":"COMS","versions":["11.2"],"reviewStatus":"APPROVED_DEMO","keywords":["连接池","连接池耗尽"],"preconditions":["客户确认产品版本为 11.2","具备只读监控访问权限"],"text":"在本项目模拟的 COMS 11.2 场景中，分别查看应用连接等待与数据库连接统计，核对两者采样时间；不能沿用 1.2 的监控字段名称。"}
+{"id":"C03","product":"COMS","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["死锁","锁等待"],"preconditions":["具备只读数据库监控权限"],"text":"对同一时间窗口的脱敏锁等待快照与业务单号进行关联，确认是否有长事务；不能把等待现象直接视为已确认死锁。"}
+{"id":"C04","product":"COMS","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["订单","重复","提交"],"preconditions":["仅查询订单与请求日志"],"text":"根据业务单号和幂等请求标识比对多次提交的响应；超时后重试可能产生不同请求，不能直接认定所有重复订单来自前端。"}
+{"id":"C05","product":"COMS","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["库存","负数","不一致"],"preconditions":["仅查询库存流水与快照"],"text":"对齐仓库、物料、业务时点后比较库存流水与查询快照；筛选条件不同会造成表面差异，不应先写入调整单。"}
+{"id":"C06","product":"COMS","versions":["1.2"],"reviewStatus":"APPROVED_DEMO","keywords":["导出","下载","报表"],"preconditions":["客户确认产品版本为 1.2"],"text":"在本项目模拟的 COMS 1.2 场景中，记录报表筛选条件、时间范围和脱敏任务标识，再核对导出任务状态与响应。"}
+{"id":"C07","product":"COMS","versions":["11.2"],"reviewStatus":"APPROVED_DEMO","keywords":["导出","下载","报表"],"preconditions":["客户确认产品版本为 11.2"],"text":"在本项目模拟的 COMS 11.2 场景中，先区分报表计算与文件下载两个阶段，分别收集任务标识与请求标识。"}
+{"id":"C08","product":"COMS","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["权限","403","登录"],"preconditions":["具备只读权限策略查看权限"],"text":"比较同账号在两个业务范围内的授权结果，记录角色与资源标识；不应把问题自动升级为管理员权限。"}
+{"id":"C09","product":"COMS","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["回调","Webhook","签名"],"preconditions":["不得在工单中上传签名密钥"],"text":"保留回调时间、请求标识与脱敏签名校验结果，核对双方时钟和签名版本；不要在工单中粘贴密钥来复现。"}
+{"id":"I01","product":"IOT","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["心跳","离线"],"preconditions":["设备处于允许观察的状态"],"text":"对比平台最后心跳与现场设备状态，记录是否仅单个设备异常；最后心跳缺失也可能来自上报链路，不能直接确认设备断电。"}
+{"id":"I02","product":"IOT","versions":["2.0"],"reviewStatus":"APPROVED_DEMO","keywords":["传感器","温度","偏移"],"preconditions":["客户确认产品版本为 2.0","由现场人员执行获准的只读检查"],"text":"在本项目模拟的 IOT 2.0 场景中，记录传感器单位、采样时间与参考读数，先核对单位及时间对齐，禁止自行改写校准参数。"}
+{"id":"I03","product":"IOT","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["MQTT","订阅","断连"],"preconditions":["具备只读消息链路日志权限"],"text":"收集脱敏会话标识、断连原因和订阅主题范围，比较重连前后的消息时间；不要通过扩大订阅权限处理未知原因。"}
+{"id":"I04","product":"IOT","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["时钟","时间戳","乱序"],"preconditions":["只读查看时钟和接收时间"],"text":"分别记录设备采样时间、网关时间与平台接收时间，区分时钟偏差与传输延迟，不能据此自动改设备时钟。"}
+{"id":"I05","product":"IOT","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["固件","升级"],"preconditions":["未取得变更批准前不重刷固件"],"text":"记录固件版本、升级批次和失败设备范围，查看升级状态与只读错误日志，禁止自动重刷或回滚。"}
+{"id":"I06","product":"IOT","versions":["ALL"],"reviewStatus":"APPROVED_DEMO","keywords":["告警","阈值"],"preconditions":["只读核对告警策略"],"text":"对比原始采样、告警阈值与持续时间条件，确认是否满足触发前提；不能因告警频繁而直接关闭告警。"}
+{"id":"DRAFT01","product":"COMS","versions":["ALL"],"reviewStatus":"DRAFT","keywords":["连接池"],"preconditions":["仅供草稿过滤测试"],"text":"未审核草稿，不应被检索。"}
+{"id":"GENERAL_BAD","product":"GENERAL","versions":["1.2"],"reviewStatus":"APPROVED_DEMO","keywords":["异常"],"preconditions":["无"],"text":"通用产品错误绑定版本，不应适用。"}
