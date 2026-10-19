@@ -1,0 +1,35 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  application:
+    name: serviceflow-ai
+  datasource:
+    url: ${SERVICEFLOW_DB_URL:jdbc:mysql://127.0.0.1:3306/serviceflow?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8}
+    username: ${SERVICEFLOW_DB_USERNAME:serviceflow}
+    password: ${SERVICEFLOW_DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 8
+      connection-timeout: 5000
+  flyway:
+    locations: classpath:db/migration
+    clean-disabled: true
+  jackson:
+    time-zone: UTC
+    deserialization:
+      fail-on-unknown-properties: true
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    arg-name-based-constructor-auto-mapping: true
+sa-token:
+  token-name: Authorization
+  token-prefix: Bearer
+  token-style: uuid
+  timeout: 28800
+  is-concurrent: true
+  is-share: false
+  is-read-cookie: false
+  is-log: false
+  is-print: false
+serviceflow:
+  products: COMS,IOT

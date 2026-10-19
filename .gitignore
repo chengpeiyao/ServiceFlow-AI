@@ -1,0 +1,10 @@
+**/target/
+.idea/
+.vscode/
+*.iml
+.env
+.env.*
+!.env.example
+*.local.json
+*.local.properties
+experiments/s1-ai/runs/
