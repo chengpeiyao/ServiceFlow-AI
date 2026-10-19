@@ -1,0 +1,35 @@
+{
+  "phase": "MODEL_PREFLIGHT_NOT_FULL_EXPERIMENT",
+  "date": "2026-10-19",
+  "projectCommit": "7fb101aec366da4bc85cda0ca7739e3f8eb0d8ff",
+  "configuredModel": "gpt-5-mini",
+  "endpoint": "https://api.openai.com/v1/chat/completions",
+  "keyEnvironment": "SERVICEFLOW_AI_API_KEY",
+  "keyLoadedFrom": "User environment",
+  "caseId": "D-01",
+  "executedArms": [
+    "A1"
+  ],
+  "skippedArms": [
+    "A2"
+  ],
+  "modelProbeHttpAttempts": 2,
+  "diagnosticHttpAttempts": 1,
+  "reason": "HTTP 429 insufficient_quota / credit_balance_exhausted",
+  "outputGenerated": false,
+  "fixedSetExecuted": false,
+  "inputTokens": null,
+  "outputTokens": null,
+  "cost": null,
+  "diagnosticRequest": {
+    "description": "单独的极小错误类型诊断，不作为 A1 案例评测",
+    "maxCompletionTokens": 1
+  },
+  "artifactSha256": "2DF9ED1028AB6B5F88C38057C5C31C2E87F348D51BA641DFC786ECEF05189D95",
+  "dataSha256": {
+    "data/fixed.jsonl": "057DA3EDE6A5815291FC92396A68E10308F6BAAEA80045D9717CF342CE90B58C",
+    "output.schema.json": "9BF25A24FDC2953CA2EBAF8804C8E7F2414BC4F37A6E8A9068859EF809A7B872",
+    "data/dev.jsonl": "FB81ADDB15BE008475ED80706B03629841C1E5FBFCCCA23D60E09503DE3C1B74",
+    "data/knowledge.jsonl": "F167CD0B2AF305E3B62846731E45CBAB148B29E8D0DD085F29615926C7CEBB55"
+  }
+}

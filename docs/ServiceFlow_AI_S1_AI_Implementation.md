@@ -1,6 +1,6 @@
 # S1-AI 实施与验证记录
 
-日期：2026-10-19。状态：**独立实验工具与 A0 基线完成；真实 A1/A2、领域复核和人工效果评审尚未完成，不满足 S1-AI 效果验收条件。**
+日期：2026-10-19。状态：**独立实验工具与 A0 基线完成；真实调用预检已尝试，但 API 返回额度不足，没有生成 A1/A2 结果。领域复核和人工效果评审尚未完成，不满足 S1-AI 效果验收条件。**
 
 ## 已交付
 
@@ -63,8 +63,10 @@
 
 ## 尚未完成及下一步
 
-- 检查时没有发现项目/用户/机器级模型密钥环境变量，本机 Codex 配置为 ChatGPT 登录模式，没有 API 密钥；没有借用登录凭据发起请求。
-- `config_al/model.local.properties` 当前是占位模板，真实服务商、模型与 API 配置仍待填写；不能输出 A1/A2 成绩，也不能宣称已验证服务商兼容性。
-- 填好配置并设置密钥环境变量后，先跑开发集验证协议；参数稳定后，以同一模型和当前冻结资料运行 A1/A2 固定检查，避免重复运行 A0 后按结果调参。服务商不支持相应格式时，先在开发集修正参数，再冻结，记录与 A0 数据/规则版本的一致性。
+- 用户已填写 `config_al/model.local.properties`：`https://api.openai.com/v1/chat/completions`、`gpt-5-mini`、`max_completion_tokens`、`json_schema`，不发送 temperature。密钥已配置在用户级 `SERVICEFLOW_AI_API_KEY`，执行时加载到子进程，没有写入文件或输出；没有借用 Codex 登录凭据。
+- 真实预检仅尝试开发案例 `D-01` 的 A1：首次与客户端一次重试都返回 HTTP 429。为区分临时限流与额度问题，另发一次 `max_completion_tokens=1` 的独立诊断请求，返回 `error.type=insufficient_quota`、`error.code=credit_balance_exhausted`。这是 API 返回的额度/余额错误，不是通过重试能解决的格式校验问题。
+- 合计 3 次 HTTP 请求，没有生成模型输出；A2、20 条完整开发集和 40 条固定检查集均未运行。Token 与费用没有返回，仍为 NULL，不能声称零消耗或已验证结构化输出兼容性。预检证据见 [真实调用预检归档](../experiments/s1-ai/evidence/model-preflight-2026-10-19/preflight-manifest.json)。
+- 已停止批量请求，不自动轮询额度。需要用户处理该 API 项目的可用额度，或自行切换到有可用额度的服务配置。恢复后先在开发集验证协议和输出预算，再冻结参数执行 A1/A2 固定检查；当前规则、Schema、案例和 A0 成绩未作调整。
+- GPT-5 Mini 的 [官方模型说明](https://developers.openai.com/api/docs/models/gpt-5-mini) 列明支持结构化输出和推理 Token。1024 的 `max_completion_tokens` 同时约束可见输出和推理 Token（参见 [Chat Completions 参数](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create)）；预检未到生成阶段，尚不能判断当前预算是否足以完成 JSON。若后续截断，需仅在开发集调整并同时应用于 A1/A2，不能把额度失败归为模型质量错误。
 - 人工复核资料、填写逐案例评审后，才能比较事实遗漏、无关追问、建议证据支持、延迟、失败与可核查成本。若复核改变标签，需重新声明数据版本并重算所有组，不选择性保留有利结果。
 - P1 安全接入未实现；AI 输出不能直接作为 S1 人工受理请求提交。即使分类编码对齐，事实字段、人工确认、权限、工单版本、幂等和事务仍需单独适配验证。现有非空 `proposalId` 继续被 S1 拒绝。S2 派工未启动。

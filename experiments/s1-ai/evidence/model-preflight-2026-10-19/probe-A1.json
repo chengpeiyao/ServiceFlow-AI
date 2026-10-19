@@ -1,0 +1,24 @@
+{
+  "output" : null,
+  "rawContent" : null,
+  "failure" : "HTTP_429",
+  "attempts" : [ {
+    "number" : 1,
+    "httpStatus" : 429,
+    "status" : "HTTP_429",
+    "elapsedMs" : 2050,
+    "inputTokens" : null,
+    "outputTokens" : null,
+    "servedModel" : null,
+    "requestId" : null
+  }, {
+    "number" : 2,
+    "httpStatus" : 429,
+    "status" : "HTTP_429",
+    "elapsedMs" : 764,
+    "inputTokens" : null,
+    "outputTokens" : null,
+    "servedModel" : null,
+    "requestId" : null
+  } ]
+}

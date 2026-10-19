@@ -1,0 +1,8 @@
+{
+  "httpStatus": 429,
+  "errorType": "insufficient_quota",
+  "errorCode": "credit_balance_exhausted",
+  "errorParameter": null,
+  "retryAfter": null,
+  "timestamp": "2026-10-19T10:19:21.3671494+00:00"
+}
