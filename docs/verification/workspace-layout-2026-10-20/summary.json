@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-20",
+  "scope": "DIRECTORY_AND_PATHS_ONLY",
+  "command": ".\\scripts\\Test-Project.ps1 -Offline",
+  "processMavenArgs": "-Dtest=*,!ExperimentTest#allBaselineOutputsPassSharedValidation",
+  "totals": {
+    "tests": 89,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.serviceflow.ExperimentTest": {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "com.serviceflow.HybridTriageTest": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "com.serviceflow.S1IntegrationTest": {
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "com.serviceflow.S2IntegrationTest": {
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "excludedExistingTest": {
+    "method": "ExperimentTest#allBaselineOutputsPassSharedValidation",
+    "reason": "该项会对固定检查集执行规则基线，本轮按用户约束不运行；测试实现未改动"
+  },
+  "realModelCalls": 0,
+  "fixedSetEvaluationStarted": false,
+  "fixtureIntegrityChecksOnly": "原有加载器及数量/家族隔离检查会读取固定集；未对固定集执行模型或规则效果评测",
+  "movedFiles": 49,
+  "trackedFilesMovedWithGitMv": 15,
+  "businessLogicChanged": false,
+  "sqlChanged": false,
+  "promptChanged": false,
+  "labelsChanged": false,
+  "localConfigurationPath": "experiments/s1-ai/config/model.local.properties",
+  "temporaryPath": "backend/.local/tmp",
+  "openItems": [
+    "V0.1 设计原文件在本轮整理前已缺失",
+    "更早的 artifacts/migration-2026-10-20 与 artifacts/workspaces 在整理前已缺失",
+    "Ollama 进程仍使用 artifacts/runtime/ollama 日志，保留原路径",
+    "JDK/Maven/IDE 和本机配置含本机绝对路径，换机器时需要重新配置"
+  ],
+  "jarSha256": "3df6af9dc8c7c2653f174005adcdd565e92a05b4aa2f2e764e5d492333582628",
+  "historicalHashesVerified": 140,
+  "currentMarkdownLinksVerified": 100,
+  "freezeJarVerified": true,
+  "freezeZipEntriesVerified": 27,
+  "powerShellSyntaxFilesVerified": 3,
+  "indexBlobsPreserved": true,
+  "gitDiffCheck": "PASS",
+  "beforeEditArchiveSha256": "b3d3bd1d5fa08643863b535873993c0047a3702505caa4cf8088b58f800e6e01",
+  "changedExistingFiles": [
+    ".gitignore",
+    "README.md",
+    "backend/scripts/Run-S1Ai.ps1",
+    "backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java",
+    "backend/src/main/java/com/serviceflow/experiment/ExperimentData.java",
+    "backend/src/test/java/com/serviceflow/ExperimentTest.java",
+    "docs/Project_Directory_Guide.md",
+    "docs/README.md",
+    "docs/design/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_Design_V0.2.md",
+    "docs/implementation/ServiceFlow_AI_S1_AI_Implementation.md",
+    "docs/implementation/ServiceFlow_AI_S1_Implementation.md",
+    "docs/implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md",
+    "docs/verification/ServiceFlow_AI_Ollama_Call_Verification_2026-10-20.md",
+    "docs/verification/ServiceFlow_AI_S1_AI_Hybrid_2026-10-20.md",
+    "docs/verification/ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md",
+    "docs/verification/ServiceFlow_AI_S1_AI_Validation_V0.3.1.md",
+    "experiments/s1-ai/README.md",
+    "experiments/s1-ai/config/model.example.properties",
+    "experiments/s1-ai/evidence/README.md",
+    "experiments/s1-ai/freezes/a3-v01-2026-10-20/README.md",
+    "scripts/Test-Project.ps1"
+  ],
+  "addedNavigationFiles": [
+    "docs/design/README.md",
+    "docs/implementation/README.md",
+    "docs/verification/README.md",
+    "experiments/s1-ai/config/README.md",
+    "experiments/s1-ai/datasets/README.md",
+    "experiments/s1-ai/knowledge/README.md",
+    "experiments/s1-ai/prompts/README.md",
+    "artifacts/README.md"
+  ],
+  "testMysqlPort33319ListeningAfterRun": false,
+  "isolatedMysqlDirectoriesRemainingAfterRun": 0,
+  "reportLinksChecked": 8
+}

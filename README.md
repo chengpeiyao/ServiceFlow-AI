@@ -1,6 +1,6 @@
-# ServiceFlow AI S1
+# ServiceFlow AI
 
-本仓库按 V0.3.1 开发契约实现 S1：登录、合同权益检查、工单创建与查询、客户补充说明、人工受理、资源权限和请求幂等。当前交付是 Java API 后端；AI 运行与草稿确认、派工转派、客户验收、解决 SLA 暂停恢复和 Vue3 页面属于后续阶段。
+本仓库按 V0.3.1 开发契约实现 S1 基础业务及 S2 首段任务执行：登录、合同权益、工单受理、任务创建、首次派工、转派、接单、开始与完成。当前交付是 Java API 后端。解决方案提交、客户验收整改、解决 SLA 暂停恢复和 Vue3 页面待后续实现；AI 仍为独立实验，A3 已冻结，人工语义效果尚未验收。
 
 ## 技术与目录
 
@@ -10,7 +10,24 @@
 - `backend/src/main/resources/db/migration`：基于验收的 V0.3.1 完整 25 表初始迁移。
 - `backend/src/main/resources/db/demo`：仅在 `dev` 和测试环境加载的假账号、合同、路由、SLA 及知识样例。
 - `backend/src/test`：真实 HTTP/MySQL 集成测试。
-- `docs`：原设计、验收清单及 S1 实施记录。
+- `docs/design`、`docs/implementation`、`docs/verification`：设计、实施与验证材料，统一由文档导航索引。
+- `scripts/Test-Project.ps1`：统一测试入口，使用项目内 JDK、Maven 缓存和临时目录。
+- `tools`：本机 JDK 与 Maven 依赖缓存，供离线开发使用；大型本地文件不纳入 Git。
+- `docs/verification/local-history/development`：原样保留的验证日志、检查结果及变更前备份。
+- `experiments/s1-ai/freezes`：A3 冻结快照及原运行 JAR；正式原始输出在 `experiments/s1-ai/evidence`。
+- `artifacts/runtime`：当前 Ollama 服务日志；`backend/.local/tmp`：Java 测试临时文件。
+
+完整说明见 [项目目录与清理规则](./docs/Project_Directory_Guide.md)，设计和验收文件见 [文档索引](./docs/README.md)。
+
+推荐在项目根目录运行：
+
+```powershell
+.\scripts\Test-Project.ps1 -Offline
+```
+
+该入口调用现有独立 MySQL 测试脚本，默认使用 `tools/java/jdk-21.0.12.1+1`、`tools/maven/repository` 和 `backend/.local/tmp`；要求 PATH 中已有 Maven 与 MySQL 程序。去掉 `-Offline` 可在需要时下载依赖。
+
+2026-10-20 已清理可重建的 `backend/target`；首次启动或运行模型实验前，先执行上述命令重新构建。90 项历史测试及源码摘要保存在 [S2 验证记录](./docs/verification/s2-first-2026-10-20/summary.json)。
 
 ## 本地启动
 
@@ -28,7 +45,7 @@ Set-Location .\backend
 mvn spring-boot:run '-Dspring-boot.run.profiles=dev'
 ```
 
-`dev` 配置会导入演示账号，统一演示口令为 `S1Demo!2026`。账号有 `customer_a`、`customer_b`、`support`、`manager`、`manager_other`、`engineer`、`ops`。BCrypt 摘要存在演示迁移中；此口令仅用于假数据演示。默认配置不导入这些账号，业务库与演示库分开使用。
+`dev` 配置会导入演示账号，统一演示口令为 `S1Demo!2026`。账号有 `customer_a`、`customer_b`、`support`、`manager`、`manager_other`、`engineer`、`ops`，S2 演示增加 `engineer_backup`（数据库团队）、`engineer_other`（应用团队）和 `manager_backup`（数据库团队主管）。BCrypt 摘要存在演示迁移中；此口令仅用于假数据演示。默认配置不导入这些账号，业务库与演示库分开使用。
 
 登录示例：
 
@@ -90,6 +107,12 @@ Invoke-RestMethod -Uri "http://localhost:8080/api/v1/tickets/$($ticket.ticketId)
 
 `proposalId` 非空时当前阶段明确返回 `AI_TRIAGE_NOT_READY`，不会伪造 AI 草稿执行。人工诊断引用只检查已审核知识、产品及精确版本适用性；引文是否真正支持结论仍需人工核验和后续 AI 评测。
 
+## S2 首段接口
+
+已支持任务创建、首次派工、转派、接单、开始、完成、未派任务取消及内部详情查询。写入携带工单/任务双版本，使用工单锁、请求幂等与数据库单活动任务约束；转派后新人必须重新接单，旧负责人失权。完整请求字段及状态限制见 [S2 首段说明](./docs/implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md)。
+
+当前完整回归为 90 项：S1 27 项、原实验 32 项、A3 6 项、S2 25 项；真实 MySQL 并发与审计失败回滚均通过。验证记录见 [S2 汇总](./docs/verification/s2-first-2026-10-20/summary.json)。
+
 ## 运行测试
 
 默认测试使用 Testcontainers 启动 MySQL，需要 Docker：
@@ -127,4 +150,4 @@ mvn clean verify
 
 已增加 A0 规则基线、A1 直接模型、A2 检索增强模型的独立 Java 实验入口，包含 20 条开发案例、40 条固定检查案例、24 条演示知识、统一校验与评测、人工判定表和费用估算记录。数据为合成资料，领域标注和真实模型效果仍需复核，不能把工具测试通过当作 AI 效果通过。
 
-配置路径为 `config_al/model.local.properties`，密钥从其指定的环境变量读取；该目录不纳入 Git。运行步骤及指标边界见 [S1-AI 实验说明](./experiments/s1-ai/README.md)，实测状态见 [S1-AI 实施记录](./docs/ServiceFlow_AI_S1_AI_Implementation.md)。
+配置路径为 `experiments/s1-ai/config/model.local.properties`，密钥从其指定的环境变量读取；该目录不纳入 Git。运行步骤及指标边界见 [S1-AI 实验说明](./experiments/s1-ai/README.md)，实测状态见 [S1-AI 实施记录](./docs/implementation/ServiceFlow_AI_S1_AI_Implementation.md)。

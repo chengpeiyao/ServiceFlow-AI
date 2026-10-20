@@ -1,0 +1,8 @@
+# 历史证据和数据按原始字节保存，避免自动换行转换导致 SHA-256 失效。
+experiments/s1-ai/datasets/** -text whitespace=cr-at-eol
+experiments/s1-ai/knowledge/** -text whitespace=cr-at-eol
+experiments/s1-ai/evidence/** -text whitespace=cr-at-eol
+experiments/s1-ai/review/*.jsonl -text whitespace=cr-at-eol
+experiments/s1-ai/review/evidence-a2-v1/** -text whitespace=cr-at-eol
+experiments/s1-ai/freezes/** -text whitespace=cr-at-eol
+docs/verification/** -text whitespace=cr-at-eol

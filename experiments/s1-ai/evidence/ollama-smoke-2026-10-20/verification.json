@@ -1,0 +1,68 @@
+{
+  "phase": "SINGLE_DEVELOPMENT_CASE_SMOKE_NOT_FULL_EXPERIMENT",
+  "date": "2026-10-20",
+  "caseId": "D-01",
+  "endpoint": "http://127.0.0.1:11434/v1/chat/completions",
+  "configuredModel": "qwen3:4b-instruct",
+  "modelDirectory": "D:\\SoftWare\\Ollama\\models",
+  "ollamaVersion": "0.40.6",
+  "runtime": {
+    "probeConcurrency": 1,
+    "maxOutputTokens": 1024,
+    "timeoutSeconds": 20,
+    "productionExperimentConcurrencyCap": 2,
+    "temperature": "0",
+    "tokenParameter": "max_tokens",
+    "responseFormat": "json_schema"
+  },
+  "scope": {
+    "cloudApiCalled": false,
+    "fullDevSetExecuted": false,
+    "devCasesRun": 1,
+    "nativeWarmupExecuted": false,
+    "fixedSetExecuted": false
+  },
+  "results": [
+    {
+      "transportSuccess": true,
+      "validationErrors": [
+        "DUPLICATE_FACT_FIELD",
+        "FACT_QUOTE_MISMATCH",
+        "FACT_QUOTE_MISMATCH"
+      ],
+      "outputTokens": 625,
+      "arm": "A1",
+      "httpStatus": 200,
+      "category": "DATABASE_CONNECTION",
+      "acceptedByValidator": false,
+      "elapsedMs": 10891,
+      "inputTokens": 771
+    },
+    {
+      "transportSuccess": true,
+      "validationErrors": [
+        "FACT_QUOTE_MISMATCH",
+        "FACT_QUOTE_MISMATCH"
+      ],
+      "outputTokens": 832,
+      "arm": "A2",
+      "httpStatus": 200,
+      "category": "DATABASE_CONNECTION",
+      "acceptedByValidator": false,
+      "elapsedMs": 10671,
+      "inputTokens": 1045
+    }
+  ],
+  "cost": null,
+  "semanticEvidenceSupport": null,
+  "sourceCommit": "3a9dfb9a9605f50b37c56784f91e3386afa60334",
+  "sourceHasUncommittedHttpSupport": true,
+  "jarSha256": "018B5D709263EA16EE024A59E73611CC5161CF2969DAEAF23E1775EEA8C2677A",
+  "dataSha256": {
+    "data/dev.jsonl": "FB81ADDB15BE008475ED80706B03629841C1E5FBFCCCA23D60E09503DE3C1B74",
+    "data/fixed.jsonl": "057DA3EDE6A5815291FC92396A68E10308F6BAAEA80045D9717CF342CE90B58C",
+    "data/knowledge.jsonl": "F167CD0B2AF305E3B62846731E45CBAB148B29E8D0DD085F29615926C7CEBB55",
+    "output.schema.json": "9BF25A24FDC2953CA2EBAF8804C8E7F2414BC4F37A6E8A9068859EF809A7B872"
+  },
+  "serverMode": "后台命令行 serve，桌面进程已停止；用户级模型路径由用户修正，本轮未修改该变量"
+}

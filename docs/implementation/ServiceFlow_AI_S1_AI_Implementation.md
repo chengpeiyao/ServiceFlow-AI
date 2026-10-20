@@ -1,6 +1,6 @@
 # S1-AI 实施与验证记录
 
-日期：2026-10-19。状态：**独立实验工具与 A0 基线完成；真实调用预检已尝试，但 API 返回额度不足，没有生成 A1/A2 结果。领域复核和人工效果评审尚未完成，不满足 S1-AI 效果验收条件。**
+初次实施：2026-10-19；状态更新：2026-10-20。**独立工具、A0 基线及本机模型 20 条开发集对照已完成；事实来源、重复追问校验与追踪已完善，59 项测试通过。本轮模型分类与必问覆盖未优于规则，仍有元数据引用、重复事实和语义错误；尚无 A1/A2 固定集与人工效果验收结果，不满足 S1-AI 效果验收条件。**
 
 ## 已交付
 
@@ -10,11 +10,11 @@
 4. 六类编码与 S1 受理契约对齐，事实、推测、追问、引用及适用前提分别输出；模型不接收 gold、家族标签或业务写入字段。
 5. 统一 Schema、精确版本过滤、原文引用检查、知识片段与前置条件检查；逐案例自动评分、原始输出保留、人工判定与汇总入口。
 6. HTTP 客户端具备 20 秒请求超时、最多一次有限重试、2 个并发、1024 输出 Token 限制及逐次用量记录；用量缺失、未核实价格及人工未评分项保留 NULL。
-7. 用户指定配置目录为 `config_al`，已生成无密钥模板并加入 Git 忽略。API 密钥只从配置指定的环境变量读取。
+7. 用户指定配置目录为 `experiments/s1-ai/config`，已生成无密钥模板并加入 Git 忽略。API 密钥只从配置指定的环境变量读取。
 
-具体操作见 [实验说明](../experiments/s1-ai/README.md)。
+具体操作见 [实验说明](../../experiments/s1-ai/README.md)。
 
-## 构建与 S1 回归
+## 构建与 S1 回归（2026-10-19 初次实施）
 
 使用 JDK 21.0.12、Maven 3.9.11 和本机 MySQL 8.0.46，通过 `backend/scripts/Test-LocalMySql.ps1` 新建独立临时实例执行 Maven 离线 `clean verify`，实例监听 loopback，结束后关闭并清理。复用了此前下载的依赖，没有连接已有业务数据库。
 
@@ -38,7 +38,7 @@
 
 - 开发集：`2026-10-19T10-02-35-835718100Z-a2e45c23`。
 - 固定集：`2026-10-19T10-02-35-820903700Z-910e2610`。
-- 每次 manifest 保存了案例、知识、Schema 和实际加载实验类字节码的 SHA-256；原始记录归档在 [A0 证据](../experiments/s1-ai/evidence/README.md)。
+- 每次 manifest 保存了案例、知识、Schema 和实际加载实验类字节码的 SHA-256；原始记录归档在 [A0 证据](../../experiments/s1-ai/evidence/README.md)。
 
 | 指标 | 开发集 20 条 | 固定集 40 条 |
 |---|---:|---:|
@@ -63,10 +63,22 @@
 
 ## 尚未完成及下一步
 
-- 用户已填写 `config_al/model.local.properties`：`https://api.openai.com/v1/chat/completions`、`gpt-5-mini`、`max_completion_tokens`、`json_schema`，不发送 temperature。密钥已配置在用户级 `SERVICEFLOW_AI_API_KEY`，执行时加载到子进程，没有写入文件或输出；没有借用 Codex 登录凭据。
+最新进展：提示词 `s1-ai-intake-v0.3` 完成 20 条开发案例的 A0/A1/A2 真实对照，单并发、超时和 Token 限制不变。分类原始正确数分别 19、17、18；通过机械校验的案例分别 20、19、18，A2 接受且分类正确为 16。必问覆盖分别 53/55、14/55、5/55；少问不能算作效果改善。D-01 的引用/重复问题得到缓解，其他案例仍暴露真实错误，固定检查集未提交模型。详见 [完善与开发集结果](../verification/ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md)。
+
+下面的单案例和 OpenAI 预检段落保留为历史，不代表当前最新开发集状态：
+
+2026-10-20 已使用本机 `qwen3:4b-instruct` 完成开发案例 `D-01` 的 A1/A2 调用，均为 HTTP 200，分别约 10.9 秒和 10.7 秒；产品/版本引文与原文不匹配，A1 另有重复事实字段，两个输出均拒绝接受。没有调用固定检查集，没有修改冻结资料。详见 [Ollama 调用验证](../verification/ServiceFlow_AI_Ollama_Call_Verification_2026-10-20.md)。当前本机服务可用，后续先在开发集完善事实来源和追问规则，再执行完整对照。
+
+以下保留 2026-10-19 的 OpenAI 预检历史；其中的服务商配置及额度阻塞仅对应当时的云端尝试，当前项目配置已切换为本机 Ollama：
+
+- 用户已填写 `experiments/s1-ai/config/model.local.properties`：`https://api.openai.com/v1/chat/completions`、`gpt-5-mini`、`max_completion_tokens`、`json_schema`，不发送 temperature。密钥已配置在用户级 `SERVICEFLOW_AI_API_KEY`，执行时加载到子进程，没有写入文件或输出；没有借用 Codex 登录凭据。
 - 真实预检仅尝试开发案例 `D-01` 的 A1：首次与客户端一次重试都返回 HTTP 429。为区分临时限流与额度问题，另发一次 `max_completion_tokens=1` 的独立诊断请求，返回 `error.type=insufficient_quota`、`error.code=credit_balance_exhausted`。这是 API 返回的额度/余额错误，不是通过重试能解决的格式校验问题。
-- 合计 3 次 HTTP 请求，没有生成模型输出；A2、20 条完整开发集和 40 条固定检查集均未运行。Token 与费用没有返回，仍为 NULL，不能声称零消耗或已验证结构化输出兼容性。预检证据见 [真实调用预检归档](../experiments/s1-ai/evidence/model-preflight-2026-10-19/preflight-manifest.json)。
+- 合计 3 次 HTTP 请求，没有生成模型输出；A2、20 条完整开发集和 40 条固定检查集均未运行。Token 与费用没有返回，仍为 NULL，不能声称零消耗或已验证结构化输出兼容性。预检证据见 [真实调用预检归档](../../experiments/s1-ai/evidence/model-preflight-2026-10-19/preflight-manifest.json)。
 - 已停止批量请求，不自动轮询额度。需要用户处理该 API 项目的可用额度，或自行切换到有可用额度的服务配置。恢复后先在开发集验证协议和输出预算，再冻结参数执行 A1/A2 固定检查；当前规则、Schema、案例和 A0 成绩未作调整。
 - GPT-5 Mini 的 [官方模型说明](https://developers.openai.com/api/docs/models/gpt-5-mini) 列明支持结构化输出和推理 Token。1024 的 `max_completion_tokens` 同时约束可见输出和推理 Token（参见 [Chat Completions 参数](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create)）；预检未到生成阶段，尚不能判断当前预算是否足以完成 JSON。若后续截断，需仅在开发集调整并同时应用于 A1/A2，不能把额度失败归为模型质量错误。
 - 人工复核资料、填写逐案例评审后，才能比较事实遗漏、无关追问、建议证据支持、延迟、失败与可核查成本。若复核改变标签，需重新声明数据版本并重算所有组，不选择性保留有利结果。
 - P1 安全接入未实现；AI 输出不能直接作为 S1 人工受理请求提交。即使分类编码对齐，事实字段、人工确认、权限、工单版本、幂等和事务仍需单独适配验证。现有非空 `proposalId` 继续被 S1 拒绝。S2 派工未启动。
+
+## 2026-10-20 A3 开发候选补充
+
+已新增保守混合方案、20 条标签复核底稿与四组真实开发集对照；65 项回归通过。模型非法或失败时明确记录规则降级，未完成标签/输出人工语义审核，不代表 AI 效果验收。固定集继续保留，详见 [A3 记录](../verification/ServiceFlow_AI_S1_AI_Hybrid_2026-10-20.md)。

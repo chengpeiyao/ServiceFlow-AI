@@ -72,6 +72,45 @@ class ExperimentTest {
         Input i = input("", ""); var out = output(i); ((ObjectNode)out.path("facts").get(0)).put("sourceQuote", "服务器已断电");
         assertTrue(TriageEngine.validate(out, i, List.of(), corpus.schema()).contains("FACT_QUOTE_MISMATCH"));
     }
+    @Test void explicitMetadataCannotMasqueradeAsDescriptionQuotes() {
+        Input i = input("COMS", "1.2"); var out = output(i);
+        var facts = out.putArray("facts");
+        facts.addObject().put("field", "product").put("value", "COMS").put("sourceQuote", "COMS");
+        facts.addObject().put("field", "version").put("value", "1.2").put("sourceQuote", "1.2");
+        var errors = TriageEngine.validate(out, i, List.of(), corpus.schema());
+        assertEquals(2, Collections.frequency(errors, "FACT_QUOTE_MISMATCH"));
+        assertEquals(2, Collections.frequency(errors, "METADATA_QUOTE_NOT_IN_DESCRIPTION"));
+    }
+    @Test void productAndVersionMayBeQuotedWhenActuallyPresentInDescription() {
+        Input i = new Input("test", "test", "COMS 1.2 登录异常", "COMS", "1.2"); var out = output(i);
+        var facts = out.putArray("facts");
+        facts.addObject().put("field", "product").put("value", "COMS").put("sourceQuote", "COMS 1.2");
+        facts.addObject().put("field", "version").put("value", "1.2").put("sourceQuote", "COMS 1.2");
+        assertEquals(List.of(), TriageEngine.validate(out, i, List.of(), corpus.schema()));
+    }
+    @Test void repeatedSymptomFactsAreStillRejectedRatherThanSilentlyMerged() {
+        Input i = input("", ""); var out = output(i);
+        int before = out.path("facts").size();
+        out.withArray("facts").addObject().put("field", "symptom").put("value", "连接池耗尽").put("sourceQuote", "连接池耗尽");
+        assertTrue(TriageEngine.validate(out, i, List.of(), corpus.schema()).contains("DUPLICATE_FACT_FIELD"));
+        assertEquals(before + 1, out.path("facts").size());
+    }
+    @Test void duplicateQuestionFieldsAreRejectedWithoutDroppingModelOutput() {
+        Input i = input("", ""); var out = output(i);
+        int before = out.path("questions").size();
+        out.withArray("questions").addObject().put("field", "scope").put("question", "是否所有用户都有问题？");
+        out.withArray("questions").addObject().put("field", "scope").put("question", "是否仅部分用户有问题？");
+        assertTrue(TriageEngine.validate(out, i, List.of(), corpus.schema()).contains("DUPLICATE_QUESTION_FIELD"));
+        assertEquals(before + 2, out.path("questions").size());
+    }
+    @Test void rawCategoryCorrectnessIsSeparateFromAcceptedOutput() {
+        var row = JSON.createObjectNode().put("arm", "A1").put("status", "VALIDATION_REJECTED").put("goldCategory", "APPLICATION");
+        row.putObject("rawOutput").put("category", "APPLICATION"); row.putNull("acceptedOutput");
+        row.putObject("metrics").put("categoryCorrect", false);
+        var summary = JSON.valueToTree(ExperimentMetrics.aggregate(List.of(row))).path("A1");
+        assertEquals(1, summary.path("rawCategoryCorrect").asInt()); assertEquals(0, summary.path("categoryCorrect").asInt());
+        assertEquals(1, summary.path("rejectedCases").asInt()); assertEquals(0, summary.path("acceptedCategoryWrong").asInt());
+    }
     @Test void inventedKnowledgeIsRejected() {
         Input i = input("", ""); var out = output(i);
         out.withArray("suggestions").addObject().put("text", "建议").put("knowledgeId", "FAKE").put("sourceQuote", "不存在").putArray("preconditions");
@@ -87,6 +126,11 @@ class ExperimentTest {
         serve(200, "{}", new AtomicInteger()); var client = client(2); Input i = input("COMS", "1.2");
         var a1 = client.request(i, List.of(), corpus.schema()); var a2 = client.request(i, TriageEngine.retrieve(i, corpus.knowledge()), corpus.schema());
         assertFalse(a1.toString().contains(i.family())); assertFalse(a1.toString().contains("requiredQuestions"));
+        var visible = JSON.readTree(a1.path("messages").get(1).path("content").asText());
+        assertEquals(i.description(), visible.path("customerInput").path("description").asText());
+        assertEquals(1, visible.path("customerInput").size());
+        assertEquals(i.product(), visible.path("readOnlyReportedContext").path("reportedProduct").asText());
+        assertEquals(i.version(), visible.path("readOnlyReportedContext").path("reportedVersion").asText());
         var data = (ObjectNode)JSON.readTree(a2.path("messages").get(1).path("content").asText()); data.putArray("retrievedEvidence");
         ((ObjectNode)a2.path("messages").get(1)).put("content", data.toString()); assertEquals(a1, a2);
     }
@@ -125,6 +169,44 @@ class ExperimentTest {
         for (String endpoint : List.of("http://example.com/v1/chat/completions", "https://key@example.com/v1/chat/completions", "https://example.com/v1/chat/completions?key=secret"))
             assertThrows(IllegalArgumentException.class, () -> new ModelClient.Config(endpoint, "test", "KEY", "max_tokens", "json_object", "", 20));
     }
+    @Test void localBaseAddressesAreNormalizedToChatCompletions() {
+        for (String host : List.of("127.0.0.1", "localhost", "[::1]", "LOCALHOST"))
+            for (String path : List.of("", "/", "/v1", "/v1/", "/v1/chat/completions", "/v1/chat/completions/")) {
+                var config = new ModelClient.Config("http://" + host + ":11434" + path, "local-model", "OLLAMA_API_KEY", "max_tokens", "json_object", "", 20);
+                assertEquals("http://" + host + ":11434/v1/chat/completions", config.endpoint());
+            }
+    }
+    @Test void localBaseAddressWorksWithoutKeyAndOmitsAuthorizationHeader() throws Exception {
+        AtomicInteger calls = new AtomicInteger(), authorizationHeaders = new AtomicInteger();
+        String body = envelope("stop", output(input("", "")), true);
+        server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+        server.createContext("/v1/chat/completions", exchange -> {
+            calls.incrementAndGet(); exchange.getRequestBody().readAllBytes();
+            if (exchange.getRequestHeaders().containsKey("Authorization")) authorizationHeaders.incrementAndGet();
+            byte[] data = body.getBytes(StandardCharsets.UTF_8); exchange.sendResponseHeaders(200, data.length);
+            try (var stream = exchange.getResponseBody()) { stream.write(data); }
+        }); server.start();
+        var config = new ModelClient.Config("http://127.0.0.1:" + server.getAddress().getPort(), "local-model", "OLLAMA_API_KEY", "max_tokens", "json_object", "", 2);
+        for (String key : Arrays.asList(null, "", " ")) {
+            var result = new ModelClient(config, key).complete(input("", ""), List.of(), corpus.schema());
+            assertNull(result.failure());
+        }
+        assertEquals(3, calls.get()); assertEquals(0, authorizationHeaders.get());
+    }
+    @Test void externalHttpsBaseIsNormalizedAndStillRequiresKey() {
+        var config = new ModelClient.Config("https://model.service.test/v1/", "model", "KEY", "max_tokens", "json_object", "", 20);
+        assertEquals("https://model.service.test/v1/chat/completions", config.endpoint());
+        assertThrows(IllegalArgumentException.class, () -> new ModelClient(config, null));
+        assertDoesNotThrow(() -> new ModelClient(config, "test-key"));
+    }
+    @Test void httpExternalHostsAndLoopbackLookalikesRemainRejected() {
+        for (String host : List.of("192.168.1.20", "model.service.test", "localhost.service.test", "127.0.0.1.service.test", "0.0.0.0"))
+            assertThrows(IllegalArgumentException.class, () -> new ModelClient.Config("http://" + host + ":11434", "model", "KEY", "max_tokens", "json_object", "", 20));
+    }
+    @Test void invalidBaseAddressesAndLocalUrlCredentialsAreRejected() {
+        for (String endpoint : List.of("", "localhost:11434", "https:///v1/chat/completions", "http://127.0.0.1:11434/api/chat", "http://key@localhost:11434", "http://localhost:11434?key=secret", "http://localhost:11434/#fragment"))
+            assertThrows(IllegalArgumentException.class, () -> new ModelClient.Config(endpoint, "model", "KEY", "max_tokens", "json_object", "", 20));
+    }
     @Test void exactMetricCountsDoNotPretendToBeSemanticJudgments() {
         var c = corpus.dev().getFirst(); var r = ExperimentMetrics.score(c, TriageEngine.baseline(c.input(), List.of()), List.of(), "A0");
         assertTrue(r.factCorrect() > 0); assertTrue(r.factMissing() > 0); assertEquals("UNSCORED_HUMAN_REVIEW_REQUIRED", r.semanticEvidenceSupport());
@@ -142,16 +224,20 @@ class ExperimentTest {
         assertEquals(0, ExperimentMetrics.score(c, out, List.of(), "A1").knownFieldQuestions());
     }
     @Test void cliWritesReproducibleArtifactsAndRequiresFixedConfirmation(@TempDir Path root) throws Exception {
-        Files.createDirectory(root.resolve("data"));
-        for (String name : List.of("data/dev.jsonl", "data/fixed.jsonl", "data/knowledge.jsonl", "output.schema.json"))
+        Files.createDirectory(root.resolve("datasets"));
+        Files.createDirectory(root.resolve("knowledge"));
+        for (String name : List.of("datasets/dev.jsonl", "datasets/fixed.jsonl", "knowledge/knowledge.jsonl", "output.schema.json"))
             Files.copy(Path.of("../experiments/s1-ai").resolve(name), root.resolve(name));
         assertThrows(IllegalArgumentException.class, () -> ExperimentCli.main(new String[]{"--root", root.toString(), "--split", "fixed"}));
-        ExperimentCli.main(new String[]{"--root", root.toString(), "--arms", "A0"});
+        assertThrows(IllegalArgumentException.class, () -> ExperimentCli.main(new String[]{"--root", root.toString(), "--arms", "A0", "--concurrency", "3"}));
+        ExperimentCli.main(new String[]{"--root", root.toString(), "--arms", "A0", "--concurrency", "1"});
         Path run;
         try (var dirs = Files.list(root.resolve("runs"))) { run = dirs.findFirst().orElseThrow(); }
         assertEquals(20, Files.readAllLines(run.resolve("results.jsonl")).size());
         assertEquals(20, Files.readAllLines(run.resolve("human-review.jsonl")).size());
         assertTrue(JSON.readTree(run.resolve("manifest.json").toFile()).path("sha256").size() > 4);
+        assertEquals(ModelClient.PROMPT_VERSION, JSON.readTree(run.resolve("manifest.json").toFile()).path("promptVersion").asText());
+        assertEquals(1, JSON.readTree(run.resolve("manifest.json").toFile()).path("concurrency").asInt());
         assertTrue(Files.exists(run.resolve("completed.json")));
         assertTrue(JSON.readTree(run.resolve("summary.json").toFile()).path("A0").path("semanticEvidenceSupport").isNull());
         Path reviewed = run.resolve("reviewed.jsonl");

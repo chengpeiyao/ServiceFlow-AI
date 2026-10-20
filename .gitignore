@@ -9,3 +9,14 @@
 *.local.properties
 experiments/s1-ai/runs/
 config_al/
+artifacts/
+tools/*
+!tools/README.md
+
+# 本机临时文件与历史证据的不提交副本
+backend/.local/
+experiments/s1-ai/config/*.local.properties
+experiments/s1-ai/config/*.local.json
+experiments/s1-ai/freezes/**/*.jar
+docs/verification/local-history/
+docs/verification/workspace-layout-2026-10-20/.local/

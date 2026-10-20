@@ -84,7 +84,14 @@ public final class TriageEngine {
             if (!i.description().contains(f.path("sourceQuote").asText()) || !f.path("sourceQuote").asText().contains(f.path("value").asText()))
                 errors.add("FACT_QUOTE_MISMATCH");
             if (!facts.add(f.path("field").asText())) errors.add("DUPLICATE_FACT_FIELD");
+            String field = f.path("field").asText(), value = f.path("value").asText();
+            if (!i.description().contains(f.path("sourceQuote").asText())
+                    && ((field.equals("product") && value.equals(i.product())) || (field.equals("version") && value.equals(i.version()))))
+                errors.add("METADATA_QUOTE_NOT_IN_DESCRIPTION");
         }
+        Set<String> questions = new HashSet<>();
+        for (JsonNode question : out.path("questions"))
+            if (!questions.add(question.path("field").asText())) errors.add("DUPLICATE_QUESTION_FIELD");
         for (JsonNode s : out.path("suggestions")) {
             String id = s.path("knowledgeId").asText(), quote = s.path("sourceQuote").asText();
             if (id.isEmpty()) { if (!quote.isEmpty()) errors.add("QUOTE_WITHOUT_SOURCE"); continue; }

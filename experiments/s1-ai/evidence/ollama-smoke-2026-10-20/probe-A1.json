@@ -1,0 +1,73 @@
+{
+  "output" : {
+    "category" : "DATABASE_CONNECTION",
+    "categoryInsufficient" : false,
+    "evidenceInsufficient" : true,
+    "facts" : [ {
+      "field" : "symptom",
+      "sourceQuote" : "全部用户提交订单失败",
+      "value" : "全部用户提交订单失败"
+    }, {
+      "field" : "symptom",
+      "sourceQuote" : "提示连接池耗尽",
+      "value" : "提示连接池耗尽"
+    }, {
+      "field" : "product",
+      "sourceQuote" : "COMS",
+      "value" : "COMS"
+    }, {
+      "field" : "version",
+      "sourceQuote" : "1.2",
+      "value" : "1.2"
+    }, {
+      "field" : "startTime",
+      "sourceQuote" : "今天09:15",
+      "value" : "今天09:15"
+    } ],
+    "hypotheses" : [ "连接池配置不足导致连接耗尽", "数据库服务端连接数限制被触发", "连接池未正确回收连接", "高并发场景下连接池无法及时扩容" ],
+    "questions" : [ {
+      "field" : "product",
+      "question" : "COMS 产品是否在 1.2 版本中使用了连接池机制？"
+    }, {
+      "field" : "version",
+      "question" : "1.2 版本的连接池配置参数是什么？"
+    }, {
+      "field" : "startTime",
+      "question" : "09:15 之前是否有类似问题发生？"
+    }, {
+      "field" : "scope",
+      "question" : "该问题影响的是所有用户还是特定用户群体？"
+    }, {
+      "field" : "frequency",
+      "question" : "该问题是否为偶发或持续性现象？"
+    } ],
+    "suggestions" : [ {
+      "knowledgeId" : "",
+      "preconditions" : [ "连接池配置参数已知", "数据库服务端连接数限制明确" ],
+      "sourceQuote" : "",
+      "text" : "建议检查 COMS 1.2 版本的连接池配置，确认其最大连接数是否合理，并评估是否需要扩容。"
+    }, {
+      "knowledgeId" : "",
+      "preconditions" : [ "存在历史故障记录", "连接池回收逻辑已验证" ],
+      "sourceQuote" : "",
+      "text" : "建议核查连接池的连接回收机制，确保连接在使用后被正确释放。"
+    }, {
+      "knowledgeId" : "",
+      "preconditions" : [ "数据库服务端连接数限制已知", "服务端日志可访问" ],
+      "sourceQuote" : "",
+      "text" : "建议查看数据库服务端日志，确认连接数是否达到上限。"
+    } ]
+  },
+  "rawContent" : "{\n  \"category\": \"DATABASE_CONNECTION\",\n  \"categoryInsufficient\": false,\n  \"evidenceInsufficient\": true,\n  \"facts\": [\n    {\n      \"field\": \"symptom\",\n      \"sourceQuote\": \"全部用户提交订单失败\",\n      \"value\": \"全部用户提交订单失败\"\n    },\n    {\n      \"field\": \"symptom\",\n      \"sourceQuote\": \"提示连接池耗尽\",\n      \"value\": \"提示连接池耗尽\"\n    },\n    {\n      \"field\": \"product\",\n      \"sourceQuote\": \"COMS\",\n      \"value\": \"COMS\"\n    },\n    {\n      \"field\": \"version\",\n      \"sourceQuote\": \"1.2\",\n      \"value\": \"1.2\"\n    },\n    {\n      \"field\": \"startTime\",\n      \"sourceQuote\": \"今天09:15\",\n      \"value\": \"今天09:15\"\n    }\n  ],\n  \"hypotheses\": [\n    \"连接池配置不足导致连接耗尽\",\n    \"数据库服务端连接数限制被触发\",\n    \"连接池未正确回收连接\",\n    \"高并发场景下连接池无法及时扩容\"\n  ],\n  \"questions\": [\n    {\n      \"field\": \"product\",\n      \"question\": \"COMS 产品是否在 1.2 版本中使用了连接池机制？\"\n    },\n    {\n      \"field\": \"version\",\n      \"question\": \"1.2 版本的连接池配置参数是什么？\"\n    },\n    {\n      \"field\": \"startTime\",\n      \"question\": \"09:15 之前是否有类似问题发生？\"\n    },\n    {\n      \"field\": \"scope\",\n      \"question\": \"该问题影响的是所有用户还是特定用户群体？\"\n    },\n    {\n      \"field\": \"frequency\",\n      \"question\": \"该问题是否为偶发或持续性现象？\"\n    }\n  ],\n  \"suggestions\": [\n    {\n      \"knowledgeId\": \"\",\n      \"preconditions\": [\n        \"连接池配置参数已知\",\n        \"数据库服务端连接数限制明确\"\n      ],\n      \"sourceQuote\": \"\",\n      \"text\": \"建议检查 COMS 1.2 版本的连接池配置，确认其最大连接数是否合理，并评估是否需要扩容。\"\n    },\n    {\n      \"knowledgeId\": \"\",\n      \"preconditions\": [\n        \"存在历史故障记录\",\n        \"连接池回收逻辑已验证\"\n      ],\n      \"sourceQuote\": \"\",\n      \"text\": \"建议核查连接池的连接回收机制，确保连接在使用后被正确释放。\"\n    },\n    {\n      \"knowledgeId\": \"\",\n      \"preconditions\": [\n        \"数据库服务端连接数限制已知\",\n        \"服务端日志可访问\"\n      ],\n      \"sourceQuote\": \"\",\n      \"text\": \"建议查看数据库服务端日志，确认连接数是否达到上限。\"\n    }\n  ]\n}",
+  "failure" : null,
+  "attempts" : [ {
+    "number" : 1,
+    "httpStatus" : 200,
+    "status" : "SUCCESS",
+    "elapsedMs" : 10891,
+    "inputTokens" : 771,
+    "outputTokens" : 625,
+    "servedModel" : "qwen3:4b-instruct",
+    "requestId" : "chatcmpl-960"
+  } ]
+}

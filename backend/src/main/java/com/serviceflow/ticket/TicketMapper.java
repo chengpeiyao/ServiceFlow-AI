@@ -67,6 +67,12 @@ public interface TicketMapper {
             """)
     int insertTriage(long id, long ticketId, String category, String facts, String followups, String diagnostics, long actorId, Instant now);
 
+    @Update("""
+            UPDATE service_ticket SET status=#{status},version=version+1,updated_at=#{now}
+            WHERE id=#{id} AND version=#{expectedVersion}
+            """)
+    int taskState(long id, int expectedVersion, String status, Instant now);
+
     @Select("SELECT id,product_code,applicable_versions,status FROM knowledge_article_version WHERE id=#{id}")
     Knowledge knowledge(long id);
 }

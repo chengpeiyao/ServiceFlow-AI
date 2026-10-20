@@ -1,0 +1,74 @@
+{
+  "output" : {
+    "category" : "DATABASE_CONNECTION",
+    "categoryInsufficient" : false,
+    "evidenceInsufficient" : false,
+    "facts" : [ {
+      "field" : "symptom",
+      "sourceQuote" : "今天09:15全部用户提交订单失败，提示连接池耗尽。",
+      "value" : "全部用户提交订单失败，提示连接池耗尽"
+    }, {
+      "field" : "product",
+      "sourceQuote" : "COMS",
+      "value" : "COMS"
+    }, {
+      "field" : "version",
+      "sourceQuote" : "1.2",
+      "value" : "1.2"
+    }, {
+      "field" : "change",
+      "sourceQuote" : "连接池耗尽",
+      "value" : "连接池耗尽"
+    }, {
+      "field" : "startTime",
+      "sourceQuote" : "今天09:15",
+      "value" : "今天09:15"
+    }, {
+      "field" : "scope",
+      "sourceQuote" : "全部用户",
+      "value" : "全部用户"
+    } ],
+    "hypotheses" : [ "连接池配置过小，无法满足当前并发请求量。", "存在连接泄漏，导致连接池被长期占用。", "数据库服务端连接池配置与客户端请求频率不匹配。", "订单提交流程中存在重复请求，导致连接池被反复占用。", "连接池耗尽是由于服务端未正确释放数据库连接。" ],
+    "questions" : [ {
+      "field" : "frequency",
+      "question" : "订单提交失败是否在特定时间段内频繁发生？"
+    }, {
+      "field" : "logs",
+      "question" : "是否有服务端或客户端的详细日志记录连接池使用情况？"
+    }, {
+      "field" : "reproduction",
+      "question" : "是否可以复现该问题？复现步骤是什么？"
+    }, {
+      "field" : "errorCode",
+      "question" : "错误提示中是否有具体的错误码或异常信息？"
+    } ],
+    "suggestions" : [ {
+      "knowledgeId" : "C01",
+      "preconditions" : [ "客户确认产品版本为 1.2", "具备只读监控访问权限" ],
+      "sourceQuote" : "在本项目模拟的 COMS 1.2 场景中，对比连接活跃数、等待数和请求量；若连接长期占用，收集对应慢请求。该建议不证明连接泄漏。",
+      "text" : "对比连接活跃数、等待数和请求量，若连接长期占用，需收集对应慢请求以进一步分析，但该建议不证明连接泄漏。"
+    }, {
+      "knowledgeId" : "C04",
+      "preconditions" : [ "仅查询订单与请求日志" ],
+      "sourceQuote" : "根据业务单号和幂等请求标识比对多次提交的响应；超时后重试可能产生不同请求，不能直接认定所有重复订单来自前端。",
+      "text" : "通过业务单号和幂等请求标识比对多次提交的响应，需确认是否为重复请求，超时后重试可能产生不同请求，不能直接认定所有重复订单来自前端。"
+    }, {
+      "knowledgeId" : "G05",
+      "preconditions" : [ "日志必须脱敏，不包含密码或令牌" ],
+      "sourceQuote" : "收集错误提示、发生时间、最小复现步骤和脱敏日志。先区分客户端与服务端现象，不能根据单条报错确认根因。",
+      "text" : "收集错误提示、发生时间、最小复现步骤和脱敏日志，先区分客户端与服务端现象，不能根据单条报错确认根因。"
+    } ]
+  },
+  "rawContent" : "{\n  \"category\": \"DATABASE_CONNECTION\",\n  \"categoryInsufficient\": false,\n  \"evidenceInsufficient\": false,\n  \"facts\": [\n    {\n      \"field\": \"symptom\",\n      \"sourceQuote\": \"今天09:15全部用户提交订单失败，提示连接池耗尽。\",\n      \"value\": \"全部用户提交订单失败，提示连接池耗尽\"\n    },\n    {\n      \"field\": \"product\",\n      \"sourceQuote\": \"COMS\",\n      \"value\": \"COMS\"\n    },\n    {\n      \"field\": \"version\",\n      \"sourceQuote\": \"1.2\",\n      \"value\": \"1.2\"\n    },\n    {\n      \"field\": \"change\",\n      \"sourceQuote\": \"连接池耗尽\",\n      \"value\": \"连接池耗尽\"\n    },\n    {\n      \"field\": \"startTime\",\n      \"sourceQuote\": \"今天09:15\",\n      \"value\": \"今天09:15\"\n    },\n    {\n      \"field\": \"scope\",\n      \"sourceQuote\": \"全部用户\",\n      \"value\": \"全部用户\"\n    }\n  ],\n  \"hypotheses\": [\n    \"连接池配置过小，无法满足当前并发请求量。\",\n    \"存在连接泄漏，导致连接池被长期占用。\",\n    \"数据库服务端连接池配置与客户端请求频率不匹配。\",\n    \"订单提交流程中存在重复请求，导致连接池被反复占用。\",\n    \"连接池耗尽是由于服务端未正确释放数据库连接。\"\n  ],\n  \"questions\": [\n    {\n      \"field\": \"frequency\",\n      \"question\": \"订单提交失败是否在特定时间段内频繁发生？\"\n    },\n    {\n      \"field\": \"logs\",\n      \"question\": \"是否有服务端或客户端的详细日志记录连接池使用情况？\"\n    },\n    {\n      \"field\": \"reproduction\",\n      \"question\": \"是否可以复现该问题？复现步骤是什么？\"\n    },\n    {\n      \"field\": \"errorCode\",\n      \"question\": \"错误提示中是否有具体的错误码或异常信息？\"\n    }\n  ],\n  \"suggestions\": [\n    {\n      \"knowledgeId\": \"C01\",\n      \"preconditions\": [\n        \"客户确认产品版本为 1.2\",\n        \"具备只读监控访问权限\"\n      ],\n      \"sourceQuote\": \"在本项目模拟的 COMS 1.2 场景中，对比连接活跃数、等待数和请求量；若连接长期占用，收集对应慢请求。该建议不证明连接泄漏。\",\n      \"text\": \"对比连接活跃数、等待数和请求量，若连接长期占用，需收集对应慢请求以进一步分析，但该建议不证明连接泄漏。\"\n    },\n    {\n      \"knowledgeId\": \"C04\",\n      \"preconditions\": [\n        \"仅查询订单与请求日志\"\n      ],\n      \"sourceQuote\": \"根据业务单号和幂等请求标识比对多次提交的响应；超时后重试可能产生不同请求，不能直接认定所有重复订单来自前端。\",\n      \"text\": \"通过业务单号和幂等请求标识比对多次提交的响应，需确认是否为重复请求，超时后重试可能产生不同请求，不能直接认定所有重复订单来自前端。\"\n    },\n    {\n      \"knowledgeId\": \"G05\",\n      \"preconditions\": [\n        \"日志必须脱敏，不包含密码或令牌\"\n      ],\n      \"sourceQuote\": \"收集错误提示、发生时间、最小复现步骤和脱敏日志。先区分客户端与服务端现象，不能根据单条报错确认根因。\",\n      \"text\": \"收集错误提示、发生时间、最小复现步骤和脱敏日志，先区分客户端与服务端现象，不能根据单条报错确认根因。\"\n    }\n  ]\n}",
+  "failure" : null,
+  "attempts" : [ {
+    "number" : 1,
+    "httpStatus" : 200,
+    "status" : "SUCCESS",
+    "elapsedMs" : 10671,
+    "inputTokens" : 1045,
+    "outputTokens" : 832,
+    "servedModel" : "qwen3:4b-instruct",
+    "requestId" : "chatcmpl-898"
+  } ]
+}

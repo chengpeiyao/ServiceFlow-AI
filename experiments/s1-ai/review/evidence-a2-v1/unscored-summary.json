@@ -1,0 +1,22 @@
+{
+  "caseCount": 20,
+  "suggestionCount": 30,
+  "casesWithNoSuggestion": 1,
+  "wholeOutputRejectedCases": 2,
+  "fullyReviewedSuggestions": 0,
+  "metrics": {
+    "evidenceSupport": {
+      "UNSCORED": 30
+    },
+    "applicabilityCorrect": {
+      "UNSCORED": 30
+    },
+    "addedValueOverRule": {
+      "UNSCORED": 30
+    },
+    "factHypothesisConfusion": {
+      "UNSCORED": 30
+    }
+  },
+  "limitation": "计数单位为建议条目，不是案例通过率；未评分不能视为正确，也不能据此认定 AI 增益"
+}

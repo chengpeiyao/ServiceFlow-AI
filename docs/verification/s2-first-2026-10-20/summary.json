@@ -1,0 +1,71 @@
+{
+  "verifiedAt": "2026-10-20T07:19:23.056835+00:00",
+  "scope": "S2_FIRST_SEGMENT_TASK_ASSIGNMENT_TRANSFER_STATE_MACHINE",
+  "command": ".\\scripts\\Test-Project.ps1 -Offline",
+  "totals": {
+    "tests": 90,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.serviceflow.ExperimentTest": {
+      "tests": 32,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "com.serviceflow.HybridTriageTest": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "com.serviceflow.S1IntegrationTest": {
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "com.serviceflow.S2IntegrationTest": {
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "preservedSourceHashes": {
+    "backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java": "0a23d5096b313bc6ac47c63ad3301b5895a1e2e6e455a4d82c8d532e66b76674",
+    "backend/src/main/java/com/serviceflow/experiment/ExperimentData.java": "e8434b240d39179341b942796c198c20612623b060de5fef28c2823aea18e447",
+    "backend/src/main/java/com/serviceflow/experiment/ExperimentMetrics.java": "4d22fdc7aff0372c7e75615bb388edf63ff7107d7f52fba7ce022a6d0b4ad22d",
+    "backend/src/main/java/com/serviceflow/experiment/ExperimentPricing.java": "dbdeca5531cf70c3531101ba6248094e9e85a4c3cf9b3630eedb3c503ea6db6d",
+    "backend/src/main/java/com/serviceflow/experiment/HybridTriage.java": "4d3be411bbcfad6c25e080a4bcac42bd9222dae92b3c7bca78f3b38c52766926",
+    "backend/src/main/java/com/serviceflow/experiment/ModelClient.java": "b82c6d73de208e49008583c97721a7212b366b9d9e473f55249ec29ba9329982",
+    "backend/src/main/java/com/serviceflow/experiment/ReviewSummaryCli.java": "2d0d61f999d2e2c1b9467ba6790802b19da5c6af93fb4c9fc4273fb974e9ec92",
+    "backend/src/main/java/com/serviceflow/experiment/TriageEngine.java": "578fc5ff598feb3373398097eb63c2a2ad9907dbacc3ec5813578784b35e7096",
+    "backend/src/main/resources/db/migration/V1__serviceflow_p0_core.sql": "52803ca17d8bd716d113092cf3ae3b11e005b0e984e2d49c04df20a6d361ad7d",
+    "backend/src/main/resources/db/demo/V2__demo_seed.sql": "d51db84282c861498a18d3eb660d9f848693576b908eeadcc66b9fbb343fdb83",
+    "backend/src/test/java/com/serviceflow/S1IntegrationTest.java": "bdb0f4e10d6f5266ec055da16e788223aac09a04f3d1cd33336ff965cdc55e64",
+    "experiments/s1-ai/data/dev.jsonl": "fb81addb15be008475ed80706b03629841c1e5fbfccca23d60e09503de3c1b74",
+    "experiments/s1-ai/data/fixed.jsonl": "057da3ede6a5815291fc92396a68e10308f6baaea80045d9717cf342ce90b58c",
+    "experiments/s1-ai/data/knowledge.jsonl": "f167cd0b2af305e3b62846731e45cbab148b29e8d0dd085f29615926c7cebb55",
+    "experiments/s1-ai/output.schema.json": "9bf25a24fdc2953ca2ebaf8804c8e7f2414bc4f37a6e8a9068859ef809a7b872"
+  },
+  "changedSourceHashes": {
+    "backend/src/main/java/com/serviceflow/task/TaskMapper.java": "1dce7b1e665a4992c24ce39f96b639fdd4d2d5d0d4c08f7cb7b8fc39605ba40c",
+    "backend/src/main/java/com/serviceflow/task/TaskCommands.java": "b5c404886bed3a15c12d57d74553035f8c4d2c995ccd310e247be950b42dabad",
+    "backend/src/main/java/com/serviceflow/task/TaskService.java": "2caf26a64e1e7f17aa9b4c7c0781fda3dab97e5fccf95a66b1da610647c771bf",
+    "backend/src/main/java/com/serviceflow/task/TaskController.java": "9998c4bc61d7a886b448236217a33b305e7cf2c2095175077c42fb6d9812fc98",
+    "backend/src/test/java/com/serviceflow/S2IntegrationTest.java": "800aadc5c5e8a9537ef6ddf21cfaeffefb430fb35bf5ae385bc4eeb369f0c421",
+    "backend/src/main/java/com/serviceflow/ticket/TicketMapper.java": "5e97fe4246fbcf3e03dbd1c2db7b26207af3d293fa27832490f8f3fbc35b7c07",
+    "backend/src/main/resources/db/demo/V3__s2_demo_engineers.sql": "0751a4ac32ed65b3e9d5b04deaef6e3cde42577cda078e209253cdd246754683"
+  },
+  "jarSha256": "2201cf13d7e29f1008326b47328a5299ba4bf97aae8a5e9bd2889a74de7f106d",
+  "a3FreezeVerified": true,
+  "a3JarSha256": "5044bda6ff55ef21f930358a1e5da65d2a16ee47bd06bd061762b175e38cd0ca",
+  "evidenceReviewToolChecksPassed": 7,
+  "humanReviewCompletedSuggestions": 0,
+  "modelCallsThisStage": 0,
+  "concurrencyMethod": "测试拦截器设置真实工单锁入口栅栏/持锁点；读取 CONNECTION_ID 并断言每组两条不同连接，不替换 Mapper 返回值",
+  "log": "D:\\Code\\my_project\\ServiceFlow AI\\artifacts\\development\\s2-20261020\\tests-first.log"
+}

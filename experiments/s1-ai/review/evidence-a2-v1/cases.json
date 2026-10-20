@@ -1,0 +1,122 @@
+[
+  {
+    "caseId": "D-01",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 3
+  },
+  {
+    "caseId": "D-02",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-03",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-04",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-05",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-06",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-07",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-08",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-09",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-10",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-11",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-12",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-13",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-14",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-15",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-16",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-17",
+    "wholeOutputStatus": "VALIDATION_REJECTED",
+    "acceptedIntakeOutput": false,
+    "suggestionCount": 2
+  },
+  {
+    "caseId": "D-18",
+    "wholeOutputStatus": "VALIDATION_REJECTED",
+    "acceptedIntakeOutput": false,
+    "suggestionCount": 1
+  },
+  {
+    "caseId": "D-19",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 0
+  },
+  {
+    "caseId": "D-20",
+    "wholeOutputStatus": "SUCCESS",
+    "acceptedIntakeOutput": true,
+    "suggestionCount": 1
+  }
+]

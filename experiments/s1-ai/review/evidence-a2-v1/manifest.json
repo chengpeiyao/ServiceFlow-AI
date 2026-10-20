@@ -1,0 +1,14 @@
+{
+  "version": "evidence-review-v1",
+  "preparedAt": "2026-10-20T04:02:27.302604+00:00",
+  "sourceRun": "D:\\Code\\my_project\\ServiceFlow AI\\experiments\\s1-ai\\evidence\\dev-a3-v01-2026-10-20",
+  "sourceResultsSha256": "345e93742e173c71654486ffccbf7bd18fe51042e953402a827d75e9455fcab4",
+  "sourceManifestSha256": "fe84933abe54932566b6264449082c4aa27935d6b12f99ec770166fc0ded831d",
+  "templateSha256": "d6b7e14fecd691d108a0d603a4c8df0c5ae61042188e6c3624d687d261c291e4",
+  "caseCount": 20,
+  "suggestionCount": 30,
+  "casesWithNoSuggestion": 1,
+  "wholeOutputRejectedCases": 2,
+  "reviewStatus": "PENDING_HUMAN_REVIEW",
+  "scope": "独立评价原始 A2 建议；整份输出已拒绝的案例也保留，但不计作可用受理输出"
+}

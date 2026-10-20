@@ -1,0 +1,241 @@
+[ {
+  "reviewId" : "5a1c46ed-f1d6-49df-be3d-d6026a58c841",
+  "caseId" : "D-01",
+  "arm" : "A0"
+}, {
+  "reviewId" : "bab71bbc-5127-4016-925a-c22187e31211",
+  "caseId" : "D-01",
+  "arm" : "A1"
+}, {
+  "reviewId" : "3e5e2e37-b299-4abf-90a2-bea82a75a895",
+  "caseId" : "D-01",
+  "arm" : "A2"
+}, {
+  "reviewId" : "608ca894-46d8-4739-bec6-11098623847b",
+  "caseId" : "D-02",
+  "arm" : "A2"
+}, {
+  "reviewId" : "80c46331-3f1c-41ef-9fb8-2c0116639dbc",
+  "caseId" : "D-02",
+  "arm" : "A1"
+}, {
+  "reviewId" : "2095fcef-b15a-44bb-b648-1cd370a2b133",
+  "caseId" : "D-02",
+  "arm" : "A0"
+}, {
+  "reviewId" : "6975e948-bbf4-4e82-b058-05c18717e2b5",
+  "caseId" : "D-03",
+  "arm" : "A0"
+}, {
+  "reviewId" : "2acd6de7-b832-47cf-8561-d4e529ed9d90",
+  "caseId" : "D-03",
+  "arm" : "A1"
+}, {
+  "reviewId" : "015c8659-4e44-41d1-bf1a-281cfff87410",
+  "caseId" : "D-03",
+  "arm" : "A2"
+}, {
+  "reviewId" : "a2c51c41-12f1-4172-bf17-19361667261e",
+  "caseId" : "D-04",
+  "arm" : "A2"
+}, {
+  "reviewId" : "54f0d254-2b95-4b9d-8be2-c929e9892c3c",
+  "caseId" : "D-04",
+  "arm" : "A1"
+}, {
+  "reviewId" : "0032f688-7c3f-4c35-9f60-51da7559408d",
+  "caseId" : "D-04",
+  "arm" : "A0"
+}, {
+  "reviewId" : "d7fbee0a-0f49-4c84-ba15-0a23d74e7eb3",
+  "caseId" : "D-05",
+  "arm" : "A0"
+}, {
+  "reviewId" : "8f7c43a6-d2ec-4bc4-9f66-742218b2ff77",
+  "caseId" : "D-05",
+  "arm" : "A1"
+}, {
+  "reviewId" : "4e73c1b0-90cc-495c-aa13-6f93a2f0e1d2",
+  "caseId" : "D-05",
+  "arm" : "A2"
+}, {
+  "reviewId" : "f1e08438-5115-42b2-a553-fa563b00d9e6",
+  "caseId" : "D-06",
+  "arm" : "A2"
+}, {
+  "reviewId" : "ad40b81a-5aa5-4b4e-8a50-d532e7d94a1f",
+  "caseId" : "D-06",
+  "arm" : "A1"
+}, {
+  "reviewId" : "7f595f5e-c457-4851-add2-7bd2f1adfff0",
+  "caseId" : "D-06",
+  "arm" : "A0"
+}, {
+  "reviewId" : "4803b6bf-bd3f-41ec-a37a-0be12170d760",
+  "caseId" : "D-07",
+  "arm" : "A0"
+}, {
+  "reviewId" : "e422ce29-0cdf-4b46-a016-62efcdaa8b9f",
+  "caseId" : "D-07",
+  "arm" : "A1"
+}, {
+  "reviewId" : "77b4c584-39d2-4c22-96cf-d54464209e8a",
+  "caseId" : "D-07",
+  "arm" : "A2"
+}, {
+  "reviewId" : "79edb5e4-71c1-4165-a0f3-605c35007351",
+  "caseId" : "D-08",
+  "arm" : "A2"
+}, {
+  "reviewId" : "1a136cf4-56c8-44de-9ba1-a47d34b096a9",
+  "caseId" : "D-08",
+  "arm" : "A1"
+}, {
+  "reviewId" : "e3025064-0fdb-4fbe-84eb-19c76e594108",
+  "caseId" : "D-08",
+  "arm" : "A0"
+}, {
+  "reviewId" : "6d384403-5996-4ace-97e6-b15ac83733bc",
+  "caseId" : "D-09",
+  "arm" : "A0"
+}, {
+  "reviewId" : "442e1068-58c1-4a82-ad2f-c374d77f3164",
+  "caseId" : "D-09",
+  "arm" : "A1"
+}, {
+  "reviewId" : "0c6f4f69-66e1-4c32-a3ef-ab4d26ab7ca7",
+  "caseId" : "D-09",
+  "arm" : "A2"
+}, {
+  "reviewId" : "23a8e450-e2ff-4f1b-bc0b-5f7ff53ee4c2",
+  "caseId" : "D-10",
+  "arm" : "A2"
+}, {
+  "reviewId" : "ee6a02c8-fbd3-4016-9084-1bf0ed54ec3d",
+  "caseId" : "D-10",
+  "arm" : "A1"
+}, {
+  "reviewId" : "6c2f53de-701e-4702-9d99-c73416934222",
+  "caseId" : "D-10",
+  "arm" : "A0"
+}, {
+  "reviewId" : "3785b8dc-c1db-442f-9997-54f7ed944fb0",
+  "caseId" : "D-11",
+  "arm" : "A0"
+}, {
+  "reviewId" : "8e69d142-ee96-4ddd-9d56-0709a2eae3f3",
+  "caseId" : "D-11",
+  "arm" : "A1"
+}, {
+  "reviewId" : "d645d2e8-325f-4e80-b052-77b266004879",
+  "caseId" : "D-11",
+  "arm" : "A2"
+}, {
+  "reviewId" : "bd133ded-7fdb-4348-8acc-4daa99d981c4",
+  "caseId" : "D-12",
+  "arm" : "A2"
+}, {
+  "reviewId" : "381a7010-e3e3-49e6-9b85-e537b0055cce",
+  "caseId" : "D-12",
+  "arm" : "A1"
+}, {
+  "reviewId" : "fd63e30d-1432-4aa3-a30e-8e6e3cf957d1",
+  "caseId" : "D-12",
+  "arm" : "A0"
+}, {
+  "reviewId" : "7407052c-5bc1-405c-bb2f-1b80f0131645",
+  "caseId" : "D-13",
+  "arm" : "A0"
+}, {
+  "reviewId" : "d887ad66-4774-416f-85d5-6cea745ab0fc",
+  "caseId" : "D-13",
+  "arm" : "A1"
+}, {
+  "reviewId" : "7eee8d10-9482-4c6c-b86a-39772950fde9",
+  "caseId" : "D-13",
+  "arm" : "A2"
+}, {
+  "reviewId" : "7c92ccab-b45f-4f40-8145-eb5b0b26e5b3",
+  "caseId" : "D-14",
+  "arm" : "A2"
+}, {
+  "reviewId" : "f53ac04a-5180-460b-a27a-6c093a2831a4",
+  "caseId" : "D-14",
+  "arm" : "A1"
+}, {
+  "reviewId" : "5f9e1ee5-bfa3-4c21-a240-85ae855b6816",
+  "caseId" : "D-14",
+  "arm" : "A0"
+}, {
+  "reviewId" : "8968e686-4dd7-4a24-95b7-d3b670337938",
+  "caseId" : "D-15",
+  "arm" : "A0"
+}, {
+  "reviewId" : "ed707258-223c-440e-9a73-ebb482ad3c9a",
+  "caseId" : "D-15",
+  "arm" : "A1"
+}, {
+  "reviewId" : "4dc231dc-f00f-415d-b35f-383a207cce45",
+  "caseId" : "D-15",
+  "arm" : "A2"
+}, {
+  "reviewId" : "6faf5cb9-7f3d-44d0-8d28-31042388af08",
+  "caseId" : "D-16",
+  "arm" : "A2"
+}, {
+  "reviewId" : "38dca788-abe3-4c0d-a150-54201f3949ac",
+  "caseId" : "D-16",
+  "arm" : "A1"
+}, {
+  "reviewId" : "55ca052f-ab4c-42bc-9e9d-979f33916a04",
+  "caseId" : "D-16",
+  "arm" : "A0"
+}, {
+  "reviewId" : "bb0ceccf-89cc-4f60-81fb-6bf713ad0180",
+  "caseId" : "D-17",
+  "arm" : "A0"
+}, {
+  "reviewId" : "490ee8fa-1abd-4294-8f4c-df5c0c25c904",
+  "caseId" : "D-17",
+  "arm" : "A1"
+}, {
+  "reviewId" : "8f31fa58-3e09-4f7d-b87d-cfa56ce1072d",
+  "caseId" : "D-17",
+  "arm" : "A2"
+}, {
+  "reviewId" : "0f1520cb-3f4a-4804-adae-6d3167c58e2d",
+  "caseId" : "D-18",
+  "arm" : "A2"
+}, {
+  "reviewId" : "3f1397db-609e-4cd5-9bb9-284b95511f46",
+  "caseId" : "D-18",
+  "arm" : "A1"
+}, {
+  "reviewId" : "1388f80a-7fa2-417c-a66e-408c5160524f",
+  "caseId" : "D-18",
+  "arm" : "A0"
+}, {
+  "reviewId" : "db5dcdee-64f8-4e3f-babe-3bc2a2ea1aa9",
+  "caseId" : "D-19",
+  "arm" : "A0"
+}, {
+  "reviewId" : "00a796ea-97ac-47d9-909f-68ae3d8f8d3c",
+  "caseId" : "D-19",
+  "arm" : "A1"
+}, {
+  "reviewId" : "3904c901-f284-427b-9999-d3c7d6716093",
+  "caseId" : "D-19",
+  "arm" : "A2"
+}, {
+  "reviewId" : "3944853a-dc33-4e2e-a0a0-dba4bf160276",
+  "caseId" : "D-20",
+  "arm" : "A2"
+}, {
+  "reviewId" : "ff7d00fe-d889-425b-b942-6006587e107a",
+  "caseId" : "D-20",
+  "arm" : "A1"
+}, {
+  "reviewId" : "42f1a781-2813-446a-b7ca-b041ef6d6be5",
+  "caseId" : "D-20",
+  "arm" : "A0"
+} ]

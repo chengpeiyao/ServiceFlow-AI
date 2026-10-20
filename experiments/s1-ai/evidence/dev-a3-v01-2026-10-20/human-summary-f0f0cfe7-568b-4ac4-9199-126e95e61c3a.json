@@ -1,0 +1,110 @@
+{
+  "A0" : {
+    "factsSemanticCorrect" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "questionRelevance" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "evidenceSupportsSuggestion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "preconditionsSatisfied" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "factHypothesisConfusion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    }
+  },
+  "A1" : {
+    "factsSemanticCorrect" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "questionRelevance" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "evidenceSupportsSuggestion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "preconditionsSatisfied" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "factHypothesisConfusion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    }
+  },
+  "A2" : {
+    "factsSemanticCorrect" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "questionRelevance" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "evidenceSupportsSuggestion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "preconditionsSatisfied" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "factHypothesisConfusion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    }
+  },
+  "A3" : {
+    "factsSemanticCorrect" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "questionRelevance" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "evidenceSupportsSuggestion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "preconditionsSatisfied" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    },
+    "factHypothesisConfusion" : {
+      "falseCases" : 0,
+      "trueCases" : 0,
+      "unscoredCases" : 20
+    }
+  }
+}

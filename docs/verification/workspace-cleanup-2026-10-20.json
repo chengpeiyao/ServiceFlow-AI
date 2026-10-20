@@ -1,0 +1,829 @@
+{
+  "date": "2026-10-20",
+  "scope": "D:\\Code\\my_project\\ServiceFlow AI",
+  "status": "COMPLETE",
+  "deletedFileCount": 152,
+  "deletedBytes": 233335272,
+  "deletedMiB": 222.53,
+  "deletedTargets": [
+    "tools/downloads",
+    "backend/target",
+    "artifacts/development/a3-20261020/implementation-tools",
+    "artifacts/development/s2-20261020/implementation-tools",
+    "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3",
+    "artifacts/tmp/mockitoboot14788257630587166158.jar",
+    "artifacts/tmp/mockitoboot4302834400503659302.jar",
+    "artifacts/tmp/mockitoboot5650070247641956909.jar"
+  ],
+  "deletedFiles": [
+    {
+      "path": "tools/downloads/jdk21.zip",
+      "bytes": 201096952,
+      "sha256": "192441a9d27da813bada974bb88b4cf64d37a9589ed37f204374d411ca5ce07f"
+    },
+    {
+      "path": "backend/target/classes/application-dev.yml",
+      "bytes": 74,
+      "sha256": "31fb5008857f4032ca84c7f464d42d418470f24de7ecc4d2e5c7bc4fc2e92316"
+    },
+    {
+      "path": "backend/target/classes/application.yml",
+      "bytes": 932,
+      "sha256": "f493789fdedf57eecc20a1c628832a22658985ec51c2f8485cc89d5162f73845"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/audit/AuditMapper.class",
+      "bytes": 797,
+      "sha256": "3bf4f06dc7b681305cfc560a097225b29ce01aea7da867f1bb85b194f7d0cf19"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/audit/IdempotencyMapper$Entry.class",
+      "bytes": 1816,
+      "sha256": "9f649ed1cbe63f878ae62311863ad08da81d7061ae88383a8c64515c86f1908a"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/audit/IdempotencyMapper.class",
+      "bytes": 1542,
+      "sha256": "6e9770c377481e66c2ec85201d7eea8887708faf7a255365117bb09dc2175fb7"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/audit/IdempotencyService$Reservation.class",
+      "bytes": 1733,
+      "sha256": "25fda81b7c7ce402d3df9e1db66fa21286520e6ed5bdff55de97e29b1ea92e27"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/audit/IdempotencyService.class",
+      "bytes": 5675,
+      "sha256": "f81096ea7a97def18017f179298f229a6e64ea6a5fe377e8ee3542127f91ea2e"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/contract/ContractMapper$Contract.class",
+      "bytes": 2093,
+      "sha256": "5d4495bda249809f524423b1a1f77b023aba734940ad6ca2ad8349da06a5f81d"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/contract/ContractMapper$Policy.class",
+      "bytes": 1658,
+      "sha256": "2ba4533e508ef1b4fcf4409b54818b5c1093723f580f1174f8dd929e64bed7c4"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/contract/ContractMapper$Route.class",
+      "bytes": 1515,
+      "sha256": "d3fe2ea83bb153844f3a53f00a6456718890d7bf401677668077fd1886fd9065"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/contract/ContractMapper.class",
+      "bytes": 1808,
+      "sha256": "a3b29b4ca51e9246ccd47f3eb5f63be0fee4b80e1c01c1ec4b6911e8583dd75b"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/contract/ContractService$Coverage.class",
+      "bytes": 1974,
+      "sha256": "32435a7ba29c7ef56882c1ea9ab20f8864c670c5e46cf6dd11fa27f1703732ec"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/contract/ContractService.class",
+      "bytes": 2899,
+      "sha256": "b52253a93950f6437afdbf57e36d42964b1d0bde5de42c5d6d061da0b736fa78"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentCli.class",
+      "bytes": 23495,
+      "sha256": "a54faaf1364d2376f45f467777f379f3c00ce195c119970b2926b95a6651e57f"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentData$Case.class",
+      "bytes": 1915,
+      "sha256": "22319a562380ce2e6bef198f7bf86a9c4de13b05337381ca4874a4e6f84106fe"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentData$Corpus.class",
+      "bytes": 7465,
+      "sha256": "193a07d0c604930f0f29f7e8b7223c6b292855916b2fd69093dcf477e1ac04fc"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentData$Gold.class",
+      "bytes": 2336,
+      "sha256": "d6604178aafb1ab28adb2e56323fc82df7444c2d45b11ebe3abc299a739cb141"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentData$Input.class",
+      "bytes": 1920,
+      "sha256": "81381a8e220b7e0c0e597076aa21c37988778ed3241566e1d555f0d51fb71039"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentData$Knowledge.class",
+      "bytes": 2600,
+      "sha256": "49574321aaab46096128b4b230b59b00ebeded95a41b2775d9416b9f44555b54"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentData.class",
+      "bytes": 2554,
+      "sha256": "e08f9985ea32b7bbae946b78022a6d5241bb6f87b40c992641c44763f2410e87"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentMetrics$Score.class",
+      "bytes": 3238,
+      "sha256": "dc4d8bbc7446a5f2a6e659805703c67701f2eb354911e70cb4fc0c1493807e3e"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentMetrics.class",
+      "bytes": 21000,
+      "sha256": "cc426005f96be1c7905ad690281b2502d0106c303f547a6425fab6801e90471f"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ExperimentPricing.class",
+      "bytes": 5039,
+      "sha256": "8dd9dba503d370e86904f771ae47f562629c1229e269925b2f81949c958e75a5"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/HybridTriage$Decision.class",
+      "bytes": 2295,
+      "sha256": "5268c107b95233b9123d6ed59489c5219636f1d12cd789ba8366495f0f23857c"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/HybridTriage.class",
+      "bytes": 5670,
+      "sha256": "00319fd2f938d5e2d15f9df931687fd3a541c00246237315174b89bbf5d8558b"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ModelClient$Attempt.class",
+      "bytes": 2396,
+      "sha256": "88ee77913654a37b1326f6d882797b2bad1a48dd5b8b22d61c31997b2d7073a4"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ModelClient$Config.class",
+      "bytes": 3690,
+      "sha256": "0ccfa0ee635dbb6f504ce34c67e8d8a67b14d98fd6475a7114fd5f7d7b594b2c"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ModelClient$Result.class",
+      "bytes": 2344,
+      "sha256": "d0cb175c3220623a0dacfac5b8317fb879e00cf342996a172c7841062a99fedf"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ModelClient.class",
+      "bytes": 18167,
+      "sha256": "befc38286221183c369999d39a942b6aee9ea5f022883b6997f351b7e8958258"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/ReviewSummaryCli.class",
+      "bytes": 8817,
+      "sha256": "439f72e6240b631788275957018837453ac72af52b78138761421db85ba2c259"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/experiment/TriageEngine.class",
+      "bytes": 18724,
+      "sha256": "1be0f005f964a26a28e4766bc9e5ee21dbcd513758425ba58017e6ac1cdd83f3"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/AuthController$LoginRequest.class",
+      "bytes": 2087,
+      "sha256": "3aec8e4e280a44dba3832ba3123a9d90b99d2d3b0dd5c41f28da63d4f0222748"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/AuthController.class",
+      "bytes": 2094,
+      "sha256": "41643b69ce02fdafb20564457363e0db1e79eb7aad1c0e3738b0b1863084b2be"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/IdentityMapper$User.class",
+      "bytes": 1919,
+      "sha256": "dbc57159b00c595ecd09628bcc3ff087115fea6e9f862638deec422732449dba"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/IdentityMapper.class",
+      "bytes": 1168,
+      "sha256": "5f96b8dca866657833929c0f9399d4c6f58bdbdf38553465029fe711b5d1101d"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/IdentityService$Actor.class",
+      "bytes": 1951,
+      "sha256": "4bc573270f78d7b85814bca9069b219ecf88535425f9761a330e857d031405b2"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/IdentityService$LoginResult.class",
+      "bytes": 1808,
+      "sha256": "2323e9f075d26b64e26572075b30142e2d7d19f4e6ed304e40f141f9c7c153bf"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/identity/IdentityService.class",
+      "bytes": 3445,
+      "sha256": "4be65bc52e5a49b0eb616c29786588a5b1a818edfa980b2ac5a125a7f92f6a43"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ServiceFlowApplication.class",
+      "bytes": 752,
+      "sha256": "009f759293da7acc12d482292af9a8081fd4ae8661eef21e09fea227226dac68"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/shared/ApiExceptionHandler$ErrorBody.class",
+      "bytes": 1698,
+      "sha256": "eb317d60ba5c787b2e96bdab9be3854e5ced4a15ec7ed276f529266d65cd83c6"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/shared/ApiExceptionHandler.class",
+      "bytes": 5131,
+      "sha256": "45820f86061e8fbe37a457a4ed8e7358ef53f4542ba44bc0d16c49157c8bb2e0"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/shared/BusinessException.class",
+      "bytes": 1204,
+      "sha256": "f2559a266a72bee35942ef27a344db6f86c9b1c647ede6d68f611a992beffeb3"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/shared/WebConfiguration.class",
+      "bytes": 3508,
+      "sha256": "03b1eaa09f5acf3b6f0b51fdbb92f9bf0a3ab46eb799b568dd6cf66dae5d4745"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/sla/SlaMapper$Snapshot.class",
+      "bytes": 2333,
+      "sha256": "4e35f47303ef61d8e6788a1d4c799a684de9d90c3cf60428a615dc3800fb4407"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/sla/SlaMapper.class",
+      "bytes": 2030,
+      "sha256": "c89fcdfefcb511fe7216d5985147f198a40740bd9d19aff42d86eb2a899bdf6d"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands$Assign.class",
+      "bytes": 2821,
+      "sha256": "b689082611481656b4b69b2145e35dbc946a9033f7da606cda9dbf6f21d8aca4"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands$Cancel.class",
+      "bytes": 2490,
+      "sha256": "e376924b619dcf01faa721030e693efa0bfe0643d146a46cf1d4cb835768bd6f"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands$Complete.class",
+      "bytes": 2500,
+      "sha256": "411a33a19324aea5a1fc718042a01daaa847ffdad8379bacf26e83b69cf35b86"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands$Create.class",
+      "bytes": 2186,
+      "sha256": "c1439d44d8cab6b51c6c9e17b563dd8a3739fe56f03d2b2e72365daf669b4b7e"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands$Progress.class",
+      "bytes": 2109,
+      "sha256": "1b6044466f5f6f3dbc73d079114747185240749a84b289dd159846699cdf3e7a"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands$Reassign.class",
+      "bytes": 3094,
+      "sha256": "98292ab67d49f4275a68d0fbf78fcd2731d3c706b4622974a4f126ea930ac58b"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskCommands.class",
+      "bytes": 750,
+      "sha256": "457ac5c77a5eef1460360c3895c7cb65e645ce65ca468bf4fa53639ec7ba31d3"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskController.class",
+      "bytes": 4626,
+      "sha256": "dbcd74955c39d0d68384034aba69f11894d37f2e680805ed85553444eb7153db"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskMapper$Activity.class",
+      "bytes": 1915,
+      "sha256": "981672ab4d6936431e8f37bfec1e8bef612841fff312e95b376826b6ba9373d5"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskMapper$Assignment.class",
+      "bytes": 2101,
+      "sha256": "607c2068f8a80b9b8d8e3b61c64d70ca560bf245b71dd947f103878ad4e8b505"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskMapper$Task.class",
+      "bytes": 2544,
+      "sha256": "63b29714ce87f41821342a45fcb8487791fd48c881b51a88826d48e551978542"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskMapper.class",
+      "bytes": 3900,
+      "sha256": "132998ff27c81633d1119e0872028a0f6d16d21e76b0367241245b12a9dbf818"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskService$Changed.class",
+      "bytes": 2181,
+      "sha256": "8d5464b356daf1f9fb9dbaed21b841a0e957a802cfd5c814291160611906dbcc"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskService$Details.class",
+      "bytes": 2481,
+      "sha256": "f530e49ab4fb9965e732a217e3f7effbadc829f5401c5e416f71b476203c308b"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskService$Locked.class",
+      "bytes": 2847,
+      "sha256": "ca1e7a453f00f37c94b7bcc921bb6bdd747e09c7ff28adeaa82d02eb04c1ea75"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/task/TaskService.class",
+      "bytes": 18088,
+      "sha256": "d8090815cc55644b3577ce3502c090dc491b7db944376b453c2c26819b8d13b9"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands$Create.class",
+      "bytes": 4123,
+      "sha256": "3b9cc8e6fef8ea4b67338813e3d05e00465ae6883bc20de81a9800ae96173ca9"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands$Diagnostic.class",
+      "bytes": 2790,
+      "sha256": "490cae05daf0b026b11fcb7d0aef985496918368a4539cc16b09c8ebd2e12bff"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands$Fact.class",
+      "bytes": 2614,
+      "sha256": "1db3efe1abe35fd2a6d4661e03e9b15c3b80cddcaa7bac09f23a217b9cc657bc"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands$Followup.class",
+      "bytes": 2051,
+      "sha256": "010b3205c28c8c408691d05ad73967969984a0f6e6bbbca9ae4ac6ba520c4d87"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands$Message.class",
+      "bytes": 2949,
+      "sha256": "8cd1ee8dda8e5d753ab652c44a68644b822287cce8e29b1c02a9782cb8029447"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands$Triage.class",
+      "bytes": 4968,
+      "sha256": "f3d40fd11adee058d6898c9a2d47ef9eb80f27ccb3a5ade65cfe2c4c92c7a145"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketCommands.class",
+      "bytes": 782,
+      "sha256": "439ba2d570420d36e4d66d944513aa6ec5d781ecf52154aa4598e0ab2e35b886"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketController.class",
+      "bytes": 3527,
+      "sha256": "1de935dc6fc1b058d8818d1452bdcb05cff7389ea99271a0bc9c3cb21a500938"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketMapper$Activity.class",
+      "bytes": 2073,
+      "sha256": "194ce34d4a2df3dcc298b9267ceb89b2aaeb663ee42b4f2f05caf810f5c10e26"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketMapper$Knowledge.class",
+      "bytes": 1797,
+      "sha256": "66dbe91a9c18d1495f0412833748a2a8d5719766f27abbae40f8d028c2bdd13b"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketMapper$Ticket.class",
+      "bytes": 3633,
+      "sha256": "5b82b4385d4ca009ae0b62d4884aebdb6c2fa93c954eb94eeb18b1d8f2fff7b4"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketMapper.class",
+      "bytes": 5021,
+      "sha256": "1d18a271481b2b188f6eaf99bfe57185891ad137747427dbf121617fa52e6b43"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketService$Created.class",
+      "bytes": 1890,
+      "sha256": "aceb9d8facb93f91096e0a7f731ecfce465e8ed4020fdb066db7fac697a5dbbd"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketService$Details.class",
+      "bytes": 2506,
+      "sha256": "1015d94d94806118e7da05d1d8ccb9434617f1ab6065a31124ce48be036346ed"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketService$MessageAdded.class",
+      "bytes": 1640,
+      "sha256": "b263beb41fe05c0c81317a67f9bd82fab2987ec3fe9fa9a82715bc87459cf3c7"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketService$Triaged.class",
+      "bytes": 1896,
+      "sha256": "a46d8a85364ab9411a9213eeaf7b87a3272422b7d8415c3eeec531723f7ce59c"
+    },
+    {
+      "path": "backend/target/classes/com/serviceflow/ticket/TicketService.class",
+      "bytes": 20296,
+      "sha256": "4647f2e4eeaf3f0dfd5f226116e9cc0888ab239db6cb616b1f42134423c09b13"
+    },
+    {
+      "path": "backend/target/classes/db/demo/V2__demo_seed.sql",
+      "bytes": 4092,
+      "sha256": "d51db84282c861498a18d3eb660d9f848693576b908eeadcc66b9fbb343fdb83"
+    },
+    {
+      "path": "backend/target/classes/db/demo/V3__s2_demo_engineers.sql",
+      "bytes": 908,
+      "sha256": "0751a4ac32ed65b3e9d5b04deaef6e3cde42577cda078e209253cdd246754683"
+    },
+    {
+      "path": "backend/target/classes/db/migration/V1__serviceflow_p0_core.sql",
+      "bytes": 22643,
+      "sha256": "52803ca17d8bd716d113092cf3ae3b11e005b0e984e2d49c04df20a6d361ad7d"
+    },
+    {
+      "path": "backend/target/local-mysql-init.log",
+      "bytes": 551,
+      "sha256": "2aa33f81df7e49baf4ad9c61102815eba2e68afc45c123c58755022e276c8e49"
+    },
+    {
+      "path": "backend/target/local-mysql-server.log",
+      "bytes": 1279,
+      "sha256": "a042ebffe0de8cffae0cdcb7f24b308649cc2d16c98046af4ff54b5ef0f19481"
+    },
+    {
+      "path": "backend/target/maven-archiver/pom.properties",
+      "bytes": 81,
+      "sha256": "d2fbc33da5096fe4b901d105c388a888fc78d96461e2afb4b7de3afeb211e6cf"
+    },
+    {
+      "path": "backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst",
+      "bytes": 3740,
+      "sha256": "20ebb2dd038a51e71f1079417d9ac53ab34771d96159bad953009b1da5e06364"
+    },
+    {
+      "path": "backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst",
+      "bytes": 2930,
+      "sha256": "78c83ca9b0b77e882ba7af26ef0e9cc1b41d29210240bb7d0731917bc36b6eb9"
+    },
+    {
+      "path": "backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst",
+      "bytes": 444,
+      "sha256": "acbc5d14ff68c77675e5128bbdfe90decf436724e047049809ce3dcde547a07d"
+    },
+    {
+      "path": "backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst",
+      "bytes": 475,
+      "sha256": "d5f6b32693fc889d7944158db9bd88ba47aa05c7677dd70a361f73d320b68354"
+    },
+    {
+      "path": "backend/target/serviceflow-backend-0.1.0-SNAPSHOT.jar",
+      "bytes": 30509237,
+      "sha256": "2201cf13d7e29f1008326b47328a5299ba4bf97aae8a5e9bd2889a74de7f106d"
+    },
+    {
+      "path": "backend/target/serviceflow-backend-0.1.0-SNAPSHOT.jar.original",
+      "bytes": 155631,
+      "sha256": "725ab55559bcef17942d9f3bf7684003fe1c252f39c4518bef823f90f5ebef62"
+    },
+    {
+      "path": "backend/target/surefire-reports/com.serviceflow.ExperimentTest.txt",
+      "bytes": 315,
+      "sha256": "b9692707ac953f85b814e7a6e5f9c91a72cec76d668350917f5f1d7a74a6f5cc"
+    },
+    {
+      "path": "backend/target/surefire-reports/com.serviceflow.HybridTriageTest.txt",
+      "bytes": 318,
+      "sha256": "ee6d820848ba60d3111caee7afe70681939c26d9774b413b02e86ec8403e387f"
+    },
+    {
+      "path": "backend/target/surefire-reports/com.serviceflow.S1IntegrationTest.txt",
+      "bytes": 321,
+      "sha256": "1a4bd61933c6ac5d4b23f65c2394c0a7e2fbbc8dab42a2c91656d37ce2f13e55"
+    },
+    {
+      "path": "backend/target/surefire-reports/com.serviceflow.S2IntegrationTest.txt",
+      "bytes": 321,
+      "sha256": "d4112a9066c07205050742649623a4fa4a48adbb0cd1f9e6cb6222b181cb3ada"
+    },
+    {
+      "path": "backend/target/surefire-reports/TEST-com.serviceflow.ExperimentTest.xml",
+      "bytes": 39872,
+      "sha256": "9cf04b107d23ba836fa7ff4136af95147ae0fce0e3911444857b19bc039e9c45"
+    },
+    {
+      "path": "backend/target/surefire-reports/TEST-com.serviceflow.HybridTriageTest.xml",
+      "bytes": 34684,
+      "sha256": "1d2e52cac1f15989144eff25c20371ee0952a7aa35c7d200ee7fbe2597f6653a"
+    },
+    {
+      "path": "backend/target/surefire-reports/TEST-com.serviceflow.S1IntegrationTest.xml",
+      "bytes": 57064,
+      "sha256": "df2436fea51d33befae1d766e637c1e4c639af63ff7fb4b6abffc2c457413dc2"
+    },
+    {
+      "path": "backend/target/surefire-reports/TEST-com.serviceflow.S2IntegrationTest.xml",
+      "bytes": 55656,
+      "sha256": "276ee243c42d1778d352d6eab22503dc60fa005475c9c0f66ed23e7f86f3920c"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/ExperimentTest.class",
+      "bytes": 31713,
+      "sha256": "c43309fc6527194aa931f41897680c4b64b623f46fdf9533b3ecc6886a3ca82b"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/HybridTriageTest.class",
+      "bytes": 11833,
+      "sha256": "191dd13f108bdff32e3d7b2509b72137d6c774a5678b9a9c049dade2a5715ebe"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/MySqlTestSupport.class",
+      "bytes": 3607,
+      "sha256": "b9a7dd25924998f87935bcc0fc6a724cf3495404fb2d781d7e8b570bbb72d0a3"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S1IntegrationTest$FixedTime.class",
+      "bytes": 1026,
+      "sha256": "2f7ad646e4db13f03de779b9e592d994aed6708a4879884caffba5bfc9c40ee8"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S1IntegrationTest.class",
+      "bytes": 28250,
+      "sha256": "04f6fc33b201d751310bef01d6b6ccf455d430e3bcaeaf8dd4b8ce9593b38175"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S2IntegrationTest$Gate.class",
+      "bytes": 1078,
+      "sha256": "56bd2c04408c791de28acf7a7d0eb29674273f15c70700c7b6b4d972901fc929"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S2IntegrationTest$Ref.class",
+      "bytes": 1696,
+      "sha256": "be75ad2de2fa957039da7bcdcd55d8d6cbf0b16ae98a0a59817edb6b40aa9425"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S2IntegrationTest$TaskLockProbe.class",
+      "bytes": 4249,
+      "sha256": "3266104f9d576d0c43ea38ba579740e069dfdbbdffd40984fc86f7ccd7833d9e"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S2IntegrationTest$TestEnvironment.class",
+      "bytes": 1272,
+      "sha256": "84f977bb974339553c91e6336cb71f41eb3f98b1f35a813d439f7613eb4b20c9"
+    },
+    {
+      "path": "backend/target/test-classes/com/serviceflow/S2IntegrationTest.class",
+      "bytes": 41658,
+      "sha256": "eeaf385152c2de478347dcdae5dcca0f90ae797a11cfd6af578fb18753788c0e"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/check_and_report.py",
+      "bytes": 4787,
+      "sha256": "e16371922d457a70cf4d015938690a9f8584d184e5752b003352b3db9e0ed2a7"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/data-hashes-before.json",
+      "bytes": 371,
+      "sha256": "774372d7fa8f8ceceb17f487b362fd6516482a346f032073cabb27255ce5ebbb"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/finalize.py",
+      "bytes": 14622,
+      "sha256": "7129346be0bb9d84b5e45fe7680679b98c6c9b1adae7a5d6fad02b978e1d6431"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/HybridTriageTest.java",
+      "bytes": 7171,
+      "sha256": "b0b0800e35a17d9047c13e2547ddaa717d5da0d395917e3b90d22982976453ed"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/original-hashes.json",
+      "bytes": 794,
+      "sha256": "808e73b8a0532c5cd4148b5a9a4a78ad5706d4a23ffe99c9a5ab8cafac0c43e0"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/backend/scripts/Run-S1Ai.ps1",
+      "bytes": 2054,
+      "sha256": "cf078079cee1c5224a9ed5f250c6d231b2a7196ad64323bc90a976d550575c35"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java",
+      "bytes": 12809,
+      "sha256": "0a23d5096b313bc6ac47c63ad3301b5895a1e2e6e455a4d82c8d532e66b76674"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/experiment/ExperimentMetrics.java",
+      "bytes": 10548,
+      "sha256": "4d22fdc7aff0372c7e75615bb388edf63ff7107d7f52fba7ce022a6d0b4ad22d"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/experiment/HybridTriage.java",
+      "bytes": 2492,
+      "sha256": "4d3be411bbcfad6c25e080a4bcac42bd9222dae92b3c7bca78f3b38c52766926"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/experiment/ModelClient.java",
+      "bytes": 13702,
+      "sha256": "b82c6d73de208e49008583c97721a7212b366b9d9e473f55249ec29ba9329982"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/backend/src/test/java/com/serviceflow/HybridTriageTest.java",
+      "bytes": 7171,
+      "sha256": "b0b0800e35a17d9047c13e2547ddaa717d5da0d395917e3b90d22982976453ed"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/experiments/s1-ai/review/dev-label-audit-v1.jsonl",
+      "bytes": 14312,
+      "sha256": "a97ae73099cff1cea670a0e847002aa238c92aa626d69165d06e77f765d547bb"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/payload/experiments/s1-ai/review/README.md",
+      "bytes": 3105,
+      "sha256": "7b9eff8a5cce76a376f624082dfb1fd07af8fa5c0430870db8a562ffa2c62da3"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/prepare.py",
+      "bytes": 15651,
+      "sha256": "79bffd06ce3a6dce5814781a268f5c946dd47c1566e27c16687fb3c9be0bfbf6"
+    },
+    {
+      "path": "artifacts/development/a3-20261020/implementation-tools/README.md",
+      "bytes": 216,
+      "sha256": "daf0ad89d9ee21cae9d72ac28933d0e867d3de8c911c78ff5501c43696827671"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/evidence_review.py",
+      "bytes": 7681,
+      "sha256": "28fd0ea66a627fc1974a99966905463922cbc66a432fd42952771780f6a7f64e"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/finalize.py",
+      "bytes": 21344,
+      "sha256": "1de15ecd790906818202618174353beff0159a55416986831ddc21b1cdd779a9"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/freeze_a3.py",
+      "bytes": 3480,
+      "sha256": "ff6b9312584a488888ff5036c17e322a79b9f2a5dd51ddc823918cd2bf24725a"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/original-hashes.json",
+      "bytes": 577,
+      "sha256": "cb57e40c8d28f01b10e05b33ead0e69d6068a737d5c640b3addfad12a9432072"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/task/TaskCommands.java",
+      "bytes": 1487,
+      "sha256": "b5c404886bed3a15c12d57d74553035f8c4d2c995ccd310e247be950b42dabad"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/task/TaskController.java",
+      "bytes": 2752,
+      "sha256": "9998c4bc61d7a886b448236217a33b305e7cf2c2095175077c42fb6d9812fc98"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/task/TaskMapper.java",
+      "bytes": 3688,
+      "sha256": "1dce7b1e665a4992c24ce39f96b639fdd4d2d5d0d4c08f7cb7b8fc39605ba40c"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/task/TaskService.java",
+      "bytes": 13906,
+      "sha256": "2caf26a64e1e7f17aa9b4c7c0781fda3dab97e5fccf95a66b1da610647c771bf"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/main/java/com/serviceflow/ticket/TicketMapper.java",
+      "bytes": 4584,
+      "sha256": "5e97fe4246fbcf3e03dbd1c2db7b26207af3d293fa27832490f8f3fbc35b7c07"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/main/resources/db/demo/V3__s2_demo_engineers.sql",
+      "bytes": 908,
+      "sha256": "0751a4ac32ed65b3e9d5b04deaef6e3cde42577cda078e209253cdd246754683"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/payload/backend/src/test/java/com/serviceflow/S2IntegrationTest.java",
+      "bytes": 32402,
+      "sha256": "800aadc5c5e8a9537ef6ddf21cfaeffefb430fb35bf5ae385bc4eeb369f0c421"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/prepare.py",
+      "bytes": 3250,
+      "sha256": "2b5a6642e0ce019e12031603dd39f59d9a3e3f4b77abf5125116c501c79cb199"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/preserved-hashes.json",
+      "bytes": 1991,
+      "sha256": "263b59178c3374b26cf94274946d59a8be569b56759a676a57c8da25cf8a27b4"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/README.md",
+      "bytes": 433,
+      "sha256": "f65e90131e1fcbdb12508c5c9eeddb076401babfda5c2ceb6f9322802257190d"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/S2IntegrationTest.java",
+      "bytes": 32402,
+      "sha256": "800aadc5c5e8a9537ef6ddf21cfaeffefb430fb35bf5ae385bc4eeb369f0c421"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/TaskCommands.java",
+      "bytes": 1487,
+      "sha256": "b5c404886bed3a15c12d57d74553035f8c4d2c995ccd310e247be950b42dabad"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/TaskController.java",
+      "bytes": 2752,
+      "sha256": "9998c4bc61d7a886b448236217a33b305e7cf2c2095175077c42fb6d9812fc98"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/TaskMapper.java",
+      "bytes": 3688,
+      "sha256": "1dce7b1e665a4992c24ce39f96b639fdd4d2d5d0d4c08f7cb7b8fc39605ba40c"
+    },
+    {
+      "path": "artifacts/development/s2-20261020/implementation-tools/TaskService.java",
+      "bytes": 13906,
+      "sha256": "2caf26a64e1e7f17aa9b4c7c0781fda3dab97e5fccf95a66b1da610647c771bf"
+    },
+    {
+      "path": "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3/completed.json",
+      "bytes": 4262,
+      "sha256": "c8606a33165888042742cc23bbe3f9743882c1d26e11d8c597543083b7f4183b"
+    },
+    {
+      "path": "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3/human-review.jsonl",
+      "bytes": 169080,
+      "sha256": "6b51ba5059004ebc595f1c388474fc509fb994c9023805305c7084e129e68576"
+    },
+    {
+      "path": "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3/manifest.json",
+      "bytes": 4209,
+      "sha256": "fe84933abe54932566b6264449082c4aa27935d6b12f99ec770166fc0ded831d"
+    },
+    {
+      "path": "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3/results.jsonl",
+      "bytes": 449291,
+      "sha256": "345e93742e173c71654486ffccbf7bd18fe51042e953402a827d75e9455fcab4"
+    },
+    {
+      "path": "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3/review-index.json",
+      "bytes": 8002,
+      "sha256": "27afaa51def0a3adebfcb2fc07b3b91469de1fdd21e403e88f16c176f93c83f0"
+    },
+    {
+      "path": "experiments/s1-ai/runs/2026-10-20T03-33-58-158696500Z-fc5254e3/summary.json",
+      "bytes": 7712,
+      "sha256": "411d4065053bdb0ae1a7da4a3ca74fb2c6b93dc72dba5100595779d118f16f11"
+    },
+    {
+      "path": "artifacts/tmp/mockitoboot14788257630587166158.jar",
+      "bytes": 1933,
+      "sha256": "d88bcc7bbf85f8e70fe0a2f03b1662c0d8a9ef9c252d5a996e3bc383848cf282"
+    },
+    {
+      "path": "artifacts/tmp/mockitoboot4302834400503659302.jar",
+      "bytes": 1933,
+      "sha256": "23ef85d6a729bd8b72b7ce79fea9fddbf44ef706394418fc75eacc068d7161d1"
+    },
+    {
+      "path": "artifacts/tmp/mockitoboot5650070247641956909.jar",
+      "bytes": 1933,
+      "sha256": "de7a3453fa028182f234beb411a87865936b2213abdfeb70207659c0d6d17f54"
+    }
+  ],
+  "relocatedEvidence": {
+    "source": "experiments/s1-ai/runs/2026-10-19T10-05-03-029527100Z-b8392ff0",
+    "destination": "experiments/s1-ai/evidence/a0-dev-local-2026-10-19",
+    "sha256": {
+      "completed.json": "79ad94218342a3a9c844c0b696bd0ac12a006f923853199cd3caf5da2c8fc52d",
+      "human-review.jsonl": "cabeee37ad44dd3806aa84c10a8160f262cb0b240afb8b7f36925eafe7193a9b",
+      "manifest.json": "a871207c6cf2c28ede84e1662259e67c9153f85784015a0f74787117ffff57f3",
+      "results.jsonl": "6b2f2c806dd169c5747158afdec4f8711c12838ed46b052906ddd7dce411c838",
+      "review-index.json": "9112766ea2654323ac6af2bfed4260f65382243d9daefa3e470cb837729d5698",
+      "summary.json": "d1358ad2ca03958dd7df789c5aa9485bd379fb82f91b04881ddf8fc180e06a76"
+    }
+  },
+  "protectedFilesHashVerified": 2614,
+  "jdkExtractedFilesHashVerified": 486,
+  "duplicateA3RunFilesHashVerified": 6,
+  "documentationChanged": [
+    "README.md",
+    "docs/README.md",
+    "docs/Project_Directory_Guide.md",
+    "tools/README.md",
+    "experiments/s1-ai/evidence/README.md"
+  ],
+  "checks": {
+    "protectedFilesUnchanged": true,
+    "relocatedEvidenceUnchanged": true,
+    "businessCodeChanged": false,
+    "modelCalls": 0,
+    "testsRerun": false,
+    "localMarkdownLinksVerified": 30,
+    "offlineMavenValidate": "PASS",
+    "gitDiffCheck": "PASS_WITH_EXISTING_LINE_ENDING_WARNINGS",
+    "a3FreezeFilesUnchanged": 27,
+    "a3FrozenJarUnchanged": true,
+    "historicalS2JUnitFilesRetained": 4,
+    "humanReviewScoredSuggestions": 0,
+    "temporaryProjectDirectoryEmpty": true
+  },
+  "note": "清理构建目录后须重新构建；历史 90 项测试记录保留，本轮不将旧结果声称为重新运行。",
+  "postCleanupGeneratedTarget": {
+    "files": 91,
+    "bytes": 464523,
+    "paths": [
+      "backend/target/classes",
+      "backend/target/test-classes"
+    ],
+    "note": "清理后出现新编译文件，与活动编辑器语言服务增量编译一致；保留当前开发缓存，仍需 Maven 重新生成可执行 JAR。"
+  },
+  "netFreedMiBAtFinalCheck": 222.08,
+  "emptyTemporaryTopLevelDirectoriesRemoved": 5
+}

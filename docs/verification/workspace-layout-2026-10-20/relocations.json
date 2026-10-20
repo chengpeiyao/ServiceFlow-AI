@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "date": "2026-10-20",
+  "historicalRecordsRewritten": false,
+  "moves": [
+    {
+      "old": "docs/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_Design_V0.2.md",
+      "new": "docs/design/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_Design_V0.2.md",
+      "sha256Before": "7a365e0927be442888985aad91bcd65d6688cabea416339de72c0860c025b533",
+      "sha256After": "9b98d35aadd98c570bc9def487d0f810a31c3d57157d0cb0bba616e13d51fb76",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_Design_V0.3.md",
+      "new": "docs/design/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_Design_V0.3.md",
+      "sha256Before": "cd536dec5a07a6ee16917c425e06581a233123851cca7c2d14c1eb49607d2cb6",
+      "sha256After": "cd536dec5a07a6ee16917c425e06581a233123851cca7c2d14c1eb49607d2cb6",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_P0_schema_V0.2.sql",
+      "new": "docs/design/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_P0_schema_V0.2.sql",
+      "sha256Before": "c15a25a7249908dc712d6e6b18d57b9af34be1ce1fd7fc380679ca38bb9b18af",
+      "sha256After": "c15a25a7249908dc712d6e6b18d57b9af34be1ce1fd7fc380679ca38bb9b18af",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_P0_schema_V0.3.sql",
+      "new": "docs/design/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_P0_schema_V0.3.sql",
+      "sha256Before": "4faea28db40c7a1c72b431212a8f1bc445bda5c101e94c313eda795ac4e86d9e",
+      "sha256After": "4faea28db40c7a1c72b431212a8f1bc445bda5c101e94c313eda795ac4e86d9e",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_README_V0.3.md",
+      "new": "docs/design/ServiceFlow_AI_Design_Package_V0.3/ServiceFlow_AI_README_V0.3.md",
+      "sha256Before": "3cfcde4c63f1ab98a193ed3bf937c455ae2a8efa8c4051d2be4ab7b300f98e3e",
+      "sha256After": "3cfcde4c63f1ab98a193ed3bf937c455ae2a8efa8c4051d2be4ab7b300f98e3e",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_Design_V0.3.1.md",
+      "new": "docs/design/ServiceFlow_AI_Design_V0.3.1.md",
+      "sha256Before": "bfcb695dc936cefdc61a02c9c05c67e53b196beb9b875a0093a15b7a8ba2d110",
+      "sha256After": "bfcb695dc936cefdc61a02c9c05c67e53b196beb9b875a0093a15b7a8ba2d110",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_Ollama_Call_Verification_2026-10-20.md",
+      "new": "docs/verification/ServiceFlow_AI_Ollama_Call_Verification_2026-10-20.md",
+      "sha256Before": "031b852bb53d32e3e7ac0cb9d5572b4bb6bb4f8e07022ae50edd131b87d41f41",
+      "sha256After": "97de28c563c4f35178327e29075b5737e07cda5b60e0b2bf2aa157c9f890cb9d",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_P0_patch_V0.3_to_V0.3.1.sql",
+      "new": "docs/design/ServiceFlow_AI_P0_patch_V0.3_to_V0.3.1.sql",
+      "sha256Before": "40b3f605d5682463a6debe6bf61a109b822ac640c101e1f686cc33493069d6ed",
+      "sha256After": "40b3f605d5682463a6debe6bf61a109b822ac640c101e1f686cc33493069d6ed",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_P0_schema_V0.3.1.sql",
+      "new": "docs/design/ServiceFlow_AI_P0_schema_V0.3.1.sql",
+      "sha256Before": "52803ca17d8bd716d113092cf3ae3b11e005b0e984e2d49c04df20a6d361ad7d",
+      "sha256After": "52803ca17d8bd716d113092cf3ae3b11e005b0e984e2d49c04df20a6d361ad7d",
+      "unchanged": true
+    },
+    {
+      "old": "docs/ServiceFlow_AI_S1_AI_Hybrid_2026-10-20.md",
+      "new": "docs/verification/ServiceFlow_AI_S1_AI_Hybrid_2026-10-20.md",
+      "sha256Before": "aaf045271fe559c7b84fe040b884c24adef65f0e03476f75e0382f5f838eeb88",
+      "sha256After": "dd3b3d63ee2f85c33c456e63ac4369a7e1ff46194adc2a1abb7f2837c218421a",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_S1_AI_Implementation.md",
+      "new": "docs/implementation/ServiceFlow_AI_S1_AI_Implementation.md",
+      "sha256Before": "811468c6775c5b2065171d3d1ff5060ee5202655e6962f44a8f6ee290310b34f",
+      "sha256After": "a7fbe5c6bc153cb3c59fcc7ebb9f1e70d6ccceab7fa312a29d969cab1c10830e",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md",
+      "new": "docs/verification/ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md",
+      "sha256Before": "e95991373552eee52456460e88f2bef57c32a89599a4c1fa321f3a73baabefb5",
+      "sha256After": "0e4fd083cfe1aa276ab5d8849ea0cab01c4b57a14f4275fcf79d3362fbbc8fbe",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_S1_AI_Validation_V0.3.1.md",
+      "new": "docs/verification/ServiceFlow_AI_S1_AI_Validation_V0.3.1.md",
+      "sha256Before": "e88bff1ec29ae05fc2d547d5d9b9c544a9c0b120c64751330036cf0562883d97",
+      "sha256After": "c86fccec013aa89988ae9a74ae503d26dc98eddee4d48130a30daa33f31ff60b",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_S1_Implementation.md",
+      "new": "docs/implementation/ServiceFlow_AI_S1_Implementation.md",
+      "sha256Before": "0dfb34c7c5401572b1f4a2a51dfcdaf846aa9c81865681a5a5e930bd7f9198da",
+      "sha256After": "1ae1b4b8f861eca6b9ae0fb00475235ac0857a3d4ad5887a66506a6d8e7178f4",
+      "unchanged": false
+    },
+    {
+      "old": "docs/ServiceFlow_AI_S2_First_Segment_2026-10-20.md",
+      "new": "docs/implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md",
+      "sha256Before": "c8e7f3840caaca870ac7516d8966d7d7a81ae72344e15a80eaf1f494f1be2e17",
+      "sha256After": "766130c026a8265fde02cfe32574ba7282d1b569fbc3429ea97d2d8dcf4a8484",
+      "unchanged": false
+    },
+    {
+      "old": "config_al/model.local.properties",
+      "new": "experiments/s1-ai/config/model.local.properties",
+      "sha256Before": "ae6aee515fd579fcaf8ab737da74f7a5683f930d51bc3f8d1109141618abd394",
+      "sha256After": "ae6aee515fd579fcaf8ab737da74f7a5683f930d51bc3f8d1109141618abd394",
+      "unchanged": true
+    },
+    {
+      "old": "experiments/s1-ai/model.example.properties",
+      "new": "experiments/s1-ai/config/model.example.properties",
+      "sha256Before": "9ce9822ac1d798f3877b2f8ca232e274cac8e2e6f3146a5d5b834170428b27aa",
+      "sha256After": "a6ade495587ca70c5cae806ac1cc3d951e00c5b33bf14e0538b9874ba129876b",
+      "unchanged": false
+    },
+    {
+      "old": "experiments/s1-ai/data/dev.jsonl",
+      "new": "experiments/s1-ai/datasets/dev.jsonl",
+      "sha256Before": "fb81addb15be008475ed80706b03629841c1e5fbfccca23d60e09503de3c1b74",
+      "sha256After": "fb81addb15be008475ed80706b03629841c1e5fbfccca23d60e09503de3c1b74",
+      "unchanged": true
+    },
+    {
+      "old": "experiments/s1-ai/data/fixed.jsonl",
+      "new": "experiments/s1-ai/datasets/fixed.jsonl",
+      "sha256Before": "057da3ede6a5815291fc92396a68e10308f6baaea80045d9717cf342ce90b58c",
+      "sha256After": "057da3ede6a5815291fc92396a68e10308f6baaea80045d9717cf342ce90b58c",
+      "unchanged": true
+    },
+    {
+      "old": "experiments/s1-ai/data/knowledge.jsonl",
+      "new": "experiments/s1-ai/knowledge/knowledge.jsonl",
+      "sha256Before": "f167cd0b2af305e3b62846731e45cbab148b29e8d0dd085f29615926c7cebb55",
+      "sha256After": "f167cd0b2af305e3b62846731e45cbab148b29e8d0dd085f29615926c7cebb55",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/freezes/a3-v01-2026-10-20.jar",
+      "new": "experiments/s1-ai/freezes/a3-v01-2026-10-20/runtime.jar",
+      "sha256Before": "5044bda6ff55ef21f930358a1e5da65d2a16ee47bd06bd061762b175e38cd0ca",
+      "sha256After": "5044bda6ff55ef21f930358a1e5da65d2a16ee47bd06bd061762b175e38cd0ca",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/backend/scripts/Run-S1Ai.ps1",
+      "new": "docs/verification/local-history/development/a3-20261020/before/backend/scripts/Run-S1Ai.ps1",
+      "sha256Before": "54164e82ee43d53cd44c6bbe49abe561e5d8de5bf57d7b0b9c01957699def217",
+      "sha256After": "54164e82ee43d53cd44c6bbe49abe561e5d8de5bf57d7b0b9c01957699def217",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java",
+      "new": "docs/verification/local-history/development/a3-20261020/before/backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java",
+      "sha256Before": "9259c56b42652d45ead934d7c33513cd1228e92ef70cc5a01c942803de3de8eb",
+      "sha256After": "9259c56b42652d45ead934d7c33513cd1228e92ef70cc5a01c942803de3de8eb",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/backend/src/main/java/com/serviceflow/experiment/ExperimentMetrics.java",
+      "new": "docs/verification/local-history/development/a3-20261020/before/backend/src/main/java/com/serviceflow/experiment/ExperimentMetrics.java",
+      "sha256Before": "b7e79efdd33dfa89d2c8aef61ba1bd4f56b7ca062f32eabb885bdcb0cda8057e",
+      "sha256After": "b7e79efdd33dfa89d2c8aef61ba1bd4f56b7ca062f32eabb885bdcb0cda8057e",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/backend/src/main/java/com/serviceflow/experiment/ModelClient.java",
+      "new": "docs/verification/local-history/development/a3-20261020/before/backend/src/main/java/com/serviceflow/experiment/ModelClient.java",
+      "sha256Before": "e2931bd404d1e85d7cbd428d5c5d8b9aa9855c50e694252c29a64bec90c0dce7",
+      "sha256After": "e2931bd404d1e85d7cbd428d5c5d8b9aa9855c50e694252c29a64bec90c0dce7",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/docs/README.md",
+      "new": "docs/verification/local-history/development/a3-20261020/before/docs/README.md",
+      "sha256Before": "bcfc45d6750037e0a3e55d277c0d32a953637cc086b8c9a834910b5e513e07f5",
+      "sha256After": "bcfc45d6750037e0a3e55d277c0d32a953637cc086b8c9a834910b5e513e07f5",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/docs/ServiceFlow_AI_S1_AI_Implementation.md",
+      "new": "docs/verification/local-history/development/a3-20261020/before/docs/ServiceFlow_AI_S1_AI_Implementation.md",
+      "sha256Before": "c4e2aa01e0dae8526ca59a8ea62162dbdac723cb49952568a10e95effb2c98e7",
+      "sha256After": "c4e2aa01e0dae8526ca59a8ea62162dbdac723cb49952568a10e95effb2c98e7",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/experiments/s1-ai/evidence/README.md",
+      "new": "docs/verification/local-history/development/a3-20261020/before/experiments/s1-ai/evidence/README.md",
+      "sha256Before": "36bad4f1f9a6c973bcfac83349a9a34db4bb18fe2d72380eb4b849275feb00a9",
+      "sha256After": "36bad4f1f9a6c973bcfac83349a9a34db4bb18fe2d72380eb4b849275feb00a9",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/before/experiments/s1-ai/README.md",
+      "new": "docs/verification/local-history/development/a3-20261020/before/experiments/s1-ai/README.md",
+      "sha256Before": "120ff092e8dcd0aa51f74b68056e553627c1001cd43772059e44f320f65aaa83",
+      "sha256After": "120ff092e8dcd0aa51f74b68056e553627c1001cd43772059e44f320f65aaa83",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/data-hashes-before.json",
+      "new": "docs/verification/local-history/development/a3-20261020/data-hashes-before.json",
+      "sha256Before": "774372d7fa8f8ceceb17f487b362fd6516482a346f032073cabb27255ce5ebbb",
+      "sha256After": "774372d7fa8f8ceceb17f487b362fd6516482a346f032073cabb27255ce5ebbb",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/dev-run.log",
+      "new": "docs/verification/local-history/development/a3-20261020/dev-run.log",
+      "sha256Before": "eaae1e7de3388989972a6ddf088c0fee92e8fc2b7f8e7c829c81a738907a8c2f",
+      "sha256After": "eaae1e7de3388989972a6ddf088c0fee92e8fc2b7f8e7c829c81a738907a8c2f",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/final-checks.json",
+      "new": "docs/verification/local-history/development/a3-20261020/final-checks.json",
+      "sha256Before": "55b7d170f860c59414b9257ae144fbc1298e356b14f1298941458def5640ec90",
+      "sha256After": "55b7d170f860c59414b9257ae144fbc1298e356b14f1298941458def5640ec90",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/a3-20261020/tests.log",
+      "new": "docs/verification/local-history/development/a3-20261020/tests.log",
+      "sha256Before": "fd371c27fbca33eee20e6710ce14a52565e98a60641b0f4bd6315c26b8fd2ef8",
+      "sha256After": "fd371c27fbca33eee20e6710ce14a52565e98a60641b0f4bd6315c26b8fd2ef8",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/before/backend/src/main/java/com/serviceflow/ticket/TicketMapper.java",
+      "new": "docs/verification/local-history/development/s2-20261020/before/backend/src/main/java/com/serviceflow/ticket/TicketMapper.java",
+      "sha256Before": "1ba3ab33eb769e66f2627bf0d7624282588a047691d4db16b1871489963a4374",
+      "sha256After": "1ba3ab33eb769e66f2627bf0d7624282588a047691d4db16b1871489963a4374",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/before/docs/README.md",
+      "new": "docs/verification/local-history/development/s2-20261020/before/docs/README.md",
+      "sha256Before": "5258ceb1b52a83c9e4e0cc025bcc80f46fe8416b0830eabd26923932fb0893b4",
+      "sha256After": "5258ceb1b52a83c9e4e0cc025bcc80f46fe8416b0830eabd26923932fb0893b4",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/before/experiments/s1-ai/README.md",
+      "new": "docs/verification/local-history/development/s2-20261020/before/experiments/s1-ai/README.md",
+      "sha256Before": "c054d053c7e9524003de6a41665872f1b07b6d64941e40659261fe9519e614b8",
+      "sha256After": "c054d053c7e9524003de6a41665872f1b07b6d64941e40659261fe9519e614b8",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/before/experiments/s1-ai/review/README.md",
+      "new": "docs/verification/local-history/development/s2-20261020/before/experiments/s1-ai/review/README.md",
+      "sha256Before": "7b9eff8a5cce76a376f624082dfb1fd07af8fa5c0430870db8a562ffa2c62da3",
+      "sha256After": "7b9eff8a5cce76a376f624082dfb1fd07af8fa5c0430870db8a562ffa2c62da3",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/before/README.md",
+      "new": "docs/verification/local-history/development/s2-20261020/before/README.md",
+      "sha256Before": "d303a67e0b08b0ee1a26f1e31aab87eb7065dae91387c4e8d82c8871478bbd91",
+      "sha256After": "d303a67e0b08b0ee1a26f1e31aab87eb7065dae91387c4e8d82c8871478bbd91",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/checks.json",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/checks.json",
+      "sha256Before": "58f33378e3d519da48d4626dfafa01f84980616484fad85df78c440a62be8f15",
+      "sha256After": "58f33378e3d519da48d4626dfafa01f84980616484fad85df78c440a62be8f15",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/reject_invalid_enum.jsonl",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/reject_invalid_enum.jsonl",
+      "sha256Before": "1cf991144270e3c26349f1d7db81913d59b68b5f413fe716c09b1a122ef20446",
+      "sha256After": "1cf991144270e3c26349f1d7db81913d59b68b5f413fe716c09b1a122ef20446",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/reject_material_change.jsonl",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/reject_material_change.jsonl",
+      "sha256Before": "2dd1e21ec45e4b8ad7e7117d01e56c23b366a34892003743068ad7a3623db22b",
+      "sha256After": "2dd1e21ec45e4b8ad7e7117d01e56c23b366a34892003743068ad7a3623db22b",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/reject_missing_reviewer.jsonl",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/reject_missing_reviewer.jsonl",
+      "sha256Before": "efcefb953ea5133e3f18b921ebeb8690f425a96a4e17f43f15241191fac8fb4e",
+      "sha256After": "efcefb953ea5133e3f18b921ebeb8690f425a96a4e17f43f15241191fac8fb4e",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/reject_numeric_boolean.jsonl",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/reject_numeric_boolean.jsonl",
+      "sha256Before": "13b3859f73a20a58134de8e301fd279c8a6f6a6183a626fc1a09b4723951cd8f",
+      "sha256After": "13b3859f73a20a58134de8e301fd279c8a6f6a6183a626fc1a09b4723951cd8f",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/reject_unknown_id.jsonl",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/reject_unknown_id.jsonl",
+      "sha256Before": "c41b4675b1bfb03aa0c2d073f5c5acacb38ad631c589b869a57f7a962e20c036",
+      "sha256After": "c41b4675b1bfb03aa0c2d073f5c5acacb38ad631c589b869a57f7a962e20c036",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/synthetic-summary.json",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/synthetic-summary.json",
+      "sha256Before": "264594744785beae590843e94e4d9f7f39aafb8a78301f477bd819c7800973c4",
+      "sha256After": "264594744785beae590843e94e4d9f7f39aafb8a78301f477bd819c7800973c4",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/evidence-review-tool-tests/synthetic_valid_rating.jsonl",
+      "new": "docs/verification/local-history/development/s2-20261020/evidence-review-tool-tests/synthetic_valid_rating.jsonl",
+      "sha256Before": "49016681ee6a1cb8bc13f1d985007b93a45034ac7f0e379989d93a856b107c1b",
+      "sha256After": "49016681ee6a1cb8bc13f1d985007b93a45034ac7f0e379989d93a856b107c1b",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/final-checks.json",
+      "new": "docs/verification/local-history/development/s2-20261020/final-checks.json",
+      "sha256Before": "92ea95b49983c621a805789efea9f705fea2f04aca4dd4c6b5b613c193308983",
+      "sha256After": "92ea95b49983c621a805789efea9f705fea2f04aca4dd4c6b5b613c193308983",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/preserved-hashes.json",
+      "new": "docs/verification/local-history/development/s2-20261020/preserved-hashes.json",
+      "sha256Before": "263b59178c3374b26cf94274946d59a8be569b56759a676a57c8da25cf8a27b4",
+      "sha256After": "263b59178c3374b26cf94274946d59a8be569b56759a676a57c8da25cf8a27b4",
+      "unchanged": true
+    },
+    {
+      "old": "artifacts/development/s2-20261020/tests-first.log",
+      "new": "docs/verification/local-history/development/s2-20261020/tests-first.log",
+      "sha256Before": "e2e0623b5ab3774ac042cc64ad88bb5251809afe932d241e00a9bcb7f722e5ea",
+      "sha256After": "e2e0623b5ab3774ac042cc64ad88bb5251809afe932d241e00a9bcb7f722e5ea",
+      "unchanged": true
+    }
+  ]
+}

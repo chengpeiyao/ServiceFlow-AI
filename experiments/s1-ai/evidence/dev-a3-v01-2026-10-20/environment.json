@@ -1,0 +1,26 @@
+{
+  "archivedAt": "2026-10-20T03:38:20.383093+00:00",
+  "runId": "2026-10-20T03-33-58-158696500Z-fc5254e3",
+  "ollama": {
+    "version": "0.40.6"
+  },
+  "tests": {
+    "tests": 65,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "dataHashesUnchanged": {
+    "data/dev.jsonl": "fb81addb15be008475ed80706b03629841c1e5fbfccca23d60e09503de3c1b74",
+    "data/fixed.jsonl": "057da3ede6a5815291fc92396a68e10308f6baaea80045d9717cf342ce90b58c",
+    "data/knowledge.jsonl": "f167cd0b2af305e3b62846731e45cbab148b29e8d0dd085f29615926c7cebb55",
+    "output.schema.json": "9bf25a24fdc2953ca2ebaf8804c8e7f2414bc4f37a6e8a9068859ef809a7b872"
+  },
+  "jarSha256": "5044bda6ff55ef21f930358a1e5da65d2a16ee47bd06bd061762b175e38cd0ca",
+  "testCommand": ".\\scripts\\Test-Project.ps1 -Offline",
+  "experimentCommand": ".\\backend\\scripts\\Run-S1Ai.ps1 -JavaHome .\\tools\\java\\jdk-21.0.12.1+1 -Split dev -Arms A0,A1,A2,A3 -Concurrency 1",
+  "fixedSetSentToModel": false,
+  "labelReviewStatus": "PENDING_HUMAN_REVIEW",
+  "semanticReviewStatus": "UNSCORED",
+  "testLog": "D:\\Code\\my_project\\ServiceFlow AI\\artifacts\\development\\a3-20261020\\tests.log"
+}

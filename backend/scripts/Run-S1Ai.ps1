@@ -1,8 +1,9 @@
 param(
     [string]$JavaHome = $env:JAVA_HOME,
     [ValidateSet('dev','fixed')][string]$Split = 'dev',
-    [ValidatePattern('^A[012](,A[012])*$')][string]$Arms = 'A0',
+    [ValidatePattern('^A[0123](,A[0123])*$')][string]$Arms = 'A0',
     [string]$Config,
+    [ValidateRange(1,2)][int]$Concurrency = 2,
     [switch]$ConfirmFixed
 )
 $ErrorActionPreference = 'Stop'
@@ -16,9 +17,9 @@ if (-not (Test-Path -LiteralPath $jarPath)) { throw '请先在 backend 执行 mv
 $jarTime = (Get-Item -LiteralPath $jarPath).LastWriteTimeUtc
 $newerSource = Get-ChildItem -LiteralPath (Join-Path $projectPath 'backend\src') -File -Recurse | Where-Object LastWriteTimeUtc -GT $jarTime | Select-Object -First 1
 if ($newerSource -or (Get-Item -LiteralPath (Join-Path $projectPath 'backend\pom.xml')).LastWriteTimeUtc -gt $jarTime) { throw '源码或构建配置已更新，请先重新执行 mvn verify' }
-if (-not $Config) { $candidate = Join-Path $projectPath 'config_al\model.local.properties'; if (Test-Path -LiteralPath $candidate) { $Config = $candidate } }
+if (-not $Config) { $candidate = Join-Path $projectPath 'experiments\s1-ai\config\model.local.properties'; if (Test-Path -LiteralPath $candidate) { $Config = $candidate } }
 $arguments = @('-Dfile.encoding=UTF-8','-Dstdout.encoding=UTF-8','-Dstderr.encoding=UTF-8','-Dloader.main=com.serviceflow.experiment.ExperimentCli','-cp',$jarPath,'org.springframework.boot.loader.launch.PropertiesLauncher',
-    '--root',(Join-Path $projectPath 'experiments\s1-ai'),'--split',$Split,'--arms',$Arms)
+    '--root',(Join-Path $projectPath 'experiments\s1-ai'),'--split',$Split,'--arms',$Arms,'--concurrency',"$Concurrency")
 if ($Config) { $arguments += @('--config',$Config) }
 if ($ConfirmFixed) { $arguments += @('--confirm-fixed','yes') }
 & $javaPath @arguments

@@ -1,0 +1,203 @@
+{
+  "A0" : {
+    "cases" : 20,
+    "categoryCorrect" : 19,
+    "categoryWrong" : 1,
+    "rawCategoryCorrect" : 19,
+    "acceptedCases" : 20,
+    "rejectedCases" : 0,
+    "acceptedCategoryWrong" : 1,
+    "categoryInsufficientCases" : 2,
+    "factQuoteTotal" : 35,
+    "factQuoteExact" : 35,
+    "citationTotal" : 33,
+    "citationExistsApplicableAndExact" : 33,
+    "failures" : { },
+    "confusion" : {
+      "ACCOUNT_PERMISSION" : {
+        "ACCOUNT_PERMISSION" : 1
+      },
+      "APPLICATION" : {
+        "APPLICATION" : 8,
+        "OTHER" : 1
+      },
+      "CONFIGURATION" : {
+        "CONFIGURATION" : 1
+      },
+      "DATABASE_CONNECTION" : {
+        "DATABASE_CONNECTION" : 2
+      },
+      "NETWORK" : {
+        "NETWORK" : 3
+      },
+      "OTHER" : {
+        "OTHER" : 4
+      }
+    },
+    "macroF1Over6Categories" : 0.9716775599128541,
+    "factCorrect" : 13,
+    "factWrong" : 22,
+    "factMissing" : 31,
+    "requiredQuestionAsked" : 53,
+    "requiredQuestionMissing" : 2,
+    "extraQuestionCandidates" : 86,
+    "duplicateQuestions" : 0,
+    "knownFieldQuestions" : 10,
+    "citedSuggestions" : 33,
+    "uncitedSuggestions" : 0,
+    "factPrecisionExact" : 0.37142857142857144,
+    "factRecallExact" : 0.29545454545454547,
+    "factF1Exact" : 0.3291139240506329,
+    "relevantRetrieved" : 28,
+    "relevantTotal" : 30,
+    "retrievalRecallAt3" : 0.9333333333333333,
+    "p50Ms" : 3,
+    "p95Ms" : 13,
+    "attempts" : 0,
+    "knownInputTokens" : null,
+    "knownOutputTokens" : null,
+    "attemptsWithUnknownUsage" : 0,
+    "totalCost" : null,
+    "costStatus" : "NOT_PRICED_OR_USAGE_INCOMPLETE",
+    "knownListPriceEstimateSubtotal" : null,
+    "listPriceEstimateTotal" : null,
+    "semanticEvidenceSupport" : null,
+    "questionQualityHumanScore" : null
+  },
+  "A1" : {
+    "cases" : 20,
+    "categoryCorrect" : 17,
+    "categoryWrong" : 3,
+    "rawCategoryCorrect" : 17,
+    "acceptedCases" : 19,
+    "rejectedCases" : 1,
+    "acceptedCategoryWrong" : 2,
+    "categoryInsufficientCases" : 4,
+    "factQuoteTotal" : 18,
+    "factQuoteExact" : 18,
+    "citationTotal" : 0,
+    "citationExistsApplicableAndExact" : 0,
+    "failures" : {
+      "TIMEOUT" : 1
+    },
+    "confusion" : {
+      "ACCOUNT_PERMISSION" : {
+        "REJECTED" : 1
+      },
+      "APPLICATION" : {
+        "APPLICATION" : 9
+      },
+      "CONFIGURATION" : {
+        "OTHER" : 1
+      },
+      "DATABASE_CONNECTION" : {
+        "DATABASE_CONNECTION" : 2
+      },
+      "NETWORK" : {
+        "NETWORK" : 3
+      },
+      "OTHER" : {
+        "APPLICATION" : 1,
+        "OTHER" : 3
+      }
+    },
+    "macroF1Over6Categories" : 0.6162280701754386,
+    "factCorrect" : 6,
+    "factWrong" : 12,
+    "factMissing" : 38,
+    "requiredQuestionAsked" : 14,
+    "requiredQuestionMissing" : 41,
+    "extraQuestionCandidates" : 31,
+    "duplicateQuestions" : 0,
+    "knownFieldQuestions" : 10,
+    "citedSuggestions" : 0,
+    "uncitedSuggestions" : 17,
+    "factPrecisionExact" : 0.3333333333333333,
+    "factRecallExact" : 0.13636363636363635,
+    "factF1Exact" : 0.1935483870967742,
+    "p50Ms" : 3436,
+    "p95Ms" : 7976,
+    "attempts" : 20,
+    "knownInputTokens" : 22113,
+    "knownOutputTokens" : 4236,
+    "attemptsWithUnknownUsage" : 1,
+    "totalCost" : null,
+    "costStatus" : "NOT_PRICED_OR_USAGE_INCOMPLETE",
+    "knownListPriceEstimateSubtotal" : null,
+    "listPriceEstimateTotal" : null,
+    "semanticEvidenceSupport" : null,
+    "questionQualityHumanScore" : null
+  },
+  "A2" : {
+    "cases" : 20,
+    "categoryCorrect" : 16,
+    "categoryWrong" : 4,
+    "rawCategoryCorrect" : 18,
+    "acceptedCases" : 18,
+    "rejectedCases" : 2,
+    "acceptedCategoryWrong" : 2,
+    "categoryInsufficientCases" : 1,
+    "factQuoteTotal" : 51,
+    "factQuoteExact" : 49,
+    "citationTotal" : 30,
+    "citationExistsApplicableAndExact" : 30,
+    "failures" : {
+      "VALIDATION:DUPLICATE_FACT_FIELD" : 1,
+      "VALIDATION:FACT_QUOTE_MISMATCH" : 2,
+      "VALIDATION:METADATA_QUOTE_NOT_IN_DESCRIPTION" : 2,
+      "VALIDATION_REJECTED" : 2
+    },
+    "confusion" : {
+      "ACCOUNT_PERMISSION" : {
+        "ACCOUNT_PERMISSION" : 1
+      },
+      "APPLICATION" : {
+        "APPLICATION" : 9
+      },
+      "CONFIGURATION" : {
+        "REJECTED" : 1
+      },
+      "DATABASE_CONNECTION" : {
+        "DATABASE_CONNECTION" : 2
+      },
+      "NETWORK" : {
+        "NETWORK" : 3
+      },
+      "OTHER" : {
+        "APPLICATION" : 1,
+        "NETWORK" : 1,
+        "OTHER" : 1,
+        "REJECTED" : 1
+      }
+    },
+    "macroF1Over6Categories" : 0.7007518796992481,
+    "factCorrect" : 13,
+    "factWrong" : 31,
+    "factMissing" : 31,
+    "requiredQuestionAsked" : 5,
+    "requiredQuestionMissing" : 50,
+    "extraQuestionCandidates" : 8,
+    "duplicateQuestions" : 0,
+    "knownFieldQuestions" : 0,
+    "citedSuggestions" : 27,
+    "uncitedSuggestions" : 0,
+    "factPrecisionExact" : 0.29545454545454547,
+    "factRecallExact" : 0.29545454545454547,
+    "factF1Exact" : 0.29545454545454547,
+    "relevantRetrieved" : 28,
+    "relevantTotal" : 30,
+    "retrievalRecallAt3" : 0.9333333333333333,
+    "p50Ms" : 4989,
+    "p95Ms" : 7478,
+    "attempts" : 20,
+    "knownInputTokens" : 26167,
+    "knownOutputTokens" : 7617,
+    "attemptsWithUnknownUsage" : 0,
+    "totalCost" : null,
+    "costStatus" : "NOT_PRICED_OR_USAGE_INCOMPLETE",
+    "knownListPriceEstimateSubtotal" : null,
+    "listPriceEstimateTotal" : null,
+    "semanticEvidenceSupport" : null,
+    "questionQualityHumanScore" : null
+  }
+}

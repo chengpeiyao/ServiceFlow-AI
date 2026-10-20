@@ -55,12 +55,16 @@ public final class ExperimentMetrics {
     }
     public static Map<String, Object> aggregate(List<JsonNode> rows) {
         Map<String, Object> all = new LinkedHashMap<>();
-        for (String arm : List.of("A0", "A1", "A2")) {
+        for (String arm : List.of("A0", "A1", "A2", "A3")) {
             List<JsonNode> r = rows.stream().filter(n -> arm.equals(n.path("arm").asText())).toList();
             if (r.isEmpty()) continue;
             Map<String, Object> m = new LinkedHashMap<>();
             m.put("cases", r.size()); m.put("categoryCorrect", r.stream().filter(n -> n.path("metrics").path("categoryCorrect").asBoolean()).count());
             m.put("categoryWrong", r.size() - ((Number)m.get("categoryCorrect")).longValue());
+            m.put("rawCategoryCorrect", r.stream().filter(n -> n.path("goldCategory").asText().equals(n.path("rawOutput").path("category").asText())).count());
+            m.put("acceptedCases", r.stream().filter(n -> n.path("acceptedOutput").isObject()).count());
+            m.put("rejectedCases", r.stream().filter(n -> !n.path("acceptedOutput").isObject()).count());
+            m.put("acceptedCategoryWrong", r.stream().filter(n -> n.path("acceptedOutput").isObject() && !n.path("metrics").path("categoryCorrect").asBoolean()).count());
             m.put("categoryInsufficientCases", r.stream().filter(n -> n.path("acceptedOutput").path("categoryInsufficient").asBoolean()).count());
             for (String key : List.of("factQuoteTotal", "factQuoteExact", "citationTotal", "citationExistsApplicableAndExact"))
                 m.put(key, r.stream().mapToInt(n -> n.path("mechanicalChecks").path(key).asInt()).sum());
@@ -73,6 +77,12 @@ public final class ExperimentMetrics {
                 confusion.computeIfAbsent(row.path("goldCategory").asText(), k -> new TreeMap<>()).merge(predicted, 1, Integer::sum);
             }
             m.put("failures", failures); m.put("confusion", confusion);
+            if (arm.equals("A3")) {
+                m.put("modelCandidateAcceptedCases", r.stream().filter(n -> n.path("modelCandidateAccepted").asBoolean()).count());
+                m.put("ruleFallbackCases", r.stream().filter(n -> n.path("status").asText().equals("RULE_FALLBACK")).count());
+                m.put("templateQuestionCount", r.stream().mapToInt(n -> n.path("hybridDecision").path("fallbackQuestionFields").size()).sum());
+                m.put("ignoredModelQuestionCount", r.stream().mapToInt(n -> n.path("hybridDecision").path("ignoredModelQuestionFields").size()).sum());
+            }
             double f1Sum = 0;
             for (String category : List.of("DATABASE_CONNECTION", "NETWORK", "APPLICATION", "ACCOUNT_PERMISSION", "CONFIGURATION", "OTHER")) {
                 int tp = 0, fp = 0, fn = 0;

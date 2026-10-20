@@ -1,0 +1,980 @@
+{
+  "questionCount": 139,
+  "exactlySameAsRuleTemplateCount": 139,
+  "method": "与同批 A0 对应案例/字段的 question 字符串逐字比较，不是人工语义评分",
+  "questions": [
+    {
+      "caseId": "D-01",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-01",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-01",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-01",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-02",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": false
+    },
+    {
+      "caseId": "D-02",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": false
+    },
+    {
+      "caseId": "D-02",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": false
+    },
+    {
+      "caseId": "D-02",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": false
+    },
+    {
+      "caseId": "D-02",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": false
+    },
+    {
+      "caseId": "D-03",
+      "field": "product",
+      "question": "请确认产品名称或产品代码。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-03",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-04",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-04",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-04",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-04",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-04",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-05",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-06",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-06",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-06",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-06",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-06",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-06",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-07",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-07",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-07",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-07",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-07",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-07",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-08",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "product",
+      "question": "请确认产品名称或产品代码。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-09",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-10",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-11",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "product",
+      "question": "请确认产品名称或产品代码。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-12",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-13",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-14",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-14",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-14",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-14",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-14",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-14",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "product",
+      "question": "请确认产品名称或产品代码。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-15",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-16",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-17",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-18",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "product",
+      "question": "请确认产品名称或产品代码。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-19",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "product",
+      "question": "请确认产品名称或产品代码。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "version",
+      "question": "请提供准确的产品版本。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "startTime",
+      "question": "故障从什么时间开始？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "scope",
+      "question": "哪些用户或功能受到影响？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "errorCode",
+      "question": "是否有错误码或完整错误提示？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "change",
+      "question": "发生前是否进行过发布或配置变更？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "frequency",
+      "question": "故障发生频率如何？",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "logs",
+      "question": "请提供脱敏后的相关日志。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    },
+    {
+      "caseId": "D-20",
+      "field": "reproduction",
+      "question": "请描述最小复现步骤。",
+      "exactlySameAsRuleTemplate": true,
+      "modelCandidateAccepted": true
+    }
+  ]
+}

@@ -17,9 +17,9 @@ public final class ExperimentData {
                             List<String> keywords, List<String> preconditions, String text) {}
     public record Corpus(List<Case> dev, List<Case> fixed, List<Knowledge> knowledge, JsonNode schema) {
         public static Corpus load(Path root) throws Exception {
-            List<Case> dev = read(root.resolve("data/dev.jsonl"), Case.class);
-            List<Case> fixed = read(root.resolve("data/fixed.jsonl"), Case.class);
-            List<Knowledge> kb = read(root.resolve("data/knowledge.jsonl"), Knowledge.class);
+            List<Case> dev = read(root.resolve("datasets/dev.jsonl"), Case.class);
+            List<Case> fixed = read(root.resolve("datasets/fixed.jsonl"), Case.class);
+            List<Knowledge> kb = read(root.resolve("knowledge/knowledge.jsonl"), Knowledge.class);
             if (dev.size() != 20 || fixed.size() != 40) throw new IllegalArgumentException("案例数量必须为 20/40");
             Set<String> ids = new HashSet<>(), families = new HashSet<>(), knowledgeIds = new HashSet<>();
             for (Knowledge k : kb) {
