@@ -19,6 +19,23 @@ public final class TicketCommands {
                           @NotBlank @Size(max=4000) String content, Boolean customerVisible,
                           @Size(max=80) String reportedProductCode, @Size(max=80) String reportedProductVersion) {}
 
+    public record Cancel(@NotNull @Min(0) Integer expectedTicketVersion,
+                         @NotBlank @Size(max=500) String reason) {}
+
+    public record Query(@Min(1) @Max(1000000) Integer page,
+                        @Min(1) @Max(100) Integer size,
+                        @Pattern(regexp="SUBMITTED|TRIAGED|ASSIGNED|IN_PROGRESS|PENDING_ACCEPTANCE|CLOSED|CANCELLED") String status,
+                        @Pattern(regexp="P1|P2|P3") String priority,
+                        @Positive Long customerId, @Positive Long ownerTeamId,
+                        @Size(max=120) String keyword) {
+        public Query {
+            page = page == null ? 1 : page;
+            size = size == null ? 20 : size;
+            keyword = keyword == null ? null : keyword.strip();
+        }
+        public long offset() { return (page.longValue()-1)*size; }
+    }
+
     public record Fact(@NotBlank @Size(max=64) String field, @NotBlank @Size(max=1000) String value,
                        @NotBlank @Size(max=1000) String sourceQuote, @Positive Long sourceMessageId) {}
     public record Followup(@NotBlank @Size(max=64) String field, @NotBlank @Size(max=500) String question) {}

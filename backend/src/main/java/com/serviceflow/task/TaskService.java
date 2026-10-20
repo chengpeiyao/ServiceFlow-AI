@@ -46,7 +46,7 @@ public class TaskService {
         var reservation = idempotency.reserve(actor.id(), "TASK_CREATE", "/tickets/" + ticketId + "/tasks", key, command, now);
         if (reservation.replay()) return idempotency.replay(reservation, Changed.class);
         ticketVersion(ticket, command.expectedTicketVersion());
-        // 整改任务未来由拒绝验收事务内部创建，不对 IN_PROGRESS 开放任意建任务。
+        // 整改任务由拒绝验收事务内部创建，不对 IN_PROGRESS 开放任意建任务。
         require(ticket.status().equals("TRIAGED"), "仅已受理且未派工的工单可创建首轮任务");
         if (tasks.activeCount(ticketId) != 0) throw BusinessException.conflict("ACTIVE_TASK_EXISTS", "工单已有活动阻塞任务");
         long taskId = IdWorker.getId();
@@ -79,11 +79,16 @@ public class TaskService {
         var locked = lock(taskId, "TASK_ASSIGN", "assignments", command, key, true);
         if (locked.reservation().replay()) return replay(locked);
         versions(locked, command.expectedTicketVersion(), command.expectedTaskVersion());
-        require(locked.ticket().status().equals("TRIAGED")
-                && locked.task().status().equals("CREATED") && locked.task().currentAssigneeId() == null,
-                "首次派工仅适用于已受理工单的未派任务");
+        var task = locked.task(); var ticket = locked.ticket();
+        boolean initial = ticket.status().equals("TRIAGED") && ticket.resolutionCycleNo() == 0
+                && task.resolutionCycleNo() == 1 && task.sourceResolutionId() == null;
+        boolean rework = ticket.status().equals("IN_PROGRESS") && task.sourceResolutionId() != null
+                && task.resolutionCycleNo() == ticket.resolutionCycleNo()+1
+                && tasks.rejectedSource(ticket.id(), task.sourceResolutionId(), ticket.resolutionCycleNo()) == 1;
+        require((initial || rework) && task.status().equals("CREATED") && task.currentAssigneeId() == null,
+                "首次派工需要首轮未派任务或当前轮次的真实整改任务");
         eligible(locked, command.assigneeId());
-        return assignTo(locked, command.assigneeId(), command.reason(), "ASSIGNED", "TASK_ASSIGNED", key);
+        return assignTo(locked, command.assigneeId(), command.reason(), rework ? "IN_PROGRESS" : "ASSIGNED", "TASK_ASSIGNED", key);
     }
 
     public Changed reassign(long taskId, TaskCommands.Reassign command, String key) {

@@ -1,13 +1,13 @@
 # ServiceFlow AI
 
-本仓库的统一开发基线为 [开发需求规格说明书](./docs/design/ServiceFlow_AI_Requirements.md)。当前已实现 S1 基础业务及 S2 首段任务执行：登录、合同权益、工单受理、任务创建、首次派工、转派、接单、开始与完成。当前交付是 Java API 后端。解决方案提交、客户验收整改、解决 SLA 暂停恢复和 Vue3 页面待后续实现；AI 仍为独立实验，A3 已冻结，人工语义效果尚未验收。
+本仓库的统一开发基线为 [开发需求规格说明书](./docs/design/ServiceFlow_AI_Requirements.md)。当前 Java API 后端已支持登录、合同权益、工单受理、任务派工与执行，以及解决方案提交、创建者验收、拒绝整改、工单主动取消、工单分页和 SLA 双时钟。任务列表、候选项等辅助查询和 Vue3 页面待后续实现；AI 仍为独立实验，A3 已冻结，人工语义效果尚未验收。
 
 ## 技术与目录
 
 - JDK 21、Maven 3.9.x。
 - Spring Boot 3.5.16、MyBatis-Plus 3.5.17、Sa-Token 1.44.0。
 - Flyway 11.7.2、MySQL 8.0.46；具体传递依赖由 Spring Boot BOM 管理。
-- `backend/src/main/resources/db/migration`：基于验收的 V0.3.1 完整 25 表初始迁移。
+- `backend/src/main/resources/db/migration`：25 表初始迁移及后续增量；V4 增加任务轮次、整改来源和 SLA 累计毫秒。
 - `backend/src/main/resources/db/demo`：仅在 `dev` 和测试环境加载的假账号、合同、路由、SLA 及知识样例。
 - `backend/src/test`：真实 HTTP/MySQL 集成测试。
 - `docs/design`、`docs/implementation`、`docs/verification`：设计、实施与验证材料，统一由文档导航索引。
@@ -27,7 +27,7 @@ AI 开发从 [项目约束](./AGENTS.md) 和 [交接索引](./docs/handoff/INDEX
 .\scripts\Test-Project.ps1 -Offline
 ```
 
-该入口调用现有独立 MySQL 测试脚本，默认使用 `tools/java/jdk-21.0.12.1+1`、`tools/maven/repository` 和 `backend/.local/tmp`；要求 PATH 中已有 Maven 与 MySQL 程序。去掉 `-Offline` 可在需要时下载依赖。
+该入口调用现有独立 MySQL 测试脚本，默认使用 `tools/java/jdk-21.0.12.1+1`、`tools/maven/repository` 和 `backend/.local/tmp`；要求 PATH 中已有 Maven 与 MySQL 程序。去掉 `-Offline` 可在需要时下载依赖。脚本使用带 BOM 的 UTF-8 以兼容 Windows PowerShell 5.1；原生命令警告保留在日志中，成败依据退出码判断。
 
 构建产物位于 `backend/target`；启动或运行新模型实验前，应确认产物与当前源码一致，必要时执行上述命令重新构建。90 项历史测试及源码摘要保存在 [S2 验证记录](./docs/verification/s2-first-2026-10-20/summary.json)。
 
@@ -115,6 +115,39 @@ Invoke-RestMethod -Uri "http://localhost:8080/api/v1/tickets/$($ticket.ticketId)
 
 2026-10-20 S2 首段的完整回归记录为 90 项：S1 27 项、原实验 32 项、A3 6 项、S2 25 项，包含真实 MySQL 并发与审计失败回滚，见 [S2 汇总](./docs/verification/s2-first-2026-10-20/summary.json)。随后目录整理回归通过 89 项，明确排除涉及固定检查集规则评测的 `ExperimentTest#allBaselineOutputsPassSharedValidation`，见 [整理汇总](./docs/verification/workspace-layout-2026-10-20/summary.json)。两份均为历史记录，不能视为新一轮验证。
 
+## S2 验收整改接口
+
+| 方法与路径 | 行为 |
+| --- | --- |
+| `POST /api/v1/tickets/{id}/resolutions` | 本轮已完成任务的当前工程师提交方案，工单进入待验收并暂停解决计时 |
+| `POST /api/v1/resolutions/{id}/acceptance` | 创建者通过后关闭；拒绝后恢复计时并原子创建未派整改任务 |
+| `GET /api/v1/tickets/{id}/resolutions` | 有权用户按轮次查看方案、验收及整改任务来源 |
+
+提交正文为 `expectedTicketVersion/taskId/expectedTaskVersion/summary`；验收正文为 `expectedTicketVersion/decision/reason`，`decision` 为 `ACCEPT` 或 `REJECT`，拒绝必须说明原因。两类写入均携带 `Idempotency-Key`。整改任务复用既有派工、接单、开始和完成接口，派工时工单保持 `IN_PROGRESS`。完整协议见规格第 6、7、11 节。
+
+已完成任务不直接关闭工单。等待验收只暂停解决时钟，公开人工答复仍可形成首响；多轮整改保留累计毫秒，关闭时结算冻结的 SLA 目标。没有人工首响即关闭时，首响结果为不达标。
+
+本段定向回归及构建结果见 [验证汇总](./docs/verification/s2-resolution-2026-10-20/summary.json)。复跑相同范围：
+
+```powershell
+$previousMavenArgs = $env:MAVEN_ARGS
+try {
+    $env:MAVEN_ARGS = '-Dtest=S1IntegrationTest,S2IntegrationTest,ResolutionIntegrationTest'
+    .\scripts\Test-Project.ps1 -Offline
+} finally { $env:MAVEN_ARGS = $previousMavenArgs }
+```
+
+该范围不运行 AI 实验套件、模型或固定集评测，不等于所有测试全量回归。
+
+## 工单取消与分页
+
+- `POST /api/v1/tickets/{id}/cancel`：创建者或客服取消 `SUBMITTED/TRIAGED` 且无活动任务的工单，携带 `Idempotency-Key` 和正文 `{"expectedTicketVersion":0,"reason":"客户撤回报障"}`。成功返回 `ticketId/status/ticketVersion/cancelledAt`；有活动任务返回 409，已派发或处理后的状态返回 422。
+- `GET /api/v1/tickets?page=1&size=20&status=SUBMITTED`：按当前用户权限分页，返回 `items/total/page/size`。支持 `priority/customerId/ownerTeamId/keyword` 筛选；`keyword` 匹配标题。默认页大小 20、最大 100，固定创建时间与 ID 倒序，`total` 为十进制字符串。
+
+取消停止解决计时并保留已有首响事实，取消原因对客户可见；不会取消或删除已有任务。列表的筛选始终与角色权限取交集，总数和条目使用同一读取快照。详细字段、错误码和可见范围见规格第 4.5、7、11.2 节。
+
+这两个接口的定向回归见 [验证记录](./docs/verification/ticket-operations-2026-10-20/summary.json)。复跑时将上方 `MAVEN_ARGS` 设置为 `-Dtest=S1IntegrationTest,S2IntegrationTest,ResolutionIntegrationTest,TicketOperationsIntegrationTest`，执行统一入口后恢复原值。
+
 ## 运行测试
 
 默认测试使用 Testcontainers 启动 MySQL，需要 Docker：
@@ -146,7 +179,7 @@ mvn clean verify
 
 ## 当前边界
 
-会话暂存在单进程内存，重启后需要重新登录。S1 创建 SLA 实例并记录人工首响，不包含解决时钟暂停恢复和结算。S2 首段已提供派工和任务执行接口；解决方案提交、客户验收整改、前端页面及 AI 草稿业务接入仍待后续实现，并以对应测试结果验收。
+会话暂存在单进程内存，重启后需要重新登录。人工服务主流程已具备后端验收整改闭环，以及工单主动取消和工单分页；任务列表、合同/服务类型/工程师候选项查询、前端页面及 AI 草稿业务接入尚未实现。V4 已在隔离空库随 Flyway 执行，已有业务数据的升级演练和生产部署未执行；本次两个接口未新增迁移。
 
 ## S1-AI 独立对照实验
 

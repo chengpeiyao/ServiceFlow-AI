@@ -37,6 +37,7 @@ class S1IntegrationTest extends MySqlTestSupport {
     @BeforeEach
     void reset() {
         for (String table : List.of("ticket_triage_record", "ai_triage_proposal", "ai_triage_run", "ticket_activity",
+                "ticket_acceptance", "task_assignment_history", "service_task", "ticket_resolution",
                 "ticket_sla_event", "ticket_sla_instance", "business_audit_log", "service_ticket", "idempotency_request")) {
             jdbc.update("DELETE FROM " + table);
         }

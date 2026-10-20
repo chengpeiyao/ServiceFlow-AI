@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$JavaHome = $env:JAVA_HOME,
     [string]$MySqlBin,
     [ValidateRange(1024,65535)][int]$Port = 33319,
@@ -7,8 +7,9 @@ param(
 $ErrorActionPreference = 'Stop'
 $backendPath = Split-Path -Parent $PSScriptRoot
 if (-not $JavaHome -or -not (Test-Path -LiteralPath (Join-Path $JavaHome 'bin\java.exe'))) { throw '请通过 -JavaHome 指定 JDK 21 目录' }
-$javaVersion = & (Join-Path $JavaHome 'bin\java.exe') -version 2>&1 | Out-String
-if ($javaVersion -notmatch 'version "21\.') { throw '本项目要求 JDK 21，请勿使用默认 JDK 17' }
+# --version 写入标准输出，避免 PowerShell 5.1 将正常版本信息当作终止错误。
+$javaVersion = & (Join-Path $JavaHome 'bin\java.exe') --version | Out-String
+if ($LASTEXITCODE -ne 0 -or $javaVersion -notmatch '(?m)^(openjdk|java) 21\.') { throw '本项目要求 JDK 21，请勿使用默认 JDK 17' }
 if (-not $MySqlBin) { $MySqlBin = Split-Path -Parent (Get-Command mysql.exe -ErrorAction Stop).Source }
 $mysqld = Join-Path $MySqlBin 'mysqld.exe'
 $mysql = Join-Path $MySqlBin 'mysql.exe'
@@ -35,12 +36,21 @@ try {
     for ($attempt=0; $attempt -lt 40; $attempt++) {
         $server.Refresh()
         if ($server.HasExited) { Get-Content -LiteralPath (Join-Path $scratch 'server.log') -Tail 15; throw '独立 MySQL 启动失败' }
-        $actualData = (& $mysql @clientArguments '--execute=SELECT @@datadir;' 2>$null | Out-String).Trim()
+        # 服务启动期间连接失败属于预期探测结果，仍用退出码和目录共同确认实例。
+        $previousErrorAction = $ErrorActionPreference
+        try {
+            $ErrorActionPreference = 'Continue'
+            $actualData = (& $mysql @clientArguments '--execute=SELECT @@datadir;' 2>$null | Out-String).Trim()
+        } finally { $ErrorActionPreference = $previousErrorAction }
         if ($LASTEXITCODE -eq 0 -and [System.IO.Path]::GetFullPath($actualData.TrimEnd([char]92,[char]47)).Equals([System.IO.Path]::GetFullPath($dataDir),[StringComparison]::OrdinalIgnoreCase)) { $ready=$true; break }
         Start-Sleep -Milliseconds 250
     }
     if (-not $ready) { throw '未能确认独立 MySQL 的数据目录，停止执行测试' }
-    & $mysql @clientArguments '--execute=CREATE DATABASE serviceflow_s1_test CHARACTER SET utf8mb4;'
+    $previousErrorAction = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        & $mysql @clientArguments '--execute=CREATE DATABASE serviceflow_s1_test CHARACTER SET utf8mb4;'
+    } finally { $ErrorActionPreference = $previousErrorAction }
     if ($LASTEXITCODE -ne 0) { throw '创建独立测试库失败' }
     $env:JAVA_HOME = $JavaHome
     $env:PATH = (Join-Path $JavaHome 'bin') + ';' + $oldEnvironment['PATH']
@@ -48,14 +58,22 @@ try {
     $env:SERVICEFLOW_TEST_DB_USERNAME = 'root'
     $env:SERVICEFLOW_TEST_DB_PASSWORD = ''
     Set-Location -LiteralPath $backendPath
-    & $maven -B -ntp @MavenArguments clean verify
+    $previousErrorAction = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        & $maven -B -ntp @MavenArguments clean verify
+    } finally { $ErrorActionPreference = $previousErrorAction }
     if ($LASTEXITCODE -ne 0) { throw 'S1 构建或集成测试失败，请查看 target/surefire-reports' }
 } finally {
     Set-Location -LiteralPath $originalLocation.Path
     foreach ($name in $oldEnvironment.Keys) { [Environment]::SetEnvironmentVariable($name,$oldEnvironment[$name],'Process') }
     $stopped = $true
     if ($ready) {
-        & $mysqladmin --no-defaults --protocol=TCP --host=127.0.0.1 "--port=$Port" --user=root --skip-password shutdown
+        $previousErrorAction = $ErrorActionPreference
+        try {
+            $ErrorActionPreference = 'Continue'
+            & $mysqladmin --no-defaults --protocol=TCP --host=127.0.0.1 "--port=$Port" --user=root --skip-password shutdown
+        } finally { $ErrorActionPreference = $previousErrorAction }
         $stopped = $LASTEXITCODE -eq 0
     }
     if ($server -and -not $server.HasExited) { $stopped = $server.WaitForExit(15000) }

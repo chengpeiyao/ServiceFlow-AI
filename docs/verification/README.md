@@ -5,6 +5,8 @@
 - [开发集完善与效果分析](./ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md)
 - [A3 混合受理与标签复核准备](./ServiceFlow_AI_S1_AI_Hybrid_2026-10-20.md)
 - [原 S2 90 项测试记录](./s2-first-2026-10-20/summary.json)
+- [S2 验收整改定向回归与构建](./s2-resolution-2026-10-20/summary.json)：S1、S2 首段、方案/验收/整改/SLA；不含模型及固定集评测。
+- [工单取消与分页定向回归](./ticket-operations-2026-10-20/summary.json)：在上述 78 项基础上增加 38 项，覆盖取消事务与并发、列表权限/筛选/分页及读取快照；不含模型及固定集评测。
 - [此前文件清理记录](./workspace-cleanup-2026-10-20.json)
 - [本轮目录规范化报告](./workspace-layout-2026-10-20/README.md)
 - [模型原始证据导航](../../experiments/s1-ai/evidence/README.md)

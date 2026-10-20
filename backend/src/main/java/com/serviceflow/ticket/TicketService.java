@@ -7,6 +7,8 @@ import com.serviceflow.contract.ContractService;
 import com.serviceflow.identity.IdentityService;
 import com.serviceflow.shared.BusinessException;
 import com.serviceflow.sla.SlaMapper;
+import com.serviceflow.sla.SlaService;
+import com.serviceflow.task.TaskMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -24,27 +26,68 @@ public class TicketService {
     public record MessageAdded(long messageId, long ticketId, int ticketVersion) {}
     public record Triaged(long ticketId, String status, int ticketVersion, long triageRecordId, String source) {}
     public record Details(TicketMapper.Ticket ticket, SlaMapper.Snapshot sla, List<TicketMapper.Activity> activities) {}
+    public record Cancelled(long ticketId, String status, int ticketVersion, Instant cancelledAt) {}
+    public record Page(List<TicketMapper.ListItem> items, long total, int page, int size) {}
 
     private final TicketMapper tickets;
     private final IdentityService identities;
     private final ContractService contracts;
     private final SlaMapper sla;
+    private final SlaService slaService;
+    private final TaskMapper tasks;
     private final AuditMapper audit;
     private final IdempotencyService idempotency;
     private final Clock clock;
     private final Set<String> products;
 
     public TicketService(TicketMapper tickets, IdentityService identities, ContractService contracts,
-                         SlaMapper sla, AuditMapper audit, IdempotencyService idempotency, Clock clock,
+                         SlaMapper sla, SlaService slaService, TaskMapper tasks,
+                         AuditMapper audit, IdempotencyService idempotency, Clock clock,
                          @Value("${serviceflow.products}") String products) {
         this.tickets = tickets;
         this.identities = identities;
         this.contracts = contracts;
         this.sla = sla;
+        this.slaService = slaService;
+        this.tasks = tasks;
         this.audit = audit;
         this.idempotency = idempotency;
         this.clock = clock;
         this.products = Set.copyOf(Arrays.asList(products.split(",")));
+    }
+
+    // 总数和分页数据使用同一读取快照；授权范围在 SQL 内应用，不先分页后过滤。
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
+    public Page list(TicketCommands.Query query) {
+        var actor = identities.currentActor();
+        long total = tickets.countVisible(actor.id(), actor.role(), query);
+        var items = tickets.listVisible(actor.id(), actor.role(), query, query.offset());
+        return new Page(items, total, query.page(), query.size());
+    }
+
+    public Cancelled cancel(long ticketId, TicketCommands.Cancel command, String key) {
+        var ticket = tickets.lock(ticketId);
+        var actor = identities.currentActor();
+        if (!Set.of("CUSTOMER_CONTACT", "SUPPORT_AGENT").contains(actor.role()))
+            throw new BusinessException(403, "RESOURCE_FORBIDDEN", "当前角色不能取消工单");
+        authorize(actor, ticket);
+        if (actor.role().equals("CUSTOMER_CONTACT") && actor.id() != ticket.creatorUserId())
+            throw BusinessException.forbidden();
+        var now = now();
+        var reservation = idempotency.reserve(actor.id(), "TICKET_CANCEL", "/tickets/" + ticketId + "/cancel", key, command, now);
+        if (reservation.replay()) return idempotency.replay(reservation, Cancelled.class);
+        version(ticket, command.expectedTicketVersion());
+        if (!Set.of("SUBMITTED", "TRIAGED").contains(ticket.status()))
+            throw BusinessException.invalid("INVALID_STATE_TRANSITION", "仅待受理或已受理的工单可主动取消");
+        if (tasks.activeCount(ticketId) != 0)
+            throw BusinessException.conflict("ACTIVE_TASK_EXISTS", "请先由主管合法取消未派任务");
+        changed(tickets.cancel(ticketId, ticket.version(), now));
+        slaService.cancel(ticketId, actor.id(), now, command.reason());
+        changed(tickets.addActivity(IdWorker.getId(), ticketId, actor.id(), "TICKET_CANCELLED", command.reason(), true, now));
+        audit(ticket, actor, "TICKET_CANCELLED", key, Map.of("fromStatus", ticket.status(), "reason", command.reason()), now);
+        var response = new Cancelled(ticketId, "CANCELLED", ticket.version()+1, now);
+        idempotency.finish(reservation, 200, response, now);
+        return response;
     }
 
     public Created create(TicketCommands.Create command, String key) {
@@ -61,7 +104,7 @@ public class TicketService {
         long ticketId = IdWorker.getId();
         var ticket = new TicketMapper.Ticket(ticketId, command.customerId(), command.contractId(), actor.id(),
                 coverage.route().ownerTeamId(), coverage.route().routingVersion(), command.title(), command.description(),
-                product, productVersion, command.serviceType(), null, command.impact(), command.urgency(), priority, "SUBMITTED", 0, now);
+                product, productVersion, command.serviceType(), null, command.impact(), command.urgency(), priority, "SUBMITTED", 0, now, 0, null);
         tickets.insert(ticket);
         sla.create(IdWorker.getId(), ticketId, coverage.policy().id(), now,
                 now.plus(coverage.policy().responseTargetMinutes(), ChronoUnit.MINUTES),
@@ -180,7 +223,7 @@ public class TicketService {
         }
     }
 
-    private void authorize(IdentityService.Actor actor, TicketMapper.Ticket ticket) {
+    void authorize(IdentityService.Actor actor, TicketMapper.Ticket ticket) {
         if (ticket == null) throw BusinessException.forbidden();
         switch (actor.role()) {
             case "CUSTOMER_CONTACT" -> identities.requireCustomer(actor, ticket.customerId());

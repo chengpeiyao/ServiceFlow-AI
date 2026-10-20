@@ -7,11 +7,12 @@ import java.util.List;
 @Mapper
 public interface TaskMapper {
     record Task(long id, long ticketId, String title, int isBlocking, String status,
-                Long currentAssigneeId, int version, long createdBy, Instant createdAt, Instant completedAt) {}
+                Long currentAssigneeId, int version, long createdBy, Instant createdAt, Instant completedAt,
+                int resolutionCycleNo, Long sourceResolutionId) {}
     record Assignment(long id, Long previousAssigneeId, long newAssigneeId, long assignedBy,
                       String reason, Instant assignedAt) {}
     record Activity(long id, long actorUserId, String activityType, String body, Instant createdAt) {}
-    String COLUMNS = "id,ticket_id,title,is_blocking,status,current_assignee_id,version,created_by,created_at,completed_at";
+    String COLUMNS = "id,ticket_id,title,is_blocking,status,current_assignee_id,version,created_by,created_at,completed_at,resolution_cycle_no,source_resolution_id";
 
     @Select("SELECT ticket_id FROM service_task WHERE id=#{id}")
     Long ticketId(long id);
@@ -30,6 +31,19 @@ public interface TaskMapper {
             VALUES(#{id},#{ticketId},#{title},1,'CREATED',NULL,0,#{actorId},#{now})
             """)
     int insert(long id, long ticketId, String title, long actorId, Instant now);
+
+    @Insert("""
+            INSERT INTO service_task(id,ticket_id,title,is_blocking,status,version,created_by,created_at,
+            resolution_cycle_no,source_resolution_id)
+            VALUES(#{id},#{ticketId},'客户拒绝验收后的整改任务',1,'CREATED',0,#{actorId},#{now},#{cycle},#{resolutionId})
+            """)
+    int insertRework(long id, long ticketId, int cycle, long resolutionId, long actorId, Instant now);
+
+    @Select("""
+            SELECT COUNT(*) FROM ticket_acceptance WHERE ticket_id=#{ticketId}
+            AND resolution_id=#{resolutionId} AND cycle_no=#{cycle} AND decision='REJECT'
+            """)
+    int rejectedSource(long ticketId, long resolutionId, int cycle);
 
     @Update("""
             UPDATE service_task SET current_assignee_id=#{assigneeId},status='ASSIGNED',version=version+1

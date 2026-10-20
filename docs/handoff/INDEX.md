@@ -4,7 +4,7 @@
 
 ## 项目判断与交接范围
 
-目标是企业软件服务履约与 AI 辅助故障受理。当前已实现 S1 基础业务和 S2 任务执行首段，AI 为独立实验；完整产品目标见 [开发需求规格说明书](../design/ServiceFlow_AI_Requirements.md)，已交付边界见当前状态。
+目标是企业软件服务履约与 AI 辅助故障受理。当前已实现 S1 基础业务、S2 任务执行及验收整改后端闭环，AI 为独立实验；完整产品目标见 [开发需求规格说明书](../design/ServiceFlow_AI_Requirements.md)，已交付边界见当前状态。
 
 采用裁剪后的 **`standard`** 档位，只新增项目约束、本索引和当前状态三份入口：
 
@@ -22,7 +22,9 @@
 | 启动、配置、测试 | [应用入口](../../backend/src/main/java/com/serviceflow/ServiceFlowApplication.java)、[应用配置](../../backend/src/main/resources/application.yml)、[统一测试脚本](../../scripts/Test-Project.ps1) | [根 README](../../README.md)、[目录指南](../Project_Directory_Guide.md) |
 | 登录、资源权限、合同权益 | `identity/IdentityService.java`、`contract/ContractService.java`、`ticket/TicketService.java`，均在 `backend/src/main/java/com/serviceflow` 下 | [S1 实施记录](../implementation/ServiceFlow_AI_S1_Implementation.md)、[S1 集成测试](../../backend/src/test/java/com/serviceflow/S1IntegrationTest.java) |
 | 工单提交、补充、人工受理、SLA 首响 | [TicketService](../../backend/src/main/java/com/serviceflow/ticket/TicketService.java)、[SlaMapper](../../backend/src/main/java/com/serviceflow/sla/SlaMapper.java) | 需求规格第 4、7、8 节、S1 实施记录及 S1 集成测试 |
+| 工单主动取消、工单分页 | [TicketController](../../backend/src/main/java/com/serviceflow/ticket/TicketController.java)、[TicketMapper](../../backend/src/main/java/com/serviceflow/ticket/TicketMapper.java)、[SlaService](../../backend/src/main/java/com/serviceflow/sla/SlaService.java) | 需求规格第 4.5、7、11.2 节、[接口测试](../../backend/src/test/java/com/serviceflow/TicketOperationsIntegrationTest.java)、[验证汇总](../verification/ticket-operations-2026-10-20/summary.json) |
 | 任务创建、派工、转派及处理 | [TaskService](../../backend/src/main/java/com/serviceflow/task/TaskService.java)、[TaskController](../../backend/src/main/java/com/serviceflow/task/TaskController.java) | [S2 首段契约与实现](../implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md)、[S2 集成测试](../../backend/src/test/java/com/serviceflow/S2IntegrationTest.java) |
+| 方案、创建者验收、整改与解决计时 | [ResolutionService](../../backend/src/main/java/com/serviceflow/ticket/ResolutionService.java)、[SlaService](../../backend/src/main/java/com/serviceflow/sla/SlaService.java)、[V4 迁移](../../backend/src/main/resources/db/migration/V4__resolution_cycles_and_sla_precision.sql) | 需求规格第 6、7、11 节、[闭环测试](../../backend/src/test/java/com/serviceflow/ResolutionIntegrationTest.java)、[本段验证](../verification/s2-resolution-2026-10-20/summary.json) |
 | 幂等、审计、数据库约束 | [IdempotencyService](../../backend/src/main/java/com/serviceflow/audit/IdempotencyService.java)、[Flyway 初始迁移](../../backend/src/main/resources/db/migration/V1__serviceflow_p0_core.sql) | 需求规格第 3、10、13、15 节、S1/S2 并发与回滚用例；[需求与 SQL 导航](../design/README.md) |
 | AI 实验、复核、复现 | [ExperimentCli](../../backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java)、[HybridTriage](../../backend/src/main/java/com/serviceflow/experiment/HybridTriage.java) | [实验说明](../../experiments/s1-ai/README.md)、[人工复核入口](../../experiments/s1-ai/review/README.md)、[证据评分说明](../../experiments/s1-ai/review/Evidence_Review_Guide.md)、[A3 冻结](../../experiments/s1-ai/freezes/a3-v01-2026-10-20/README.md) |
 

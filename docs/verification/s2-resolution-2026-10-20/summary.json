@@ -1,0 +1,392 @@
+{
+  "task": "S2 方案提交、创建者验收、拒绝整改及 SLA 双时钟闭环",
+  "date": "2026-10-20",
+  "scope": "定向回归，不是所有套件全量回归；未调用模型或评测固定集",
+  "command": "设置 MAVEN_ARGS=-Dtest=S1IntegrationTest,S2IntegrationTest,ResolutionIntegrationTest 后执行 .\\scripts\\Test-Project.ps1 -Offline，最后恢复原 MAVEN_ARGS",
+  "environment": {
+    "java": "21.0.12.1",
+    "maven": "3.9.11",
+    "mysql": "8.0.46",
+    "powershell": "5.1.26100.9711",
+    "database": "脚本创建的独立临时 serviceflow_s1_test 实例"
+  },
+  "result": {
+    "tests": 78,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "build": "BUILD SUCCESS",
+    "exit_code": 0
+  },
+  "suites": [
+    {
+      "name": "com.serviceflow.ResolutionIntegrationTest",
+      "tests": 26,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 17.419,
+      "report_path": "docs/verification/local-history/s2-resolution-2026-10-20/TEST-com.serviceflow.ResolutionIntegrationTest.xml",
+      "report_sha256": "90a95c2deaefdff6c9031d1033be8c2283ddbd43a58e62252560edf1f51c1b23",
+      "cases": [
+        "oldCycleCannotSubmit",
+        "subsecondIntervalsAccumulate",
+        "overdueResumeDoesNotResetElapsed",
+        "concurrentAcceptanceAndRejection",
+        "submissionAuthorizationAndTaskState",
+        "firstResponseWhilePaused(long, int)[1]",
+        "firstResponseWhilePaused(long, int)[2]",
+        "rejectionAndClosureLifecycle",
+        "creatorOnlyAcceptanceAndCustomerReadIsolation",
+        "atomicRollback(String)[1]",
+        "atomicRollback(String)[2]",
+        "atomicRollback(String)[3]",
+        "atomicRollback(String)[4]",
+        "idempotencyAndRevocation",
+        "concurrentSubmission(boolean)[1]",
+        "concurrentSubmission(boolean)[2]",
+        "exactResolutionBoundary(long, int)[1]",
+        "exactResolutionBoundary(long, int)[2]",
+        "exactResolutionBoundary(long, int)[3]",
+        "formerOwnerCannotSubmit",
+        "validationAndVersions",
+        "remediationDatabaseConstraints",
+        "concurrentRejectionReplay",
+        "terminalAndOldResolutionDecisions",
+        "submissionAndPublicResponseCompete",
+        "rejectionWinsAgainstOldSubmissionReplay"
+      ]
+    },
+    {
+      "name": "com.serviceflow.S1IntegrationTest",
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 6.181,
+      "report_path": "docs/verification/local-history/s2-resolution-2026-10-20/TEST-com.serviceflow.S1IntegrationTest.xml",
+      "report_sha256": "9e0566ac23142583b99976c2814b5dccd05265fde8d6373ea78deebc29d32bb7",
+      "cases": [
+        "staffResourceScope",
+        "s1_10b_triageFirst",
+        "firstResponseVisibility",
+        "s1_03_invalidCoverage",
+        "invalidFactSource",
+        "concurrentCreateReplay",
+        "s1_07_customerSupplement",
+        "productValidation",
+        "s1_04_policySnapshot",
+        "s1_08_manualTriage",
+        "productUpdateBoundary",
+        "unknownProductKnowledge",
+        "s1_01_createAndFreeze",
+        "disabledAccount",
+        "exactKnowledgeVersion",
+        "successfulReplay",
+        "rollbackOnAuditFailure",
+        "authentication",
+        "s1_06_unknownProduct",
+        "s1_09_illegalFields",
+        "s1_02_crossCustomerContract",
+        "s1_10c_realConcurrentRequests",
+        "requestValidation",
+        "replayConflict",
+        "rolesAndCustomerScope",
+        "s1_05_dataIsolation",
+        "s1_10a_supplementFirst"
+      ]
+    },
+    {
+      "name": "com.serviceflow.S2IntegrationTest",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 10.082,
+      "report_path": "docs/verification/local-history/s2-resolution-2026-10-20/TEST-com.serviceflow.S2IntegrationTest.xml",
+      "report_sha256": "6b2e3da8e2db0dacf22bba7ea80f534d3f1d420b59b24aed3d0032ddea162662",
+      "cases": [
+        "oldOwnerWinsBeforeTransfer(String)[1]",
+        "oldOwnerWinsBeforeTransfer(String)[2]",
+        "roleAndTeamBoundaries",
+        "internalTaskReadAuthorization",
+        "createStateAndUniqueTask",
+        "concurrentAssign",
+        "idempotencyAndResourceDigest",
+        "concurrentCreate",
+        "reassignFromActiveStates(String)[1]",
+        "reassignFromActiveStates(String)[2]",
+        "reassignFromActiveStates(String)[3]",
+        "versionsAndSameAssignee",
+        "transferWinsAgainstOldOwner(String)[1]",
+        "transferWinsAgainstOldOwner(String)[2]",
+        "completeLifecycle",
+        "engineerEligibility",
+        "concurrentAssignmentReplay",
+        "databaseUniqueConstraint",
+        "stateMachineRejectsSkippingAndTerminalWrites",
+        "replayRechecksManagerScope",
+        "concurrentReassign",
+        "requestValidation",
+        "taskAndCustomerMessageCompete",
+        "cancelAndReplace",
+        "reassignRollsBackAllSideEffects"
+      ]
+    }
+  ],
+  "artifact": {
+    "path": "backend/target/serviceflow-backend-0.1.0-SNAPSHOT.jar",
+    "sha256": "caadb2aa984e94a4bcb66d1da662cce4cfbd340015d03c22471beabac7c935a4"
+  },
+  "log_path": "docs/verification/local-history/s2-resolution-2026-10-20/build.log",
+  "evidence_note": "原始 XML 与日志保存在 Git 忽略的本地历史目录；本摘要保留结果、用例清单、报告和源码哈希。",
+  "prior_failures": [
+    "PowerShell 5.1 按本地编码读取无 BOM UTF-8 导致解析失败；已添加 BOM。",
+    "Java/MySQL/Maven 正常 stderr 警告在 ErrorActionPreference=Stop 下中断；已按原生命令退出码判定。",
+    "首次完整业务回归新增套件 1 失败、1 错误，均为日期断言误用 Timestamp；修正为 LocalDateTime 后本轮复跑通过。"
+  ],
+  "limitations": [
+    "未运行 ExperimentTest、HybridTriageTest、模型或固定集评测。",
+    "仅验证新建空库 V1～V4 迁移；未做已有业务数据升级演练或部署。",
+    "未实现工单主动取消、页面辅助查询、Vue3 页面或 AI 草稿业务接入。"
+  ],
+  "sources": [
+    {
+      "path": "backend/pom.xml",
+      "sha256": "a6de7e5b061a5261529528c06be9b6c0d962303421fe20b493c64bbd02077345"
+    },
+    {
+      "path": "backend/scripts/Run-S1Ai.ps1",
+      "sha256": "7a3aa7ae365167cc1b71d9e2d06739056a04121b04c62e747a9a26800edbe9ef"
+    },
+    {
+      "path": "backend/scripts/Test-LocalMySql.ps1",
+      "sha256": "e1a9e8bffb42440aa1f187aa103806df4a2c9d6c9477821b0dd272be2134e405"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/audit/AuditMapper.java",
+      "sha256": "c02f704f56e134f8c418f5e62596ab8167c83669563f9269de207d6d069d2549"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/audit/IdempotencyMapper.java",
+      "sha256": "3cfd0b307757248653316339a78ce13bbdf625452e2374833fe3469ac1e1c7ae"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/audit/IdempotencyService.java",
+      "sha256": "42de8d9f77f942f471345892dfdc1ddddf3ce253f5a107e8c2b1d4266d1c3728"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/contract/ContractMapper.java",
+      "sha256": "680c16aed8b82b52d64b2c4dd988bbf1797f34aa7f15b35fd7d290e98e9cf95a"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/contract/ContractService.java",
+      "sha256": "bed0db5e8be1830193f5a2ebe7edeb0e5a0ac7a34eba394725cde3cb101fa786"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/ExperimentCli.java",
+      "sha256": "6402b6ebd9c6b24da2f3eae0c41e833d6e74c58af9c8139e7cb2e8febeffe527"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/ExperimentData.java",
+      "sha256": "728c04ddaeef314f653225dd378517bc00230ae8b31a3beffa7ec838437c6f19"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/ExperimentMetrics.java",
+      "sha256": "4d22fdc7aff0372c7e75615bb388edf63ff7107d7f52fba7ce022a6d0b4ad22d"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/ExperimentPricing.java",
+      "sha256": "dbdeca5531cf70c3531101ba6248094e9e85a4c3cf9b3630eedb3c503ea6db6d"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/HybridTriage.java",
+      "sha256": "4d3be411bbcfad6c25e080a4bcac42bd9222dae92b3c7bca78f3b38c52766926"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/ModelClient.java",
+      "sha256": "b82c6d73de208e49008583c97721a7212b366b9d9e473f55249ec29ba9329982"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/ReviewSummaryCli.java",
+      "sha256": "2d0d61f999d2e2c1b9467ba6790802b19da5c6af93fb4c9fc4273fb974e9ec92"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/experiment/TriageEngine.java",
+      "sha256": "578fc5ff598feb3373398097eb63c2a2ad9907dbacc3ec5813578784b35e7096"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/identity/AuthController.java",
+      "sha256": "5be93915533de8d09f894aca3ebda501c7ec893d7b67f7361352ca0e38d75356"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/identity/IdentityMapper.java",
+      "sha256": "b1eae0e9a461d3185cecdeae9e44b9604ae16ebfd7815c6d272ba6ab2740549d"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/identity/IdentityService.java",
+      "sha256": "ff3349a381ab79aaa5eeb1d6bfa7a8385f17c854da9d87de655e73da735e4cc1"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ServiceFlowApplication.java",
+      "sha256": "75d8b903545db77d30c8f23cebd7974d593e6af03daf61902d95e676da691c11"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/shared/ApiExceptionHandler.java",
+      "sha256": "f7466a8edccf75e571d7713665d6cbf8eff59e2acebfd262b30cc6135944d13a"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/shared/BusinessException.java",
+      "sha256": "d8d646937a4d0deaf0058465a2005f5228147d6f1177275a2de2673cb4fac65a"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/shared/WebConfiguration.java",
+      "sha256": "dd3451a5730c2927b26f926b6bed7818888eff2ac47f5aa97e760adc0744c1d5"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/sla/SlaMapper.java",
+      "sha256": "c3eb8d7a33f35829769f235badee1d9a91f3478872b0d58806c993c9c1d11162"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/sla/SlaService.java",
+      "sha256": "ed07569e9cb0a45cd2ff1fce91581a820b3d45face4586d12984bb78a98b3663"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/task/TaskCommands.java",
+      "sha256": "b5c404886bed3a15c12d57d74553035f8c4d2c995ccd310e247be950b42dabad"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/task/TaskController.java",
+      "sha256": "9998c4bc61d7a886b448236217a33b305e7cf2c2095175077c42fb6d9812fc98"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/task/TaskMapper.java",
+      "sha256": "0e725a4bd0704951c4a53ff05252022477c27763afb5cc132db52534d52954df"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/task/TaskService.java",
+      "sha256": "91f4bc67c2aa3b7487321e8607fecfe651c97bdac264c0105102684060eaab1e"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/ResolutionCommands.java",
+      "sha256": "8abbeb7a8a2f93ae1945a7d4381adf0324f990e3d666da1d0c208fafb2045fa7"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/ResolutionController.java",
+      "sha256": "a29bc801a822413b6a0d57a8a5c7393eec14d55a98247da706c263dfade75231"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/ResolutionMapper.java",
+      "sha256": "512d6ac8e4274139753dc91e22da3be47843d441f2c89c71faca67f1b4ba0b19"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/ResolutionService.java",
+      "sha256": "27ecddf23ee237f74bdccb9df115894188978bf65436cf341da1d9b2044bee14"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/TicketCommands.java",
+      "sha256": "4d56b8cac8ad8ab0b372d1ad26a27b192e52f8dd35e3a6fc6ac93a69f2b4b6b6"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/TicketController.java",
+      "sha256": "b67b228149f6a378a276c74d1175f1cea3b1c092558a0cf1b416da928fa4ab78"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/TicketMapper.java",
+      "sha256": "91c4f23468c4fa25d1668d50327214f1f2efa7dd17774b83265be427e47dfaa4"
+    },
+    {
+      "path": "backend/src/main/java/com/serviceflow/ticket/TicketService.java",
+      "sha256": "4e61924506c892c9485f9de96f6da15be3c057b1298f63863cae99c1f17a3a1b"
+    },
+    {
+      "path": "backend/src/main/resources/application.yml",
+      "sha256": "f493789fdedf57eecc20a1c628832a22658985ec51c2f8485cc89d5162f73845"
+    },
+    {
+      "path": "backend/src/main/resources/application-dev.yml",
+      "sha256": "31fb5008857f4032ca84c7f464d42d418470f24de7ecc4d2e5c7bc4fc2e92316"
+    },
+    {
+      "path": "backend/src/main/resources/db/demo/V2__demo_seed.sql",
+      "sha256": "d51db84282c861498a18d3eb660d9f848693576b908eeadcc66b9fbb343fdb83"
+    },
+    {
+      "path": "backend/src/main/resources/db/demo/V3__s2_demo_engineers.sql",
+      "sha256": "0751a4ac32ed65b3e9d5b04deaef6e3cde42577cda078e209253cdd246754683"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V1__serviceflow_p0_core.sql",
+      "sha256": "52803ca17d8bd716d113092cf3ae3b11e005b0e984e2d49c04df20a6d361ad7d"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V4__resolution_cycles_and_sla_precision.sql",
+      "sha256": "9f287d3fa8cbd28ad1187edf66d3c3fdbf1b0aedc399d90c39a7b92a6de37148"
+    },
+    {
+      "path": "backend/src/test/java/com/serviceflow/ExperimentTest.java",
+      "sha256": "e0dd07627acfd26b52d583907b23bdcfb15b6b967dc83139a6025841cfa76c54"
+    },
+    {
+      "path": "backend/src/test/java/com/serviceflow/HybridTriageTest.java",
+      "sha256": "b0b0800e35a17d9047c13e2547ddaa717d5da0d395917e3b90d22982976453ed"
+    },
+    {
+      "path": "backend/src/test/java/com/serviceflow/MySqlTestSupport.java",
+      "sha256": "0e735aae6b57416484d4cda360b8261ee31f2d8900452de6338f59181a051c8f"
+    },
+    {
+      "path": "backend/src/test/java/com/serviceflow/ResolutionIntegrationTest.java",
+      "sha256": "21bb02886370cccfd4aa2f0a35b1adb40b0cf8329b7a8faff6b2bab7dcc3348a"
+    },
+    {
+      "path": "backend/src/test/java/com/serviceflow/S1IntegrationTest.java",
+      "sha256": "7acfc74a66a1fad4e72693e189cdcfda202a96360c7bcc52a41ac35c5de55030"
+    },
+    {
+      "path": "backend/src/test/java/com/serviceflow/S2IntegrationTest.java",
+      "sha256": "f0e59d989384eca0fe61026f42bb48642a3e53edb8986d12c62b6be1faa410bc"
+    },
+    {
+      "path": "scripts/Test-Project.ps1",
+      "sha256": "50c52501c25d7cf4f461a03370f6080a88fc363c53b47e27b44dc7faca462c04"
+    }
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "README.md",
+    "backend/scripts/Test-LocalMySql.ps1",
+    "backend/src/main/java/com/serviceflow/sla/SlaMapper.java",
+    "backend/src/main/java/com/serviceflow/sla/SlaService.java",
+    "backend/src/main/java/com/serviceflow/task/TaskMapper.java",
+    "backend/src/main/java/com/serviceflow/task/TaskService.java",
+    "backend/src/main/java/com/serviceflow/ticket/ResolutionCommands.java",
+    "backend/src/main/java/com/serviceflow/ticket/ResolutionController.java",
+    "backend/src/main/java/com/serviceflow/ticket/ResolutionMapper.java",
+    "backend/src/main/java/com/serviceflow/ticket/ResolutionService.java",
+    "backend/src/main/java/com/serviceflow/ticket/TicketMapper.java",
+    "backend/src/main/java/com/serviceflow/ticket/TicketService.java",
+    "backend/src/main/resources/db/migration/V4__resolution_cycles_and_sla_precision.sql",
+    "backend/src/test/java/com/serviceflow/ResolutionIntegrationTest.java",
+    "backend/src/test/java/com/serviceflow/S1IntegrationTest.java",
+    "backend/src/test/java/com/serviceflow/S2IntegrationTest.java",
+    "docs/design/README.md",
+    "docs/design/ServiceFlow_AI_Requirements.md",
+    "docs/handoff/CURRENT.md",
+    "docs/handoff/INDEX.md",
+    "docs/verification/README.md",
+    "docs/verification/s2-resolution-2026-10-20/summary.json",
+    "scripts/Test-Project.ps1"
+  ],
+  "preserved_user_change": ".gitignore",
+  "checks": {
+    "local_markdown_files": 7,
+    "local_links_and_anchors": 117,
+    "link_check": "PASS",
+    "source_and_artifact_hashes": "PASS",
+    "original_junit_report_hashes": "PASS",
+    "git_diff_check": "PASS",
+    "existing_migrations_and_ai_experiment_files": "UNCHANGED",
+    "lint_typecheck": "???????"
+  }
+}

@@ -190,7 +190,9 @@ P0 的确定性条件为：账号有效、角色为 `ENGINEER`、属于工单负
 | `CLOSED` | 验收通过的终态 | 查询与追溯 |
 | `CANCELLED` | 在允许阶段主动取消的终态 | 查询与追溯 |
 
-`CANCEL-01`：工单创建者或获授权客服可在 `SUBMITTED/TRIAGED`、没有活动阻塞任务时主动取消，必须填写原因，递增版本并记录审计；存在 `CREATED` 任务时应先由主管合法取消任务。已派发或处理中工单不可走该取消路径。取消功能属于待开发需求。
+`CANCEL-01`：工单创建者或获授权客服可在 `SUBMITTED/TRIAGED`、没有活动阻塞任务时主动取消，必须填写原因，递增版本并记录审计；存在 `CREATED` 任务时应先由主管合法取消任务。已派发或处理中工单不可走该取消路径。当前客服权限为所有客户的服务工单；同客户非创建者、主管、工程师和运维均不能代为取消。
+
+取消命令在工单锁内重新检查身份、范围、版本和活动任务，同事务写入 `CANCELLED`、SLA 停止计时、客户可见的取消原因、审计和幂等结果。成功返回取消时间；详情中的 `closedAt` 仅用于验收关闭，取消时保持 null，取消时间与原因由 `TICKET_CANCELLED` 活动和 SLA `CANCELLED` 事件追溯。关闭或取消后不允许新建任务、受理或追加消息。重放仍检查当前授权。
 
 不引入 `ENTITLEMENT_REVIEW`、`WAITING_CUSTOMER` 或独立 `REOPENED` 常驻状态。
 
@@ -238,6 +240,8 @@ P0 的确定性条件为：账号有效、角色为 `ENGINEER`、属于工单负
 - `RES-03`：每次提交新增 `ticket_resolution`，`cycle_no` 从 1 递增，工单 `resolution_cycle_no` 指向新轮次。方案、提交人和提交时刻一经保存不覆盖；处理结果与对客解决方案是不同业务对象。
 - `RES-04`：同事务完成方案创建、工单转 `PENDING_ACCEPTANCE`、解决时钟暂停、版本递增、事件、活动、审计与幂等结果。不得产生“待验收但仍有活动任务”的最终状态。
 
+本轮归属使用 `service_task.resolution_cycle_no`：首轮为 1；工单处理中的待提交轮次为工单 `resolution_cycle_no + 1`，待验收或关闭时为工单当前轮次。该轮任务的当前负责人可在任务完成后继续读取工单、公开答复及提交方案；拒绝后旧轮次不再授予工单访问和方案提交权限，提交重放也重新检查轮次。内部任务历史查询仍按该任务的当前归属授权。
+
 ### 6.2 验收通过
 
 `ACCEPT-01`：仅工单创建者能对当前方案作 `ACCEPT`，必须匹配工单、方案、当前轮次和期望版本。一轮最多一个决定，重复同键同内容返回原结果；不同决定不能覆盖先前记录。
@@ -257,6 +261,8 @@ P0 的确定性条件为：账号有效、角色为 `ENGINEER`、属于工单负
 `REJECT-02`：新整改任务由主管首次派工，工单保持 `IN_PROGRESS`，工程师仍须接单、开始和完成；旧任务与旧方案保留，下一次提交形成新解决轮次。
 
 `REJECT-03`：同意、拒绝及重复请求竞争时只形成一种决策；数据库 `resolution_id` 与工单轮次唯一约束兜底。不能关闭工单后又创建整改任务。
+
+整改任务的 `source_resolution_id` 指向被拒绝方案，任务 `resolution_cycle_no = 被拒绝方案.cycle_no + 1`。同一方案只能产生一个整改任务，复合外键禁止跨工单引用来源。主管在 `IN_PROGRESS` 首次派工时，必须验证来源方案确有本工单当前轮次的 `REJECT` 记录；普通建任务接口仍仅接受 `TRIAGED`。这些字段由 [V4 迁移](../../backend/src/main/resources/db/migration/V4__resolution_cycles_and_sla_precision.sql) 增加。
 
 ## 7 SLA 双时钟
 
@@ -280,7 +286,7 @@ P0 的确定性条件为：账号有效、角色为 `ENGINEER`、属于工单负
 
 ### 7.3 累计与截止计算
 
-`SLA-04`：通过注入的 `Clock` 在命令中获取统一时刻，按实际经过的 UTC 时间计算；计量精度与取整边界须在对应实现前固定，不能通过反复暂停丢失时间。
+`SLA-04`：通过注入的 `Clock` 在获得工单锁后获取统一时刻，截取到毫秒，按实际经过的 UTC 时间计算。`resolution_elapsed_millis` 是权威累计值，每次暂停累加本段毫秒；兼容字段 `resolution_elapsed_seconds` 仅按累计总毫秒除以 1000 向下取整，不对各段分别取整。运行中当前有效耗时为已累计毫秒加 `now - resolution_last_started_at`，暂停/关闭时为已累计毫秒。恢复时按毫秒计算剩余目标，超期后截止投影为恢复时刻，累计超期事实不清零。旧秒值通过 V4 迁移乘以 1000 回填。
 
 ```text
 创建：elapsed = 0；last_started_at = start
@@ -301,6 +307,10 @@ P0 的确定性条件为：账号有效、角色为 `ENGINEER`、属于工单负
 暂停期间 `resolution_due_at` 可为空，页面显示暂停时刻、原因和累计耗时。超期后再暂停或拒绝不能洗掉既有超期事实；未发生新的计时事实时不通过定时刷新改变历史结论。首响或解决耗时恰好等于目标算达标，超过才算违约。
 
 `SLA-05`：有效人工首响、暂停、恢复、方案提交、验收拒绝、关闭和取消，均通过 SLA 事件与实例投影在业务事务中持久化；不能只改截止时间而没有解释轨迹。首次响应未发生时保留未知结果，关闭时再按上述口径定案。
+
+本段事件为 `RESOLUTION_PROPOSED`（方案提交并暂停）、`ACCEPTANCE_REJECTED`（拒绝并恢复）、`CLOSED`（通过并结算）；与既有 `START`、`FIRST_RESPONSE` 共用实例内顺序号和唯一命令键。一次复合业务命令记录一个能解释其计时变化的事件；方案、验收公开活动不计为人工首响。
+
+主动取消增加 `CANCELLED` 事件及原因，累计计时到取消时刻后清空解决时钟起点和截止投影，`resolution_met` 保持 null；已记录的首响时间/结果保留，未首响时仍为 null，不套用验收关闭的“未首响不达标”规则。取消后不再接受产生首响的消息。后续正常解决达标率应只统计 `CLOSED` 实例，取消数量可通过取消状态筛选单列，不能将 null 结果当作达标。
 
 例：解决目标 4 小时，处理 3 小时后提交方案，等待验收 2 小时，拒绝后再处理 1.5 小时并获验收。有效解决时长为 4.5 小时，不达标；自然历时为 6.5 小时，两种指标分别展示。
 
@@ -488,19 +498,40 @@ API 前缀 `/api/v1`，JSON 请求严格校验未知字段、类型、长度、�
 | `POST /tickets/{id}/triage` | 客服；工单版本和人工确认字段 | 人工已实现；AI 草稿接入待开发 |
 | `POST /tickets/{ticketId}/tasks` | 管理范围内主管；标题、工单版本；成功 201 | 首轮已实现；整改仅内部创建 |
 | `GET /tasks/{id}` | 内部授权用户；任务、派工历史、内部活动 | 已实现 |
-| `POST /tasks/{id}/assignments` | 主管；双版本、`assigneeId`、原因 | 首轮已实现；整改条件待扩展 |
+| `POST /tasks/{id}/assignments` | 主管；双版本、`assigneeId`、原因 | 首轮与有真实来源的整改任务均已实现 |
 | `POST /tasks/{id}/reassignments` | 主管；双版本、新旧负责人、原因 | 已实现 |
 | `POST /tasks/{id}/accept`、`POST /tasks/{id}/start` | 当前工程师；双版本 | 已实现 |
 | `POST /tasks/{id}/complete` | 当前工程师；双版本、`result` | 已实现 |
 | `POST /tasks/{id}/cancel` | 主管；双版本、原因，仅未派任务 | 已实现 |
-| `POST /tickets/{id}/resolutions` | 本轮合法工程师；方案、工单版本 | 待开发，最终 DTO 在该段固定 |
-| `POST /resolutions/{id}/acceptance` | 工单创建者；`ACCEPT/REJECT`、工单版本、拒绝理由 | 待开发，最终 DTO 在该段固定 |
+| `POST /tickets/{id}/resolutions` | 本轮合法工程师；`expectedTicketVersion`、`taskId`、`expectedTaskVersion`、`summary`（非空，最多 8000 字符）；成功 201 | 已实现 |
+| `POST /resolutions/{id}/acceptance` | 工单创建者；`expectedTicketVersion`、`decision=ACCEPT/REJECT`、`reason`（最多 1000 字符，拒绝时非空）；成功 200 | 已实现 |
+| `GET /tickets/{id}/resolutions` | 按工单授权读取方案与验收历史，按轮次升序；不包含内部处理记录 | 已实现 |
 | `POST /tickets/{id}/ai-triage-runs` | 客服；生成键及请求上下文；异步返回 202 和 runId | 待开发 |
 | `GET /ai-triage-runs/{runId}` | 有权客服；进度、通过校验的草稿或错误 | 待开发 |
-| 工单取消接口 | 创建者/获授权客服；工单版本、原因和幂等键 | 待开发，路径待定 |
-| 工单/任务列表、可选合同/服务类型、合法工程师、方案历史和审计查询 | 支撑第 12 节页面；服务端范围过滤、分页与稳定排序 | 待开发，路径及分页 DTO 待定 |
+| `POST /tickets/{id}/cancel` | 创建者/客服；`expectedTicketVersion`、`reason`（非空，最多 500 字符）、幂等键；成功 200 | 已实现 |
+| `GET /tickets` | 已登录用户；工单分页、状态/优先级/客户/团队/标题筛选，服务端按角色限制范围 | 已实现，协议见下文 |
+| 任务列表、可选合同/服务类型、合法工程师和审计查询 | 支撑第 12 节页面；服务端范围过滤、分页与稳定排序 | 待开发，路径及分页 DTO 待定 |
 
 读取候选工程师列表不代替写入时资格校验；页面需要的列表、筛选和详情投影在对应开发任务中固定，不使用硬编码工单 ID 或直接连数据库替代页面 API。
+
+方案提交返回 `ticketId/resolutionId/cycleNo/ticketStatus/ticketVersion`；验收额外返回 `acceptanceId/decision/remediationTaskId`（通过时为 null），不改变旧任务版本。历史记录返回 `id/cycleNo/summary/submittedBy/submittedAt` 以及可空的 `acceptanceId/decision/decidedBy/reason/decidedAt/remediationTaskId`。工单详情增加 `resolutionCycleNo/closedAt`；任务详情增加 `resolutionCycleNo/sourceResolutionId`；SLA 投影增加 `resolutionMet/resolutionElapsedMillis/resolutionLastStartedAt`。沿用长整型序列化约定，累计毫秒也按十进制字符串返回。
+
+取消返回 `ticketId/status/ticketVersion/cancelledAt`；状态固定为 `CANCELLED`。版本过期返回 409 `VERSION_CONFLICT`，有活动任务返回 409 `ACTIVE_TASK_EXISTS`，不合法阶段返回 422 `INVALID_STATE_TRANSITION`；沿用角色禁止 403、资源无权/不存在 404、参数或缺失幂等键 400 的错误约定。
+
+工单分页查询协议：
+
+| 参数 | 默认值与约束 | 含义 |
+| --- | --- | --- |
+| `page` | 默认 1，范围 1～1000000 | 从 1 开始的页码 |
+| `size` | 默认 20，范围 1～100 | 每页条数 |
+| `status` | 可省略，使用工单状态枚举 | 精确匹配单个状态 |
+| `priority` | 可省略，`P1/P2/P3` | 精确匹配优先级 |
+| `customerId`、`ownerTeamId` | 可省略，正整数 | 与当前授权范围取交集，不能扩大权限 |
+| `keyword` | 可省略，去除首尾空白后最多 120 字符 | 标题包含匹配；空白视为无筛选，`%`、`_` 按普通字符处理，大小写遵循数据库排序规则 |
+
+排序固定为 `created_at DESC, id DESC`。响应为 `{items,total,page,size}`；`total` 沿用长整型约定返回十进制字符串，页码/页大小为整数。每个条目只含 `id/customerId/contractId/creatorUserId/ownerTeamId/title/serviceType/priority/status/version/createdAt/updatedAt`，不返回原文、内部活动或审计明细。无可见数据或页码超过结果范围时 `items=[]`，`total` 仍表示符合筛选的可见工单总数；非法参数返回 400 `REQUEST_INVALID`。
+
+客户可见所属客户的工单；主管可见管理团队；工程师复用详情的当前任务归属和解决轮次条件；客服及运维可见全部工单。总数和条目共用 SQL 范围条件，在单个只读 `REPEATABLE_READ` 事务快照中读取，防止并发变更导致同一响应的总数和条目不一致。不同分页请求各有独立快照，数据变化后客户端需刷新。身份和角色仅来自当前会话，额外查询参数不能改变权限；查询不修改业务版本或生成写审计。
 
 ### 11.3 写入示例
 
@@ -579,7 +610,7 @@ API 前缀 `/api/v1`，JSON 请求严格校验未知字段、类型、长度、�
 
 ### 13.1 数据模型基线
 
-完整逻辑建表基线见 [现行 SQL](ServiceFlow_AI_P0_schema_V0.3.1.sql)，当前运行工程使用 [Flyway V1](../../backend/src/main/resources/db/migration/V1__serviceflow_p0_core.sql) 和 `db/demo` 下演示迁移。25 表按领域归组如下：
+完整逻辑建表基线见 [现行 SQL](ServiceFlow_AI_Design_Package_V3.1/ServiceFlow_AI_P0_schema_V0.3.1.sql)，当前运行工程使用 [Flyway V1](../../backend/src/main/resources/db/migration/V1__serviceflow_p0_core.sql)、后续增量（本段为 V4）和 `db/demo` 下演示迁移。25 表按领域归组如下：
 
 | 领域 | 表 |
 | --- | --- |
@@ -606,7 +637,7 @@ API 前缀 `/api/v1`，JSON 请求严格校验未知字段、类型、长度、�
 
 `DB-01`：新的结构变更新增 Flyway 迁移，不修改已应用迁移的内容或校验和。现行设计 SQL 用于理解或新库基线参考，不能与应用初始化重复导入。
 
-`DB-02`：已有手工导入库要先确认真实结构和迁移基线；[历史结构增量](ServiceFlow_AI_P0_patch_V0.3_to_V0.3.1.sql) 不是生产数据迁移方案。历史 SQL 保留用于对照，不作为并行需求版本。
+`DB-02`：已有手工导入库要先确认真实结构和迁移基线；[历史结构增量](ServiceFlow_AI_Design_Package_V3.1/ServiceFlow_AI_P0_patch_V0.3_to_V0.3.1.sql) 不是生产数据迁移方案。历史 SQL 保留用于对照，不作为并行需求版本。
 
 `DB-03`：`dev` 与测试环境才加载演示账号、合同、路由、SLA 和知识，默认运行配置不加载假数据。演示数据覆盖跨客户、不同团队与主管范围、备用/停用人员、有效/过期/不覆盖合同、任务生命周期、重复请求和回滚场景。
 
@@ -702,7 +733,8 @@ API 前缀 `/api/v1`，JSON 请求严格校验未知字段、类型、长度、�
 | S1 基础业务 | 登录、合同/权益、工单提交/查询/补充、人工受理、首响 | 已有源码和集成测试，见 [S1 实施](../implementation/ServiceFlow_AI_S1_Implementation.md) |
 | S1-AI 独立实验 | A0/A1/A2/A3、固定语料、结构/证据校验、评测和人工材料 | 工程已存在，A3 已冻结，人工语义与固定集模型效果尚未验收，见 [实验说明](../../experiments/s1-ai/README.md) |
 | S2 首段 | 创建、首次派工、转派、接单、开始、完成、取消未派任务 | 已有源码和测试，见 [S2 实施](../implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md) |
-| 履约后续段 | 解决方案、创建者验收、拒绝整改、整改派工授权、工单取消 | 待开发，与解决 SLA 暂停/恢复和并发用例一起形成完整闭环 |
+| S2 验收整改段 | 解决方案、创建者验收、拒绝整改、整改派工授权、解决 SLA 暂停/恢复/结算 | 已有源码和 [闭环集成测试](../../backend/src/test/java/com/serviceflow/ResolutionIntegrationTest.java)，执行结果见交接状态 |
+| 工单取消与分页 | 创建者/客服合法取消、取消计时与留痕、按角色筛选工单分页 | 已实现，见 [接口集成测试](../../backend/src/test/java/com/serviceflow/TicketOperationsIntegrationTest.java)；任务列表和候选项查询仍待开发 |
 | AI 业务接入 | 异步 run、有效草稿、客服确认、过期处理、故障降级 | 待开发，当前非空 proposalId 仍拒绝，不把独立实验当业务已接入 |
 | 全栈交付 | Vue3 角色页面、列表/辅助查询、历史与 SLA 展示、可复现部署 | 待开发，不要求完整基础数据管理后台 |
 
@@ -714,11 +746,9 @@ API 前缀 `/api/v1`，JSON 请求严格校验未知字段、类型、长度、�
 
 | 事项 | 必须确定的内容 | 影响范围 |
 | --- | --- | --- |
-| 整改来源与本轮归属 | 新任务如何关联触发的方案/轮次；如何识别本轮已完成任务及其合法提交人；旧轮次不能冒用 | 方案/验收/整改、首次派工及工程师授权 |
-| SLA 精度与恢复边界 | 毫秒到累计秒的取整方式、反复暂停小间隔、超期后截止投影、事件命名 | 解决时钟迁移与固定 Clock 测试 |
 | AI 草稿有效期与清理 | 有效期配置默认值、到期边界、主动拒绝接口、人工受理后旧草稿状态 | run/proposal 生命周期与客服页面 |
 | AI 实验到业务适配 | 多条客户补充的来源标识与上下文长度、知识 ID 映射、输出长度差异与证据保留 | 快照、校验器、受理 DTO，不直接改写冻结实验 |
-| 查询与新增命令协议 | 列表分页/筛选/排序、合同/候选人员选项、方案/验收/取消 DTO、缺失查询路径 | 后端接口与 Vue3 联调 |
+| 辅助查询协议 | 任务列表分页/筛选、合同/服务类型/候选人员选项、审计查询 | 后端接口与 Vue3 联调；工单列表、取消和方案/验收协议已在第 11 节固定 |
 | 模型服务与评价冻结 | 采用的模型/端点、配置和费用来源，标签口径、人工评审与固定集运行条件 | 对照实验与是否保留 AI 能力的判断 |
 | 前端与部署 | Vue3 工程的具体依赖、Node 版本、演示启动与数据库初始化入口 | 全栈任务；不反向要求后端重构 |
 

@@ -4,6 +4,7 @@
 *.iml
 .env
 .env.*
+*.zip
 !.env.example
 *.local.json
 *.local.properties
@@ -12,6 +13,7 @@ config_al/
 artifacts/
 tools/*
 !tools/README.md
+.history/
 
 # 本机临时文件与历史证据的不提交副本
 backend/.local/

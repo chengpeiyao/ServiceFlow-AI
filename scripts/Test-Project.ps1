@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$JavaHome,
     [string]$MySqlBin,
     [ValidateRange(1024,65535)][int]$Port = 33319,

@@ -11,6 +11,15 @@ public class TicketController {
     private final TicketService service;
     public TicketController(TicketService service) { this.service = service; }
 
+    @GetMapping
+    public TicketService.Page list(@Valid @ModelAttribute TicketCommands.Query query) { return service.list(query); }
+
+    @PostMapping("/{id}/cancel")
+    public TicketService.Cancelled cancel(@PathVariable long id, @Valid @RequestBody TicketCommands.Cancel command,
+                                          @RequestHeader(value="Idempotency-Key", required=false) String key) {
+        return service.cancel(id, command, key);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TicketService.Created create(@Valid @RequestBody TicketCommands.Create command,

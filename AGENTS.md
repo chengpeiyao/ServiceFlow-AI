@@ -30,7 +30,7 @@
 ## 验证与按需交接
 
 - 根目录统一回归入口：`.\scripts\Test-Project.ps1 -Offline`。前提是项目内 JDK 21、Maven settings/缓存，以及 PATH 中的 Maven、MySQL 程序可用；启动方式和替代测试入口见 [README](README.md)。
-- 按改动选取相关套件：`S1IntegrationTest`、`S2IntegrationTest`、`ExperimentTest`、`HybridTriageTest`。完整入口执行 `clean verify`，其中 `ExperimentTest#allBaselineOutputsPassSharedValidation` 会对固定集运行规则基线；任务要求不评测固定集时应明确排除并记录范围，不能把部分回归说成全量通过。
+- 按改动选取相关套件：`S1IntegrationTest`、`S2IntegrationTest`、`ResolutionIntegrationTest`、`TicketOperationsIntegrationTest`、`ExperimentTest`、`HybridTriageTest`。完整入口执行 `clean verify`，其中 `ExperimentTest#allBaselineOutputsPassSharedValidation` 会对固定集运行规则基线；任务要求不评测固定集时应明确排除并记录范围，不能把部分回归说成全量通过。
 - 纯文档改动检查本地链接、事实一致性和 `git diff --check` 即可；当前未配置独立 lint 或 typecheck 命令。测试前提缺失时如实记录，不为初始化文档安装依赖。
 - 目标、范围及验收标准用足够简短的说明表达，授权明确时直接执行。流程按风险扩展，不附加 COMS 阶段门禁、审批或模块七视角。
 - 接续任务、阻塞项、下一步或有价值的验证状态改变时更新 `docs/handoff/CURRENT.md`；入口变化更新索引；契约、架构、运行方法变化更新原有对应文档。无持续影响的小修复无需更新交接包。
