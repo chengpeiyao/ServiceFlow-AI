@@ -1,6 +1,6 @@
 # ServiceFlow AI
 
-本仓库按 V0.3.1 开发契约实现 S1 基础业务及 S2 首段任务执行：登录、合同权益、工单受理、任务创建、首次派工、转派、接单、开始与完成。当前交付是 Java API 后端。解决方案提交、客户验收整改、解决 SLA 暂停恢复和 Vue3 页面待后续实现；AI 仍为独立实验，A3 已冻结，人工语义效果尚未验收。
+本仓库的统一开发基线为 [开发需求规格说明书](./docs/design/ServiceFlow_AI_Requirements.md)。当前已实现 S1 基础业务及 S2 首段任务执行：登录、合同权益、工单受理、任务创建、首次派工、转派、接单、开始与完成。当前交付是 Java API 后端。解决方案提交、客户验收整改、解决 SLA 暂停恢复和 Vue3 页面待后续实现；AI 仍为独立实验，A3 已冻结，人工语义效果尚未验收。
 
 ## 技术与目录
 
@@ -19,6 +19,8 @@
 
 完整说明见 [项目目录与清理规则](./docs/Project_Directory_Guide.md)，设计和验收文件见 [文档索引](./docs/README.md)。
 
+AI 开发从 [项目约束](./AGENTS.md) 和 [交接索引](./docs/handoff/INDEX.md) 开始；当前接续状态见 [CURRENT](./docs/handoff/CURRENT.md)，后续按实质变化维护。
+
 推荐在项目根目录运行：
 
 ```powershell
@@ -27,7 +29,7 @@
 
 该入口调用现有独立 MySQL 测试脚本，默认使用 `tools/java/jdk-21.0.12.1+1`、`tools/maven/repository` 和 `backend/.local/tmp`；要求 PATH 中已有 Maven 与 MySQL 程序。去掉 `-Offline` 可在需要时下载依赖。
 
-2026-10-20 已清理可重建的 `backend/target`；首次启动或运行模型实验前，先执行上述命令重新构建。90 项历史测试及源码摘要保存在 [S2 验证记录](./docs/verification/s2-first-2026-10-20/summary.json)。
+构建产物位于 `backend/target`；启动或运行新模型实验前，应确认产物与当前源码一致，必要时执行上述命令重新构建。90 项历史测试及源码摘要保存在 [S2 验证记录](./docs/verification/s2-first-2026-10-20/summary.json)。
 
 ## 本地启动
 
@@ -111,7 +113,7 @@ Invoke-RestMethod -Uri "http://localhost:8080/api/v1/tickets/$($ticket.ticketId)
 
 已支持任务创建、首次派工、转派、接单、开始、完成、未派任务取消及内部详情查询。写入携带工单/任务双版本，使用工单锁、请求幂等与数据库单活动任务约束；转派后新人必须重新接单，旧负责人失权。完整请求字段及状态限制见 [S2 首段说明](./docs/implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md)。
 
-当前完整回归为 90 项：S1 27 项、原实验 32 项、A3 6 项、S2 25 项；真实 MySQL 并发与审计失败回滚均通过。验证记录见 [S2 汇总](./docs/verification/s2-first-2026-10-20/summary.json)。
+2026-10-20 S2 首段的完整回归记录为 90 项：S1 27 项、原实验 32 项、A3 6 项、S2 25 项，包含真实 MySQL 并发与审计失败回滚，见 [S2 汇总](./docs/verification/s2-first-2026-10-20/summary.json)。随后目录整理回归通过 89 项，明确排除涉及固定检查集规则评测的 `ExperimentTest#allBaselineOutputsPassSharedValidation`，见 [整理汇总](./docs/verification/workspace-layout-2026-10-20/summary.json)。两份均为历史记录，不能视为新一轮验证。
 
 ## 运行测试
 
@@ -144,7 +146,7 @@ mvn clean verify
 
 ## 当前边界
 
-会话暂存在单进程内存，重启后需要重新登录。S1 创建 SLA 实例并记录人工首响，不包含解决时钟暂停恢复和结算。当前没有前端页面或派工接口，业务接口尚未接入 AI 草稿；后续阶段以独立测试结果验收，不把这些功能列为已完成。
+会话暂存在单进程内存，重启后需要重新登录。S1 创建 SLA 实例并记录人工首响，不包含解决时钟暂停恢复和结算。S2 首段已提供派工和任务执行接口；解决方案提交、客户验收整改、前端页面及 AI 草稿业务接入仍待后续实现，并以对应测试结果验收。
 
 ## S1-AI 独立对照实验
 

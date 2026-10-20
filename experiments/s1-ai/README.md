@@ -137,7 +137,7 @@ $jar = (Resolve-Path '.\backend\target\serviceflow-backend-0.1.0-SNAPSHOT.jar').
 
 ## 本阶段结束标准
 
-需要冻结后的 A0/A1/A2/A3 固定集记录、经复核的标签与知识、人工评审和可核查成本，才能比较故障类型收益并决定哪些能力保留 AI。当前已完成实验工具、A0 基线及本机模型 20 条开发集对照；模型分类与必问覆盖未优于规则，不代表 S1-AI 效果已验收，详见 [完善与结果记录](../../docs/verification/ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md)。P1 的人工确认草稿写入、S2 派工均未实施，现有 S1 对 `proposalId` 的拒绝行为继续保留。
+需要冻结后的 A0/A1/A2/A3 固定集记录、经复核的标签与知识、人工评审和可核查成本，才能比较故障类型收益并决定哪些能力保留 AI。当前已完成实验工具、A0 基线及本机模型 20 条开发集对照；模型分类与必问覆盖未优于规则，不代表 S1-AI 效果已验收，详见 [完善与结果记录](../../docs/verification/ServiceFlow_AI_S1_AI_Refinement_2026-10-20.md)。人工确认 AI 草稿写入尚未接入业务，现有 S1 对 `proposalId` 的拒绝行为继续保留；[S2 首段派工与任务执行](../../docs/implementation/ServiceFlow_AI_S2_First_Segment_2026-10-20.md) 已独立实现，不依赖 AI 实验。
 
 ## 当前目录归属
 

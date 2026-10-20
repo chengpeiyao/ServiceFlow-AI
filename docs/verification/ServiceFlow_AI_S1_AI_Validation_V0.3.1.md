@@ -8,7 +8,7 @@ created: 2026-10-19
 
 > **执行状态：** S1 已于 2026-10-19 完成真实 HTTP/MySQL 集成验证，27 项测试全部通过；详见 [S1 实施与验证记录](../implementation/ServiceFlow_AI_S1_Implementation.md)。V0.3.1 新库和增量此前已完成数据库复验。S2 派工、完整 SLA 和真实模型对照实验仍未执行。
 >
-> [核心契约](../design/ServiceFlow_AI_Design_V0.3.1.md) ｜ [新库 SQL](../design/ServiceFlow_AI_P0_schema_V0.3.1.sql) ｜ [V0.3 增量](../design/ServiceFlow_AI_P0_patch_V0.3_to_V0.3.1.sql)
+> [统一需求规格](../design/ServiceFlow_AI_Requirements.md) ｜ [新库 SQL](../design/ServiceFlow_AI_P0_schema_V0.3.1.sql) ｜ [V0.3 增量](../design/ServiceFlow_AI_P0_patch_V0.3_to_V0.3.1.sql)
 
 ## 1. S0 → S1 启动门槛
 

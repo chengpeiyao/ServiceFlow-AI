@@ -1,6 +1,8 @@
 # 项目文档导航
 
-- [设计与 SQL 契约](./design/README.md)：V0.2、V0.3、V0.3.1；V0.1 当前缺失。
+- [AI 开发规范与交接入口](./handoff/INDEX.md)：项目约束、代码入口、当前状态及按需维护规则。
+- [开发需求规格说明书](./design/ServiceFlow_AI_Requirements.md)：统一维护业务、接口、页面、数据约束与验收需求。
+- [SQL 基线与历史参考](./design/README.md)：现行建表基线、结构增量及历史 DDL。
 - [Java 与 AI 实施记录](./implementation/README.md)：S1、S1-AI、S2 首段。
 - [验证与历史证据](./verification/README.md)：验证计划、模型实验报告、稳定测试记录。
 - [目录归属和开发入口](./Project_Directory_Guide.md)。

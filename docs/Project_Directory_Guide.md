@@ -8,7 +8,7 @@
 | `backend` | Java 主代码、资源、SQL、测试、pom.xml |
 | `backend/scripts` | 后端隔离 MySQL 测试及 Java 实验入口脚本 |
 | `backend/.local/tmp` | 项目测试的 MySQL/JVM 临时目录，被 Git 忽略 |
-| `docs/design` | 历史及当前设计、数据库契约 |
+| `docs/design` | 统一开发需求规格、数据库契约及历史 SQL 参考 |
 | `docs/implementation` | S1、S1-AI、S2 首段实施记录 |
 | `docs/verification` | 验证计划、分析报告、稳定测试记录 |
 | `docs/verification/local-history` | 原样保存的本机历史验证材料与变更前快照，被 Git 忽略 |

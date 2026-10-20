@@ -1,7 +1,7 @@
 # ServiceFlow AI S1 实施与验证记录
 
 日期：2026 年 10 月 19 日  
-设计基线：[V0.3.1 开发契约](../design/ServiceFlow_AI_Design_V0.3.1.md)\
+设计基线：原 V0.3.1 开发契约，现已整合为 [开发需求规格说明书](../design/ServiceFlow_AI_Requirements.md)。\
 阶段结论：S1 最小 Java 业务纵切已实现，真实 HTTP/MySQL 集成测试通过。S1-AI 真实模型实验及 S2/S3 尚未执行。
 
 ## 修改内容
