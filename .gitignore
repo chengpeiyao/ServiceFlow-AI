@@ -22,3 +22,4 @@ experiments/s1-ai/config/*.local.json
 experiments/s1-ai/freezes/**/*.jar
 docs/verification/local-history/
 docs/verification/workspace-layout-2026-10-20/.local/
+docs/study/

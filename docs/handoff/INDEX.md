@@ -31,6 +31,7 @@
 ## 信息维护位置
 
 - 开发行为和业务约束：根目录 `AGENTS.md`；当前任务、验证范围、未完成事项：`CURRENT.md`；入口和链接：本页。
+- 学习材料：[代码导读](../study/README.md)；每完成并验证一个独立业务功能，按八节结构生成导读，既有知识用链接复用。当前目录被 Git 忽略，为本机生成材料；导读说明实现，需求仍以统一规格为准。
 - 需求契约：[统一规格书](../design/ServiceFlow_AI_Requirements.md)；SQL 参考：[需求与 SQL 导航](../design/README.md)；已交付说明：[实施导航](../implementation/README.md)；历史结果：[验证导航](../verification/README.md)。后续直接维护统一规格，不新建并行版本；需求不能替代源码和验证记录。
 - 历史证据旧路径：[目录迁移映射](../verification/workspace-layout-2026-10-20/relocations.json)。不为修正旧路径改写原始 manifest 或冻结快照。
 

@@ -15,10 +15,17 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+/**
+ * 解决方案与验收闭环服务：任务完成后仍需提交方案，再由工单创建者验收。
+ * 工单、方案、验收、整改任务、SLA、活动、审计及幂等结果在同一事务内变更。
+ * 以工单行锁串行化同一工单的操作，提交方案时继续按幂等记录、任务的顺序取锁。
+ */
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public class ResolutionService {
+    /** 提交结果；cycleNo 是本次方案轮次，ticketVersion 是提交后的工单版本。 */
     public record Submitted(long ticketId, long resolutionId, int cycleNo, String ticketStatus, int ticketVersion) {}
+    /** 验收结果；cycleNo 为被验收方案的轮次，remediationTaskId 仅拒绝时有值。 */
     public record Decided(long ticketId, long resolutionId, long acceptanceId, int cycleNo, String decision,
                           String ticketStatus, int ticketVersion, Long remediationTaskId) {}
 
@@ -39,6 +46,14 @@ public class ResolutionService {
         this.identities = identities; this.idempotency = idempotency; this.audit = audit; this.sla = sla; this.clock = clock;
     }
 
+    /**
+     * 将本轮已完成阻塞任务的处理结果发布为方案，并暂停解决时钟等待客户验收。
+     * 先核验当前轮次和负责人再重放，防止上轮工程师借旧幂等键恢复访问权。
+     * @param ticketId 方案所属工单 ID
+     * @param command 方案正文、已完成任务 ID 以及客户端确认的工单和任务版本
+     * @param key 本次方案提交的幂等键，重试同一请求时保持不变
+     * @return 新方案 ID、轮次及变更后的工单状态和版本，或合法重试的原结果
+     */
     public Submitted submit(long ticketId, ResolutionCommands.Submit command, String key) {
         var ticket = tickets.lock(ticketId);
         var actor = identities.currentActor();
@@ -69,6 +84,14 @@ public class ResolutionService {
         return response;
     }
 
+    /**
+     * 仅允许工单原创建者验收当前方案；通过则结算关闭，拒绝则创建下一轮未派整改任务并恢复计时。
+     * 方案记录用于定位工单，拿到工单锁后才判断最新权限、状态和版本。
+     * @param resolutionId 待验收的方案 ID
+     * @param command 预期工单版本、ACCEPT/REJECT 及拒绝时必填的原因
+     * @param key 本次验收的幂等键，避免重复验收或重复生成整改任务
+     * @return 验收记录及最新工单状态；拒绝时包含新建的整改任务 ID
+     */
     public Decided decide(long resolutionId, ResolutionCommands.Decide command, String key) {
         var resolution = resolutions.byId(resolutionId);
         if (resolution == null) throw BusinessException.forbidden();
@@ -112,6 +135,11 @@ public class ResolutionService {
         return response;
     }
 
+    /**
+     * 在短工单锁内完成权限校验和历史读取，避免两者之间发生轮次或归属变更。
+     * @param ticketId 工单 ID
+     * @return 按方案轮次升序排列的历史，尚未验收的关联字段为空
+     */
     public List<ResolutionMapper.History> history(long ticketId) {
         var ticket = tickets.lock(ticketId);
         ticketService.authorize(identities.currentActor(), ticket);

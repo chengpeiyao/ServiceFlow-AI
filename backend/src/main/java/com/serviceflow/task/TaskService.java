@@ -15,6 +15,10 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+/**
+ * 任务执行服务，协调主管派工、工程师处理和工单聚合状态。
+ * 工单版本与任务版本独立校验，任务、派工历史、活动、审计和幂等结果在同一事务提交。
+ */
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public class TaskService {
@@ -75,6 +79,14 @@ public class TaskService {
         return new Details(task, tasks.assignments(taskId), tasks.activities(taskId));
     }
 
+    /**
+     * 为首轮未派任务或客户拒绝验收产生的整改任务首次指定负责人。
+     * 整改必须能追溯到本工单上一轮的真实拒绝记录，派工后工单保持 IN_PROGRESS。
+     * @param taskId 待派任务 ID
+     * @param command 工单与任务预期版本、候选工程师 ID 和派工原因
+     * @param key 本次派工操作的幂等键
+     * @return 工单和任务的新版本、状态及当前负责人
+     */
     public Changed assign(long taskId, TaskCommands.Assign command, String key) {
         var locked = lock(taskId, "TASK_ASSIGN", "assignments", command, key, true);
         if (locked.reservation().replay()) return replay(locked);
@@ -142,6 +154,15 @@ public class TaskService {
         return transition(locked, "CANCELLED", "TRIAGED", "TASK_CANCELLED", command.reason(), key);
     }
 
+    /**
+     * 按工单、幂等记录、任务顺序取锁，返回执行期间使用的最新数据与统一业务时间。
+     * @param taskId 任务 ID，先通过它定位所属工单
+     * @param action 幂等操作类型，如 TASK_ASSIGN
+     * @param suffix 用于构造幂等请求摘要的路径后缀
+     * @param command 请求正文，用于检测同键不同请求
+     * @param key 请求幂等键
+     * @param management true 校验主管及团队范围；false 校验工程师及当前任务归属
+     */
     private Locked lock(long taskId, String action, String suffix, Object command, String key, boolean management) {
         var ticket = locateAndLock(taskId);
         var actor = identities.currentActor();

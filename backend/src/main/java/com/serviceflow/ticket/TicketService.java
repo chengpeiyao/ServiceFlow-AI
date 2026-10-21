@@ -19,6 +19,11 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+/**
+ * 工单应用服务，协调合同权益、资源权限、SLA、活动、审计和请求幂等。
+ * 已有工单的写操作先锁定工单，再检查最新授权；所有业务写入与幂等结果同事务提交。
+ * 默认使用 READ_COMMITTED，列表方法单独采用一致的只读快照。
+ */
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public class TicketService {
@@ -26,7 +31,15 @@ public class TicketService {
     public record MessageAdded(long messageId, long ticketId, int ticketVersion) {}
     public record Triaged(long ticketId, String status, int ticketVersion, long triageRecordId, String source) {}
     public record Details(TicketMapper.Ticket ticket, SlaMapper.Snapshot sla, List<TicketMapper.Activity> activities) {}
+    /** 取消结果；ticketVersion 为变更后的版本，cancelledAt 为本次操作统一使用的业务时间。 */
     public record Cancelled(long ticketId, String status, int ticketVersion, Instant cancelledAt) {}
+    /**
+     * 工单分页结果。
+     * @param items 当前页摘要，不包含原始问题描述或内部活动
+     * @param total 当前权限及筛选条件下的总条数，不是全库工单数
+     * @param page 从 1 开始的请求页码，超出末页时 items 为空
+     * @param size 每页条数上限，末页可以不足此数量
+     */
     public record Page(List<TicketMapper.ListItem> items, long total, int page, int size) {}
 
     private final TicketMapper tickets;
@@ -56,6 +69,11 @@ public class TicketService {
         this.products = Set.copyOf(Arrays.asList(products.split(",")));
     }
 
+    /**
+     * 按当前登录人的权限分页读取工单；总数和条目共用筛选条件与事务快照。
+     * @param query 已完成格式校验的分页及筛选条件，身份和角色从登录上下文获取
+     * @return 同一读取快照中的总数和当前页
+     */
     // 总数和分页数据使用同一读取快照；授权范围在 SQL 内应用，不先分页后过滤。
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public Page list(TicketCommands.Query query) {
@@ -65,6 +83,14 @@ public class TicketService {
         return new Page(items, total, query.page(), query.size());
     }
 
+    /**
+     * 取消待受理或已受理且没有活动任务的工单，同时停止解决计时并记录原因。
+     * 当前权限校验先于幂等重放；合法重试返回原结果，不再次递增版本或累计耗时。
+     * @param ticketId 待取消的工单 ID
+     * @param command 预期工单版本和必填取消原因
+     * @param key 同一次取消操作重试时复用的幂等键
+     * @return 本次取消或合法幂等重放的结果
+     */
     public Cancelled cancel(long ticketId, TicketCommands.Cancel command, String key) {
         var ticket = tickets.lock(ticketId);
         var actor = identities.currentActor();
@@ -90,6 +116,11 @@ public class TicketService {
         return response;
     }
 
+    /**
+     * 根据合同权益和影响程度、紧急程度创建工单，冻结路由及 SLA 策略版本。
+     * @param command 客户的原始申报；客户归属和合同覆盖范围需由服务端核实
+     * @param key 本次创建操作的幂等键
+     */
     public Created create(TicketCommands.Create command, String key) {
         var actor = identities.currentActor();
         identities.requireCustomer(actor, command.customerId());
@@ -116,6 +147,10 @@ public class TicketService {
         return response;
     }
 
+    /**
+     * 查询有权访问的工单、SLA 和活动，客户只能看到公开活动。
+     * @param ticketId 工单 ID；不存在或不在可见范围内时按资源不可访问处理
+     */
     @Transactional(readOnly = true)
     public Details detail(long ticketId) {
         var ticket = tickets.byId(ticketId);
@@ -124,6 +159,12 @@ public class TicketService {
         return new Details(ticket, sla.snapshot(ticketId), tickets.activities(ticketId, !actor.role().equals("CUSTOMER_CONTACT")));
     }
 
+    /**
+     * 追加消息并递增工单版本；仅人工公开答复可能触发首次响应计时结算。
+     * @param ticketId 工单 ID
+     * @param command 消息内容、可见性、预期版本及可选产品申报
+     * @param key 本次消息的幂等键，避免重试产生重复活动或首响事件
+     */
     public MessageAdded append(long ticketId, TicketCommands.Message command, String key) {
         var ticket = tickets.lock(ticketId);
         var actor = identities.currentActor();
@@ -173,6 +214,12 @@ public class TicketService {
         return response;
     }
 
+    /**
+     * 客服人工受理：核验事实引文和知识适用性后保存受理记录，不把受理动作视为首响。
+     * @param ticketId 待受理工单 ID
+     * @param command 预期版本及人工确认内容；当前不允许非空 AI 草稿 ID
+     * @param key 本次确认受理的幂等键
+     */
     public Triaged triage(long ticketId, TicketCommands.Triage command, String key) {
         var ticket = tickets.lock(ticketId);
         var actor = identities.currentActor();
