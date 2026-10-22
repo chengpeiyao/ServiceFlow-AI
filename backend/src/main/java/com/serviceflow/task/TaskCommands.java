@@ -2,6 +2,11 @@ package com.serviceflow.task;
 
 import jakarta.validation.constraints.*;
 
+/**
+ * TaskCommands 类用于封装任务操作请求参数的 DTO（数据传输对象）类。
+ * 该类包含多个静态内部类，每个内部类对应一个任务操作命令，
+ * 用于在任务管理系统中传递和验证请求参数。
+ */
 public final class TaskCommands {
     private TaskCommands() {}
 

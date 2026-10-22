@@ -6,7 +6,7 @@ spring:
   datasource:
     url: ${SERVICEFLOW_DB_URL:jdbc:mysql://127.0.0.1:3306/serviceflow?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8}
     username: ${SERVICEFLOW_DB_USERNAME:serviceflow}
-    password: ${SERVICEFLOW_DB_PASSWORD:}
+    password: ${SERVICEFLOW_DB_PASSWORD:cheng}
     hikari:
       maximum-pool-size: 8
       connection-timeout: 5000
